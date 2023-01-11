@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "p/qgmzHTAI79LQDqqZ4mdp43WXp42zAr8UAXdYgTsYQ=",
+  "Source": "QuantumWorld.Api",
+  "BasePath": "_content/QuantumWorld.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
