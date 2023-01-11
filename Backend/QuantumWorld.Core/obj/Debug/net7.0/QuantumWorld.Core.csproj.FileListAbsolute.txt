@@ -1,0 +1,12 @@
+C:\dev\QuantumWorld\Backend\QuantumWorld.Core\bin\Debug\net7.0\QuantumWorld.Core.deps.json
+C:\dev\QuantumWorld\Backend\QuantumWorld.Core\bin\Debug\net7.0\QuantumWorld.Core.dll
+C:\dev\QuantumWorld\Backend\QuantumWorld.Core\bin\Debug\net7.0\QuantumWorld.Core.pdb
+C:\dev\QuantumWorld\Backend\QuantumWorld.Core\obj\Debug\net7.0\QuantumWorld.Core.csproj.AssemblyReference.cache
+C:\dev\QuantumWorld\Backend\QuantumWorld.Core\obj\Debug\net7.0\QuantumWorld.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\dev\QuantumWorld\Backend\QuantumWorld.Core\obj\Debug\net7.0\QuantumWorld.Core.AssemblyInfoInputs.cache
+C:\dev\QuantumWorld\Backend\QuantumWorld.Core\obj\Debug\net7.0\QuantumWorld.Core.AssemblyInfo.cs
+C:\dev\QuantumWorld\Backend\QuantumWorld.Core\obj\Debug\net7.0\QuantumWorld.Core.csproj.CoreCompileInputs.cache
+C:\dev\QuantumWorld\Backend\QuantumWorld.Core\obj\Debug\net7.0\QuantumWorld.Core.dll
+C:\dev\QuantumWorld\Backend\QuantumWorld.Core\obj\Debug\net7.0\refint\QuantumWorld.Core.dll
+C:\dev\QuantumWorld\Backend\QuantumWorld.Core\obj\Debug\net7.0\QuantumWorld.Core.pdb
+C:\dev\QuantumWorld\Backend\QuantumWorld.Core\obj\Debug\net7.0\ref\QuantumWorld.Core.dll

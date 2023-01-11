@@ -31,3 +31,7 @@ C:\dev\QuantumWorld\Backend\QuantumWorld.Api\obj\Debug\net7.0\refint\QuantumWorl
 C:\dev\QuantumWorld\Backend\QuantumWorld.Api\obj\Debug\net7.0\QuantumWorld.Api.pdb
 C:\dev\QuantumWorld\Backend\QuantumWorld.Api\obj\Debug\net7.0\QuantumWorld.Api.genruntimeconfig.cache
 C:\dev\QuantumWorld\Backend\QuantumWorld.Api\obj\Debug\net7.0\ref\QuantumWorld.Api.dll
+C:\dev\QuantumWorld\Backend\QuantumWorld.Api\bin\Debug\net7.0\QuantumWorld.Core.dll
+C:\dev\QuantumWorld\Backend\QuantumWorld.Api\bin\Debug\net7.0\QuantumWorld.Infrastructure.dll
+C:\dev\QuantumWorld\Backend\QuantumWorld.Api\bin\Debug\net7.0\QuantumWorld.Infrastructure.pdb
+C:\dev\QuantumWorld\Backend\QuantumWorld.Api\bin\Debug\net7.0\QuantumWorld.Core.pdb

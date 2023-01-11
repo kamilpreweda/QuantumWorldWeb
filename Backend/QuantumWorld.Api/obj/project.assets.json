@@ -107,6 +107,29 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "QuantumWorld.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/QuantumWorld.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/QuantumWorld.Core.dll": {}
+        }
+      },
+      "QuantumWorld.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "QuantumWorld.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/QuantumWorld.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/QuantumWorld.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -451,11 +474,23 @@
         "swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "QuantumWorld.Core/1.0.0": {
+      "type": "project",
+      "path": "../QuantumWorld.Core/QuantumWorld.Core.csproj",
+      "msbuildProject": "../QuantumWorld.Core/QuantumWorld.Core.csproj"
+    },
+    "QuantumWorld.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../QuantumWorld.Infrastructure/QuantumWorld.Infrastructure.csproj",
+      "msbuildProject": "../QuantumWorld.Infrastructure/QuantumWorld.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
       "Microsoft.AspNetCore.OpenApi >= 7.0.0",
+      "QuantumWorld.Core >= 1.0.0",
+      "QuantumWorld.Infrastructure >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
@@ -490,7 +525,14 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\dev\\QuantumWorld\\Backend\\QuantumWorld.Core\\QuantumWorld.Core.csproj": {
+              "projectPath": "C:\\dev\\QuantumWorld\\Backend\\QuantumWorld.Core\\QuantumWorld.Core.csproj"
+            },
+            "C:\\dev\\QuantumWorld\\Backend\\QuantumWorld.Infrastructure\\QuantumWorld.Infrastructure.csproj": {
+              "projectPath": "C:\\dev\\QuantumWorld\\Backend\\QuantumWorld.Infrastructure\\QuantumWorld.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

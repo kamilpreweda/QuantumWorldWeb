@@ -5,7 +5,10 @@ namespace QuantumWorld.Infrastructure.Repositories
 {
     public class InMemoryUserRopository : IUserRepository
     {
-        private static ISet<User> _users = new HashSet<User>();
+        private static ISet<User> _users = new HashSet<User>{
+            new User("email@email", "password123", "12345", "Kamil"),
+            new User("email1@next", "password123", "12345", "Bartek")
+        };
         public void Add(User user)
         {
             _users.Add(user);

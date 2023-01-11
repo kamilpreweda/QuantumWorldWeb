@@ -1,0 +1,15 @@
+C:\dev\QuantumWorld\Backend\QuantumWorld.Infrastructure\bin\Debug\net7.0\QuantumWorld.Infrastructure.deps.json
+C:\dev\QuantumWorld\Backend\QuantumWorld.Infrastructure\bin\Debug\net7.0\QuantumWorld.Infrastructure.dll
+C:\dev\QuantumWorld\Backend\QuantumWorld.Infrastructure\bin\Debug\net7.0\QuantumWorld.Infrastructure.pdb
+C:\dev\QuantumWorld\Backend\QuantumWorld.Infrastructure\bin\Debug\net7.0\QuantumWorld.Core.dll
+C:\dev\QuantumWorld\Backend\QuantumWorld.Infrastructure\bin\Debug\net7.0\QuantumWorld.Core.pdb
+C:\dev\QuantumWorld\Backend\QuantumWorld.Infrastructure\obj\Debug\net7.0\QuantumWorld.Infrastructure.csproj.AssemblyReference.cache
+C:\dev\QuantumWorld\Backend\QuantumWorld.Infrastructure\obj\Debug\net7.0\QuantumWorld.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\dev\QuantumWorld\Backend\QuantumWorld.Infrastructure\obj\Debug\net7.0\QuantumWorld.Infrastructure.AssemblyInfoInputs.cache
+C:\dev\QuantumWorld\Backend\QuantumWorld.Infrastructure\obj\Debug\net7.0\QuantumWorld.Infrastructure.AssemblyInfo.cs
+C:\dev\QuantumWorld\Backend\QuantumWorld.Infrastructure\obj\Debug\net7.0\QuantumWorld.Infrastructure.csproj.CoreCompileInputs.cache
+C:\dev\QuantumWorld\Backend\QuantumWorld.Infrastructure\obj\Debug\net7.0\QuantumWorld.Infrastructure.csproj.CopyComplete
+C:\dev\QuantumWorld\Backend\QuantumWorld.Infrastructure\obj\Debug\net7.0\QuantumWorld.Infrastructure.dll
+C:\dev\QuantumWorld\Backend\QuantumWorld.Infrastructure\obj\Debug\net7.0\refint\QuantumWorld.Infrastructure.dll
+C:\dev\QuantumWorld\Backend\QuantumWorld.Infrastructure\obj\Debug\net7.0\QuantumWorld.Infrastructure.pdb
+C:\dev\QuantumWorld\Backend\QuantumWorld.Infrastructure\obj\Debug\net7.0\ref\QuantumWorld.Infrastructure.dll

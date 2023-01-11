@@ -1,5 +1,6 @@
 using QuantumWorld.Core.Domain;
 using QuantumWorld.Core.Repositories;
+using QuantumWorld.Infrastructure.DTO;
 
 namespace QuantumWorld.Infrastructure.Services
 {
@@ -10,6 +11,17 @@ namespace QuantumWorld.Infrastructure.Services
         {
             _userRepository = userRepository;
         }
+
+        public UserDto GetUser(string email)
+        {
+            var user = _userRepository.Get(email);
+            return new UserDto
+            {
+                Username = user.Username,
+                Email = user.Email
+            };
+        }
+
         public void Register(string email, string password, string username)
         {
             var user = _userRepository.Get(email);

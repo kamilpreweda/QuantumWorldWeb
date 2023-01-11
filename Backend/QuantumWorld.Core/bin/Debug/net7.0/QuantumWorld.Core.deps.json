@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "QuantumWorld.Core/1.0.0": {
+        "runtime": {
+          "QuantumWorld.Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "QuantumWorld.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
