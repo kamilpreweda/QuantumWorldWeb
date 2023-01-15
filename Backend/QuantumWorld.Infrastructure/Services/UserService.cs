@@ -16,13 +16,14 @@ namespace QuantumWorld.Infrastructure.Services
             _mapper = mapper;
         }
 
-        public UserDto GetUser(string email)
+        public async Task<UserDto> GetAsync(string email)
         {
             var user = _userRepository.Get(email);
+            await Task.CompletedTask;
             return _mapper.Map<User, UserDto>(user);
         }
 
-        public void Register(string email, string password, string username)
+        public async Task RegisterAsync(string email, string password, string username)
         {
             var user = _userRepository.Get(email);
             if (user is not null)
@@ -32,6 +33,7 @@ namespace QuantumWorld.Infrastructure.Services
             var salt = Guid.NewGuid().ToString("N");
             user = new User(email, password, salt, username);
             _userRepository.Add(user);
+            await Task.CompletedTask;
         }
     }
 }

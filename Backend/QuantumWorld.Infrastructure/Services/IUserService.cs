@@ -6,9 +6,9 @@ namespace QuantumWorld.Infrastructure.Services
 {
     public interface IUserService
     {
-        void Register(string email, string password, string username);
+        Task RegisterAsync(string email, string password, string username);
 
-        UserDto GetUser(string email);
+        Task<UserDto> GetAsync(string email);
 
     }
 }

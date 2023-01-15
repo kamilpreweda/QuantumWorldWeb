@@ -16,14 +16,22 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("{email}")]
-    public UserDto Get(string email)
+    public async Task<IActionResult> Get(string email)
     {
-        return _userService.GetUser(email);
+        var user = await _userService.GetAsync(email);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(user);
     }
 
     [HttpPost]
-    public void Post(CreateUser request)
+    public async Task<IActionResult> Post([FromBody] CreateUser request)
     {
-        _userService.Register(request.Email, request.Username, request.Password);
+        await _userService.RegisterAsync(request.Email, request.Username, request.Password);
+
+        return Created($"users/{request.Email}", new object());
     }
 }
