@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using QuantumWorld.Infrastructure.Commands.Users;
 using QuantumWorld.Infrastructure.DTO;
 using QuantumWorld.Infrastructure.Services;
 
@@ -18,5 +19,11 @@ public class UsersController : ControllerBase
     public UserDto Get(string email)
     {
         return _userService.GetUser(email);
+    }
+
+    [HttpPost]
+    public void Post(CreateUser request)
+    {
+        _userService.Register(request.Email, request.Username, request.Password);
     }
 }

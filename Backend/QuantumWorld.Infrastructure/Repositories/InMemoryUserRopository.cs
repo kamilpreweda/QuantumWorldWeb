@@ -16,12 +16,12 @@ namespace QuantumWorld.Infrastructure.Repositories
 
         public User Get(Guid id)
         {
-            return _users.Single(x => x.Id == id);
+            return _users.SingleOrDefault(x => x.Id == id);
         }
 
         public User Get(string email)
         {
-            return _users.Single(x => x.Email == email.ToLowerInvariant());
+            return _users.SingleOrDefault(x => x.Email == email.ToLowerInvariant());
         }
 
         public IEnumerable<User> GetAll()

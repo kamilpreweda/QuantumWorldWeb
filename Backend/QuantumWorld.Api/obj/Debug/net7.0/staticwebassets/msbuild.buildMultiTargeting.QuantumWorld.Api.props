@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\QuantumWorld.Api.props" />
-</Project>

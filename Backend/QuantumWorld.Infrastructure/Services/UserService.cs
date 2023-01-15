@@ -1,3 +1,4 @@
+using AutoMapper;
 using QuantumWorld.Core.Domain;
 using QuantumWorld.Core.Repositories;
 using QuantumWorld.Infrastructure.DTO;
@@ -7,19 +8,18 @@ namespace QuantumWorld.Infrastructure.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        private readonly IMapper _mapper;
+
+        public UserService(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         public UserDto GetUser(string email)
         {
             var user = _userRepository.Get(email);
-            return new UserDto
-            {
-                Username = user.Username,
-                Email = user.Email
-            };
+            return _mapper.Map<User, UserDto>(user);
         }
 
         public void Register(string email, string password, string username)

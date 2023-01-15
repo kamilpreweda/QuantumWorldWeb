@@ -1,4 +1,5 @@
 using QuantumWorld.Core.Repositories;
+using QuantumWorld.Infrastructure.Mappers;
 using QuantumWorld.Infrastructure.Repositories;
 using QuantumWorld.Infrastructure.Services;
 
@@ -12,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUserRepository, InMemoryUserRopository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 
 var app = builder.Build();
 

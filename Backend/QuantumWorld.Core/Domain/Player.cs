@@ -9,5 +9,16 @@ namespace QuantumWorld.Core.Domain
         public IEnumerable<Research> Research { get; protected set; }
         public IEnumerable<Ship> Ships { get; protected set; }
         public IEnumerable<Enemy> Enemies { get; protected set; }
+
+        protected Player()
+        {
+
+        }
+
+        public Player(Guid id, Guid userId)
+        {
+            Id = id;
+            UserId = userId;
+        }
     }
 }
