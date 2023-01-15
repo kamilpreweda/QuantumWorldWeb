@@ -1,6 +1,8 @@
+using MediatR;
+
 namespace QuantumWorld.Infrastructure.Commands.Users
 {
-    public class CreateUser : ICommand
+    public class CreateUser : IRequest
     {
         public string Email {get; set;}
         public string Password { get; set; }

@@ -8,18 +8,8 @@ using QuantumWorld.Infrastructure.DTO;
 
 namespace QuantumWorld.TestsEndToEnd.Controllers
 {
-    public class UsersControllerTests
+    public class UsersControllerTests : ControllerTestsBase
     {
-        private readonly string url = "/users";
-        private readonly WebApplicationFactory<Program> _server;
-        private readonly HttpClient _client;
-
-        public UsersControllerTests()
-        {
-            _server = new WebApplicationFactory<Program>();
-            _client = _server.CreateClient();
-        }
-
         [Fact]
         public async Task given_valid_email_user_should_exist()
         {
@@ -32,7 +22,7 @@ namespace QuantumWorld.TestsEndToEnd.Controllers
         public async Task given_invalid_email_user_should_not_exist()
         {
             var email = "email1000@email";
-            var response = await _client.GetAsync($"users/{email}");
+            var response = await Client.GetAsync($"users/{email}");
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
         }
 
@@ -46,7 +36,7 @@ namespace QuantumWorld.TestsEndToEnd.Controllers
                 Password = "secret"
             };
             var payload = GetPayload(request);
-            var response = await _client.PostAsync("users", payload);
+            var response = await Client.PostAsync("users", payload);
             response.Headers.Location.ToString().Should().BeEquivalentTo($"users/{request.Email}");
 
             var user = await GetUserAsync(request.Email);
@@ -55,17 +45,10 @@ namespace QuantumWorld.TestsEndToEnd.Controllers
 
         private async Task<UserDto> GetUserAsync(string email)
         {
-            var response = await _client.GetAsync($"users/{email}");
+            var response = await Client.GetAsync($"users/{email}");
             var responseString = await response.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<UserDto>(responseString);
-        }
-
-        private static StringContent GetPayload(object data)
-        {
-            var json = JsonConvert.SerializeObject(data);
-
-            return new StringContent(json, Encoding.UTF8, "application/json");
         }
     }
 }

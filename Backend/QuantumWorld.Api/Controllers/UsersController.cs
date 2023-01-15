@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using QuantumWorld.Infrastructure.Commands.Users;
 using QuantumWorld.Infrastructure.DTO;
@@ -7,12 +8,15 @@ namespace QuantumWorld.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UsersController : ControllerBase
+public class UsersController : ApiControllerBase
 {
     private readonly IUserService _userService;
-    public UsersController(IUserService userService)
+    private readonly IMediator _mediator;
+
+    public UsersController(IUserService userService, IMediator mediator)
     {
         _userService = userService;
+        _mediator = mediator;
     }
 
     [HttpGet("{email}")]
@@ -30,8 +34,9 @@ public class UsersController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] CreateUser request)
     {
-        await _userService.RegisterAsync(request.Email, request.Username, request.Password);
-
+        await _mediator.Send(request);
         return Created($"users/{request.Email}", new object());
     }
+
+    
 }

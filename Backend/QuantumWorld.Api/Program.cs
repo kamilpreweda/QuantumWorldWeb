@@ -2,6 +2,7 @@ using QuantumWorld.Core.Repositories;
 using QuantumWorld.Infrastructure.Mappers;
 using QuantumWorld.Infrastructure.Repositories;
 using QuantumWorld.Infrastructure.Services;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUserRepository, InMemoryUserRopository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
+
+builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
