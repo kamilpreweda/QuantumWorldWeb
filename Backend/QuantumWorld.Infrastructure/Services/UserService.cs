@@ -9,11 +9,13 @@ namespace QuantumWorld.Infrastructure.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly IEncrypter _encrypter;
 
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        public UserService(IUserRepository userRepository, IMapper mapper, IEncrypter encrypter)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _encrypter = encrypter;
         }
 
         public async Task<UserDto> GetAsync(string email)
@@ -30,8 +32,9 @@ namespace QuantumWorld.Infrastructure.Services
             {
                 throw new Exception($"User with {email} email already exists!");
             }
-            var salt = Guid.NewGuid().ToString("N");
-            user = new User(email, password, salt, username);
+            _encrypter.CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
+
+            user = new User(email, password, passwordSalt, passwordHash, username);
             _userRepository.Add(user);
             await Task.CompletedTask;
         }

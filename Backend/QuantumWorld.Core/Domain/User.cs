@@ -8,7 +8,8 @@ namespace QuantumWorld.Core.Domain
         public Guid Id { get; protected set; }
         public string Email { get; protected set; } = string.Empty;
         public string Password { get; protected set; } = string.Empty;
-        public string Salt { get; protected set; } = string.Empty;
+        public byte[] PasswordHash { get; protected set; }
+        public byte[] PasswordSalt { get; protected set; }
         public string Username { get; protected set; } = string.Empty;
         public DateTime CreateDate { get; protected set; }
         public DateTime LastUpdated { get; protected set; }
@@ -18,12 +19,13 @@ namespace QuantumWorld.Core.Domain
 
         }
 
-        public User(string email, string password, string salt, string username)
+        public User(string email, string password, byte[] salt, byte[] hash, string username)
         {
             Id = Guid.NewGuid();
             Email = email.ToLowerInvariant();
             Password = password;
-            Salt = salt;
+            PasswordSalt = salt;
+            PasswordHash = hash;
             Username = username;
             CreateDate = DateTime.UtcNow;
         }
