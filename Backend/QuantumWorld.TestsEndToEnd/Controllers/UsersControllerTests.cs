@@ -33,7 +33,9 @@ namespace QuantumWorld.TestsEndToEnd.Controllers
             {
                 Email = "test@email.com",
                 Username = "test",
-                Password = "secret"
+                Password = "secret",
+                Resources = new(500),
+                Buildings = new()
             };
             var payload = GetPayload(request);
             var response = await Client.PostAsync("users", payload);

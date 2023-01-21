@@ -13,21 +13,25 @@ namespace QuantumWorld.Core.Domain
         public string Username { get; protected set; } = string.Empty;
         public DateTime CreateDate { get; protected set; }
         public DateTime LastUpdated { get; protected set; }
+        public List<Resource> Resources { get; set; }
+        public List<Building> Buildings { get; set; }
 
         protected User()
         {
 
         }
 
-        public User(string email, string password, byte[] salt, byte[] hash, string username)
+        public User(Guid userId, string email, string password, byte[] salt, byte[] hash, string username, List<Resource> resources, List<Building> buildings)
         {
-            Id = Guid.NewGuid();
+            Id = userId;
             Email = email.ToLowerInvariant();
             Password = password;
             PasswordSalt = salt;
             PasswordHash = hash;
             Username = username;
             CreateDate = DateTime.UtcNow;
+            Resources = resources;
+            Buildings = buildings;
         }
 
         public void SetEmail(string email)
@@ -67,6 +71,46 @@ namespace QuantumWorld.Core.Domain
             }
             Password = password;
             LastUpdated = DateTime.UtcNow;
+        }
+
+        public void UpgradeBuilding(BuildingType type)
+        {
+            var building = Buildings.SingleOrDefault(b => b.Type == type);
+
+            if (building == null)
+            {
+                throw new Exception("There is no such building.");
+            }
+
+            if (CanAfford(building.Cost))
+            {
+                SpendResources(Resources, building.Cost);
+                building.UpgradeBuilding();
+            }
+        }
+        private bool CanAfford(List<Resource> cost)
+        {
+            foreach (var costResource in cost)
+            {
+                var currentPlayerResource = Resources.FirstOrDefault(r => r.Type == costResource.Type);
+                if (currentPlayerResource == null)
+                {
+                    throw new Exception("There is no such resource.");
+                }
+                if (currentPlayerResource.Value < costResource.Value)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        private void SpendResources(List<Resource> resources, List<Resource> cost)
+        {
+            foreach (var costResource in cost)
+            {
+                var currentPlayerResource = resources.Where(r => r.Type == costResource.Type).FirstOrDefault();
+                currentPlayerResource.Value -= costResource.Value;
+            }
         }
     }
 }

@@ -1,9 +1,7 @@
-namespace QuantumWorld.Core.Domain
+namespace QuantumWorld.Core.Domain;
+
+public enum ResourceType
 {
-    public enum ResourceType
-    {
-        CarbonFiber,
-        QuantumGlass,
-        HiggsBoson
-    }
+    CarbonFiberResource,
+    QuantumGlassResource,
 }

@@ -1,37 +1,48 @@
 namespace QuantumWorld.Core.Domain
 {
-    public class Resource
+    public abstract class Resource
     {
+        public string Name { get; set; }
         public ResourceType Type { get; set; }
+        protected abstract float BaseValue { get; }
         public float Value { get; set; }
-        public float Cap { get; set; }
 
-        public Resource(ResourceType type, float value, float cap)
+        public Resource()
         {
-            SetResourceType(type);
+            AutoSetBasicAttributes();
+        }
+        public Resource(float value)
+        {
+            AutoSetBasicAttributes();
             SetValue(value);
-            SetCap(cap);
         }
-
-        private void SetResourceType(ResourceType type)
+        private void SetName()
         {
-            Type = type;
+            Name = this.GetType().Name;
         }
-
-        private void SetValue(float value)
+        private void SetType()
         {
-            if (value > Cap)
+            if (!Enum.IsDefined(typeof(ResourceType), Name))
             {
-                Value = Cap;
+                throw new Exception("Resource type not found.");
             }
-            Value = value;
+            Type = (ResourceType)Enum.Parse(typeof(ResourceType), Name);
         }
-
-        private void SetCap(float cap)
+        private void SetValue(float value = -1)
         {
-            Cap = cap;
+            Value = BaseValue;
+
+            if (value > 0)
+            {
+                Value = (float)value;
+            }
+
+        }
+        private void AutoSetBasicAttributes()
+        {
+            SetName();
+            SetValue();
+            SetType();
         }
     }
-
-
 }

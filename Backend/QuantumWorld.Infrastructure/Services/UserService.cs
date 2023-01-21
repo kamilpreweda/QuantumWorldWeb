@@ -25,7 +25,7 @@ namespace QuantumWorld.Infrastructure.Services
             return _mapper.Map<User, UserDto>(user);
         }
 
-        public async Task RegisterAsync(string email, string password, string username)
+        public async Task RegisterAsync(Guid userId, string email, string password, string username, List<Resource> resources, List<Building> buildings)
         {
             var user = _userRepository.Get(email);
             if (user is not null)
@@ -34,9 +34,33 @@ namespace QuantumWorld.Infrastructure.Services
             }
             _encrypter.CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
 
-            user = new User(email, password, passwordSalt, passwordHash, username);
+            user = new User(userId, email, password, passwordSalt, passwordHash, username, resources, buildings);
             _userRepository.Add(user);
             await Task.CompletedTask;
+        }
+
+        public async Task LoginAsync(string email, string password)
+        {
+            var user = _userRepository.Get(email);
+
+            if (user == null)
+            {
+                throw new Exception($"Invalid credentials");
+            }
+            else if (!_encrypter.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            {
+                throw new Exception($"Invalid credentials");
+            }
+
+            return;
+        }
+
+        public async Task SetBuilding(Guid userId, BuildingType type, int level, string description, TimeSpan timeToBuild, float CostMultiplier, IEnumerable<Resource> cost)
+        {
+            //     var user = _userRepository.Get(userId);
+            //     user.SetBuilding();
+            //     _userRepository.Update(user);
+            // }
         }
     }
 }

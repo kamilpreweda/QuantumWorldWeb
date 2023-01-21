@@ -16,7 +16,7 @@ namespace QuantumWorld.Tests.Services
             var encrypterMock = new Mock<IEncrypter>();
 
             var userService = new UserService(userRepositoryMock.Object, mapperMock.Object, encrypterMock.Object);
-            await userService.RegisterAsync("user@email.com", "user", "secret");
+            await userService.RegisterAsync(Guid.NewGuid(), "user@email.com", "user", "secret", new(500), new());
 
             userRepositoryMock.Verify(x => x.Add(It.IsAny<User>()), Times.Once);
         }

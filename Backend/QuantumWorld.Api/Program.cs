@@ -14,7 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUserRepository, InMemoryUserRopository>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IEncrypter, Encrypter>();
+builder.Services.AddSingleton<IEncrypter, Encrypter>();
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());

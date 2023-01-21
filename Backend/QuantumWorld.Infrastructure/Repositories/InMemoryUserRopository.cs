@@ -8,8 +8,7 @@ namespace QuantumWorld.Infrastructure.Repositories
     public class InMemoryUserRopository : IUserRepository
     {
         private static ISet<User> _users = new HashSet<User>{
-            new User("email@email", "password123", Encoding.ASCII.GetBytes("12345"), Encoding.ASCII.GetBytes("12345"), "Kamil"),
-            new User("email1@next", "password123", Encoding.ASCII.GetBytes("54321"), Encoding.ASCII.GetBytes("54321"), "Bartek")
+              new User(Guid.NewGuid(), "email@email", "password123", Encoding.ASCII.GetBytes("12345"), Encoding.ASCII.GetBytes("12345"), "Kamil", new(500), new())
         };
         public void Add(User user)
         {
