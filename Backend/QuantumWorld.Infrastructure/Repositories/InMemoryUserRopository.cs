@@ -9,7 +9,7 @@ namespace QuantumWorld.Infrastructure.Repositories
     {
         private static readonly IBattle _battle;
         private static ISet<User> _users = new HashSet<User>{
-              new User(Guid.NewGuid(), "email@email", "password123", Encoding.ASCII.GetBytes("12345"), Encoding.ASCII.GetBytes("12345"), "Kamil", new(500), new(), new(), new(), new(), _battle)
+              new User(Guid.NewGuid(), "email@email", "password123", Encoding.ASCII.GetBytes("12345"), Encoding.ASCII.GetBytes("12345"), "Kamil")
         };
         public void Add(User user)
         {

@@ -12,6 +12,7 @@ namespace QuantumWorld.Api.Controllers
             _mediator = mediator;
         }
 
+        [HttpPost]
         public async Task<IActionResult> Post([FromBody] Login command)
         {
             // await _mediator.Send(command);

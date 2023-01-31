@@ -31,7 +31,7 @@ namespace QuantumWorld.Infrastructure.Services
                 var ships = new List<Ship>();
                 var enemies = new List<Enemy>();
                 _logger.LogTrace($"Created a new user: '{username}'.");
-                tasks.Add(_userService.RegisterAsync(userId, $"{username}@test.com", "secret", username, resources, buildings, research, ships, enemies, _battle));
+                tasks.Add(_userService.RegisterAsync(userId, $"{username}@test.com", "secret", username));
             }
             await Task.WhenAll(tasks);
             _logger.LogTrace("Data was initialized.");

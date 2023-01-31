@@ -11,9 +11,6 @@ namespace QuantumWorld.TestsEndToEnd.Controllers
 {
     public class UsersControllerTests : ControllerTestsBase
     {
-
-        private readonly IBattle _battle;
-
         [Fact]
         public async Task given_valid_email_user_should_exist()
         {
@@ -35,16 +32,10 @@ namespace QuantumWorld.TestsEndToEnd.Controllers
         {
             var request = new CreateUser
             {
+                Id = Guid.NewGuid(),
                 Email = "test@email.com",
-                Username = "test",
                 Password = "secret",
-                Resources = new(500),
-                Buildings = new(),
-                Research = new(),
-                Ships = new(),
-                Enemies = new(),
-                Battle = _battle
-
+                Username = "test",
 
             };
             var payload = GetPayload(request);

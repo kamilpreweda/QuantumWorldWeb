@@ -25,7 +25,7 @@ namespace QuantumWorld.Core.Domain
 
         }
 
-        public User(Guid userId, string email, string password, byte[] salt, byte[] hash, string username, List<Resource> resources, List<Building> buildings, List<Research> research, List<Ship> ships, List<Enemy> enemies, IBattle battle)
+        public User(Guid userId, string email, string password, byte[] salt, byte[] hash, string username)
         {
             Id = userId;
             Email = email.ToLowerInvariant();
@@ -34,12 +34,16 @@ namespace QuantumWorld.Core.Domain
             PasswordHash = hash;
             Username = username;
             CreateDate = DateTime.UtcNow;
-            Resources = resources;
-            Buildings = buildings;
-            Research = research;
-            Ships = ships;
-            Enemies = enemies;
-            _battle = battle;
+            Resources = new List<Resource>()
+            {
+                new CarbonFiberResource(),
+                new QuantumGlassResource(),
+            };
+            // Buildings = buildings;
+            // Research = research;
+            // Ships = ships;
+            // Enemies = enemies;
+            _battle = new Battle();
         }
 
         public void SetEmail(string email)

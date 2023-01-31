@@ -40,7 +40,7 @@ namespace QuantumWorld.Tests.Domain
             Battle battle = new Battle();
             var userId = Guid.NewGuid();
 
-            User user = new User(userId, $"{userId}@test.com", "secret", Encoding.ASCII.GetBytes("12345"), Encoding.ASCII.GetBytes("12345"), "testUser", resources, buildings, research, ships, enemies, battle);
+            User user = new User(userId, $"{userId}@test.com", "secret", Encoding.ASCII.GetBytes("12345"), Encoding.ASCII.GetBytes("12345"), "testUser");
 
             return user;
         }

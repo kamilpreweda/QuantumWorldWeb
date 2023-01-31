@@ -7,9 +7,9 @@ namespace QuantumWorld.Infrastructure.Services
     public interface IUserService
     {
         Task<UserDto> GetAsync(string email);
-        Task RegisterAsync(Guid userId, string email, string password, string username, List<Resource> resources, List<Building> buildings, List<Research> research, List<Ship> ships, List<Enemy> enemies, IBattle battle);
-        Task LoginAsync(string email, string password);
-        // Task SetBuilding(Guid userId, BuildingType type, int level, string description, TimeSpan timeToBuild, float CostMultiplier, IEnumerable<Resource> cost);
+        Task RegisterAsync(Guid userId, string email, string password, string username);
+        Task LoginAsync(string email, string password);       
+     
 
 
 

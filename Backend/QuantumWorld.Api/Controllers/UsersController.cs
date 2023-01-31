@@ -38,5 +38,5 @@ public class UsersController : ApiControllerBase
         return Created($"users/{request.Email}", new object());
     }
 
-    
+
 }
