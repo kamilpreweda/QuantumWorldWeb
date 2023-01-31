@@ -39,10 +39,26 @@ namespace QuantumWorld.Core.Domain
                 new CarbonFiberResource(),
                 new QuantumGlassResource(),
             };
-            // Buildings = buildings;
-            // Research = research;
-            // Ships = ships;
-            // Enemies = enemies;
+            Buildings = new List<Building>()
+            {
+                new CarbonFiberFactory(),
+                new QuantumGlassFactory()
+            };
+            Research = new List<Research>()
+            {
+                new TheExpanseResearch(),
+                new ArtOfWarResearch()
+            };
+            Ships = new List<Ship>()
+            {
+                new LightFighterShip(),
+                new HeavyFighterShip()
+            };
+            Enemies = new List<Enemy>()
+            {
+                new PiratesEnemy(),
+                new OutsidersEnemy()
+            };
             _battle = new Battle();
         }
 

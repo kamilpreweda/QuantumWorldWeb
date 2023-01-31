@@ -17,6 +17,9 @@ builder.Services.AddScoped<IUserRepository, InMemoryUserRopository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSingleton<IEncrypter, Encrypter>();
 builder.Services.AddScoped<IBuildingService, BuildingService>();
+builder.Services.AddScoped<IResearchService, ResearchService>();
+builder.Services.AddScoped<IShipService, ShipService>();
+builder.Services.AddScoped<IBattleService, BattleService>();
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 // add logger
