@@ -16,8 +16,10 @@ builder.Services.AddScoped<IUserRepository, InMemoryUserRopository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSingleton<IEncrypter, Encrypter>();
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
-
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+// add logger
+// add seedData GeneralSettings
+// add IOC container
 
 var app = builder.Build();
 
