@@ -78,6 +78,7 @@ namespace QuantumWorld.Core.Domain
             LastUpdated = DateTime.UtcNow;
         }
         public void UpgradeBuilding(BuildingType type)
+
         {
             var building = Buildings.SingleOrDefault(b => b.Type == type);
 
@@ -91,6 +92,46 @@ namespace QuantumWorld.Core.Domain
                 SpendResources(Resources, building.Cost);
                 building.UpgradeBuilding();
             }
+        }
+        public void UpgradeResearch(ResearchType type)
+        {
+            var research = Research.SingleOrDefault(r => r.Type == type);
+
+            if (research == null)
+            {
+                throw new Exception("There is no such research.");
+            }
+
+            if (CanAfford(research.Cost))
+            {
+                SpendResources(Resources, research.Cost);
+                research.UpgradeResearch();
+            }
+        }
+        public void BuildShip(ShipType type)
+        {
+            var ship = Ships.SingleOrDefault(s => s.Type == type);
+
+            if (ship == null)
+            {
+                throw new Exception("There is no such ship.");
+            }
+
+            if (CanAfford(ship.Cost))
+            {
+                SpendResources(Resources, ship.Cost);
+                ship.BuildShip();
+            }
+        }
+        public void StartBattle(EnemyType type)
+        {
+
+            var enemy = Enemies.FirstOrDefault(e => e.Type == type);
+            if (enemy == null)
+            {
+                throw new Exception("There is no such enemy");
+            }
+            _battle.StartBattle(Ships, Resources, enemy);
         }
         private bool CanAfford(List<Resource> cost)
         {

@@ -61,8 +61,8 @@ public abstract class Building
     }
     public void UpgradeBuilding()
     {
-        IncreaseLevel();
-        SetNewCost();
         SetNewTime();
+        SetNewCost();
+        IncreaseLevel();
     }
 }
