@@ -3,6 +3,7 @@ using System.Text;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
+using QuantumWorld.Core.Domain;
 using QuantumWorld.Infrastructure.Commands.Users;
 using QuantumWorld.Infrastructure.DTO;
 
@@ -10,6 +11,9 @@ namespace QuantumWorld.TestsEndToEnd.Controllers
 {
     public class UsersControllerTests : ControllerTestsBase
     {
+
+        private readonly IBattle _battle;
+
         [Fact]
         public async Task given_valid_email_user_should_exist()
         {
@@ -35,7 +39,13 @@ namespace QuantumWorld.TestsEndToEnd.Controllers
                 Username = "test",
                 Password = "secret",
                 Resources = new(500),
-                Buildings = new()
+                Buildings = new(),
+                Research = new(),
+                Ships = new(),
+                Enemies = new(),
+                Battle = _battle
+
+
             };
             var payload = GetPayload(request);
             var response = await Client.PostAsync("users", payload);

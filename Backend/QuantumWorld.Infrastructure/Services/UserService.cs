@@ -25,7 +25,7 @@ namespace QuantumWorld.Infrastructure.Services
             return _mapper.Map<User, UserDto>(user);
         }
 
-        public async Task RegisterAsync(Guid userId, string email, string password, string username, List<Resource> resources, List<Building> buildings)
+        public async Task RegisterAsync(Guid userId, string email, string password, string username, List<Resource> resources, List<Building> buildings, List<Research> research, List<Ship> ships, List<Enemy> enemies, IBattle battle)
         {
             var user = _userRepository.Get(email);
             if (user is not null)
@@ -34,7 +34,7 @@ namespace QuantumWorld.Infrastructure.Services
             }
             _encrypter.CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
 
-            user = new User(userId, email, password, passwordSalt, passwordHash, username, resources, buildings);
+            user = new User(userId, email, password, passwordSalt, passwordHash, username, resources, buildings, research, ships, enemies, battle);
             _userRepository.Add(user);
             await Task.CompletedTask;
         }

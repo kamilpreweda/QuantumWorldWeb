@@ -5,6 +5,7 @@ namespace QuantumWorld.Core.Domain
     public class User
     {
         private static readonly Regex NameRegex = new Regex(@"^\w+$");
+        private readonly IBattle _battle;
         public Guid Id { get; protected set; }
         public string Email { get; protected set; } = string.Empty;
         public string Password { get; protected set; } = string.Empty;
@@ -15,13 +16,16 @@ namespace QuantumWorld.Core.Domain
         public DateTime LastUpdated { get; protected set; }
         public List<Resource> Resources { get; set; }
         public List<Building> Buildings { get; set; }
+        public List<Research> Research { get; set; }
+        public List<Ship> Ships { get; set; }
+        public List<Enemy> Enemies { get; set; }
 
         protected User()
         {
 
         }
 
-        public User(Guid userId, string email, string password, byte[] salt, byte[] hash, string username, List<Resource> resources, List<Building> buildings)
+        public User(Guid userId, string email, string password, byte[] salt, byte[] hash, string username, List<Resource> resources, List<Building> buildings, List<Research> research, List<Ship> ships, List<Enemy> enemies, IBattle battle)
         {
             Id = userId;
             Email = email.ToLowerInvariant();
@@ -32,6 +36,10 @@ namespace QuantumWorld.Core.Domain
             CreateDate = DateTime.UtcNow;
             Resources = resources;
             Buildings = buildings;
+            Research = research;
+            Ships = ships;
+            Enemies = enemies;
+            _battle = battle;
         }
 
         public void SetEmail(string email)
@@ -43,7 +51,6 @@ namespace QuantumWorld.Core.Domain
             Email = email.ToLowerInvariant();
             LastUpdated = DateTime.UtcNow;
         }
-
         public void SetUsername(string username)
         {
             if (!NameRegex.IsMatch(username))
@@ -53,8 +60,6 @@ namespace QuantumWorld.Core.Domain
             Username = username.ToLowerInvariant();
             LastUpdated = DateTime.UtcNow;
         }
-
-
         public void SetPassword(string password)
         {
             if (string.IsNullOrWhiteSpace(password))
@@ -72,7 +77,6 @@ namespace QuantumWorld.Core.Domain
             Password = password;
             LastUpdated = DateTime.UtcNow;
         }
-
         public void UpgradeBuilding(BuildingType type)
         {
             var building = Buildings.SingleOrDefault(b => b.Type == type);

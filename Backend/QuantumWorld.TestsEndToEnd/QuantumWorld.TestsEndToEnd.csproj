@@ -9,9 +9,7 @@
 
     <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
-  <ItemGroup>
-    <Content Include="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
+
 
 
   <ItemGroup>
