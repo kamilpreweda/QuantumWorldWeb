@@ -20,6 +20,7 @@ namespace QuantumWorld.Api.Controllers
         [Route("password")]
         public async Task<IActionResult> Put([FromBody] ChangeUserPassword request)
         {
+            await Task.CompletedTask;
             return NoContent();
         }
     }

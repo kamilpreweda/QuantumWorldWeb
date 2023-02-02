@@ -4,11 +4,11 @@ namespace QuantumWorld.Core.Repositories
 {
     public interface IUserRepository
     {
-        User Get(Guid id);
+        Task<User> GetAsync(Guid id);
         User Get(string email);
-        IEnumerable<User> GetAll();
-        void Add(User user);
-        void Update(User user);
-        void Remove(Guid id);
+        Task<IEnumerable<User>> BrowseAsync();
+        Task AddAsync(User user);
+        Task UpdateAsync(User user);
+        Task RemoveAsync(Guid id);
     }
 }

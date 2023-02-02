@@ -28,14 +28,27 @@ public class UsersController : ApiControllerBase
             return NotFound();
         }
 
-        return Ok(user);
+        return Json(user);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> BrowseAsync()
+    {
+        var users = await _userService.BrowseAsync();
+        return Json(users);
+    }
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] CreateUser request)
     {
         await _mediator.Send(request);
         return Created($"users/{request.Email}", new object());
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> Delete([FromBody] DeleteUser request)
+    {
+        await _mediator.Send(request);
+        return NoContent();
     }
 
 

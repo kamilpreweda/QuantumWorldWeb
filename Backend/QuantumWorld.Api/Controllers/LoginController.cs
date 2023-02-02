@@ -15,10 +15,9 @@ namespace QuantumWorld.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Login command)
         {
-            // await _mediator.Send(command);
-            throw new NotImplementedException();
+            await _mediator.Send(command);
+            return Ok();
             // return JWT from cache
-
         }
     }
 }

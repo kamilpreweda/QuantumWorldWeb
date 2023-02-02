@@ -1,8 +1,11 @@
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace QuantumWorld.Core.Domain;
 
+[BsonKnownTypes(typeof(CarbonFiberFactory), typeof(QuantumGlassFactory))]
 public abstract class Building
 {
-    public string Name { get; protected set; }
+    public string Name { get; protected set; } = string.Empty;
     public BuildingType Type { get; protected set; }
     public abstract string Description { get; }
     public int Level { get; protected set; } = 0;
@@ -11,7 +14,7 @@ public abstract class Building
     protected abstract float TimeMultiplier { get; }
     protected abstract float CostMultiplier { get; }
     protected abstract List<Resource> BaseCost { get; }
-    public List<Resource> Cost { get; protected set; }
+    public List<Resource> Cost { get; protected set; } = new();
     public bool IsUnderConstruction { get; protected set; }
     public DateTime FinishDate { get; protected set; }
 

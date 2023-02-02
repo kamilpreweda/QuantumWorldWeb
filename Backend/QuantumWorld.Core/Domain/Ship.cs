@@ -1,17 +1,20 @@
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace QuantumWorld.Core.Domain
 {
+    [BsonKnownTypes(typeof(LightFighterShip), typeof(HeavyFighterShip))]
     public abstract class Ship
     {
-        public string Name { get; protected set; }
+        public string Name { get; protected set; } = string.Empty;
         public ShipType Type { get; protected set; }
         public abstract string Description { get; }
-        public int Count { get; protected set; } 
+        public int Count { get; protected set; }
         public TimeSpan TimeToBuild { get; protected set; }
         protected abstract TimeSpan BaseTimeToBuild { get; }
         protected abstract float TimeMultiplier { get; }
         protected abstract float CostMultiplier { get; }
         protected abstract List<Resource> BaseCost { get; }
-        public List<Resource> Cost { get; protected set; }
+        public List<Resource> Cost { get; protected set; } = new();
         public bool IsUnderConstruction { get; protected set; }
         public DateTime FinishDate { get; protected set; }
         protected abstract int BaseHealthPoints { get; }
@@ -52,7 +55,7 @@ namespace QuantumWorld.Core.Domain
         }
         public void CalculateCount(int count)
         {
-            Count += count;            
+            Count += count;
         }
         private void SetNewTime()
         {
@@ -88,6 +91,6 @@ namespace QuantumWorld.Core.Domain
         {
             HealthPoints = BaseHealthPoints;
             AttackPower = BaseAttackPower;
-        }      
+        }
     }
 }

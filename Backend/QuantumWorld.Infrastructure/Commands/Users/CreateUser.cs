@@ -1,4 +1,5 @@
 using MediatR;
+using MongoDB.Bson;
 using QuantumWorld.Core.Domain;
 
 namespace QuantumWorld.Infrastructure.Commands.Users

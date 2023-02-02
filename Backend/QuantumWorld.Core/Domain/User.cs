@@ -1,9 +1,16 @@
 using System.Text.RegularExpressions;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+
 
 namespace QuantumWorld.Core.Domain
 {
     public class User
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+
         private static readonly Regex NameRegex = new Regex(@"^\w+$");
         private readonly IBattle _battle;
         public Guid Id { get; protected set; }
@@ -25,9 +32,9 @@ namespace QuantumWorld.Core.Domain
 
         }
 
-        public User(Guid userId, string email, string password, byte[] salt, byte[] hash, string username)
+        public User(Guid id, string email, string password, byte[] salt, byte[] hash, string username)
         {
-            Id = userId;
+            Id = Guid.NewGuid();
             Email = email.ToLowerInvariant();
             Password = password;
             PasswordSalt = salt;

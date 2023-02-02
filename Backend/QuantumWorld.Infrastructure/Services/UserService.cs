@@ -1,4 +1,5 @@
 using AutoMapper;
+using MongoDB.Bson;
 using QuantumWorld.Core.Domain;
 using QuantumWorld.Core.Repositories;
 using QuantumWorld.Infrastructure.DTO;
@@ -25,7 +26,13 @@ namespace QuantumWorld.Infrastructure.Services
             return _mapper.Map<User, UserDto>(user);
         }
 
-        public async Task RegisterAsync(Guid userId, string email, string password, string username)
+        public async Task<IEnumerable<UserDto>> BrowseAsync()
+        {
+            var users = await _userRepository.BrowseAsync();
+            return _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
+        }
+
+        public async Task RegisterAsync(Guid id, string email, string password, string username)
         {
             var user = _userRepository.Get(email);
             if (user is not null)
@@ -34,8 +41,8 @@ namespace QuantumWorld.Infrastructure.Services
             }
             _encrypter.CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
 
-            user = new User(userId, email, password, passwordSalt, passwordHash, username);
-            _userRepository.Add(user);
+            user = new User(id, email, password, passwordSalt, passwordHash, username);
+            await _userRepository.AddAsync(user);
             await Task.CompletedTask;
         }
 
@@ -51,16 +58,25 @@ namespace QuantumWorld.Infrastructure.Services
             {
                 throw new Exception($"Invalid credentials");
             }
-
+            await Task.CompletedTask;
             return;
+
         }
 
-        public async Task SetBuilding(Guid userId, BuildingType type, int level, string description, TimeSpan timeToBuild, float CostMultiplier, IEnumerable<Resource> cost)
+        public async Task DeleteAsync(string email, string password)
         {
-            //     var user = _userRepository.Get(userId);
-            //     user.SetBuilding();
-            //     _userRepository.Update(user);
-            // }
+            var user = _userRepository.Get(email);
+
+            if (user == null)
+            {
+                throw new Exception($"Invalid credentials");
+            }
+            else if (!_encrypter.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            {
+                throw new Exception($"Invalid credentials");
+            }
+
+            await _userRepository.RemoveAsync(user.Id);
         }
     }
 }

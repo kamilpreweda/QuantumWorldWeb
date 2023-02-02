@@ -3,6 +3,7 @@ using Moq;
 using QuantumWorld.Core.Domain;
 using QuantumWorld.Core.Repositories;
 using QuantumWorld.Infrastructure.Services;
+using MongoDB.Bson;
 
 namespace QuantumWorld.Tests.Services
 {
@@ -19,7 +20,7 @@ namespace QuantumWorld.Tests.Services
             var userService = new UserService(userRepositoryMock.Object, mapperMock.Object, encrypterMock.Object);
             await userService.RegisterAsync(Guid.NewGuid(), "user@email.com", "secret", "user");
 
-            userRepositoryMock.Verify(x => x.Add(It.IsAny<User>()), Times.Once);
+            userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);
         }
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using MongoDB.Bson;
 using QuantumWorld.Core.Domain;
 
 namespace QuantumWorld.Infrastructure.Services
@@ -23,7 +24,7 @@ namespace QuantumWorld.Infrastructure.Services
             var tasks = new List<Task>();
             for (var i = 1; i <= 10; i++)
             {
-                var userId = Guid.NewGuid();
+                var id = Guid.NewGuid();
                 var username = $"user{i}";
                 var resources = new List<Resource>();
                 var buildings = new List<Building>();
@@ -31,7 +32,7 @@ namespace QuantumWorld.Infrastructure.Services
                 var ships = new List<Ship>();
                 var enemies = new List<Enemy>();
                 _logger.LogTrace($"Created a new user: '{username}'.");
-                tasks.Add(_userService.RegisterAsync(userId, $"{username}@test.com", "secret", username));
+                tasks.Add(_userService.RegisterAsync(id, $"{username}@test.com", "secret", username));
             }
             await Task.WhenAll(tasks);
             _logger.LogTrace("Data was initialized.");

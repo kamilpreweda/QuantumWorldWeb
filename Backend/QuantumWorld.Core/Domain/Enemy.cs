@@ -1,8 +1,11 @@
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace QuantumWorld.Core.Domain
 {
+    [BsonKnownTypes(typeof(PiratesEnemy), typeof(OutsidersEnemy))]
     public abstract class Enemy
     {
-        public string Name { get; protected set; }
+        public string Name { get; protected set; } = string.Empty;
         public EnemyType Type { get; protected set; }
         public abstract string Description { get; }
         public bool IsDefeated { get; protected set; }
@@ -14,8 +17,6 @@ namespace QuantumWorld.Core.Domain
         public DateTime FinishDate { get; protected set; }
         public abstract List<Ship> BaseShips { get; }
         public List<Ship> Ships { get; protected set; }
-
-        public List<Ship> remainingShips { get; protected set; }
 
         public Enemy()
         {

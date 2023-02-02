@@ -112,7 +112,12 @@ public class Battle : IBattle
     {
         var carbonReward = rewards.Find(r => r.Name == "CarbonFiberResource");
         var quantumReward = rewards.Find(r => r.Name == "QuantumGlassResource");
+        if (carbonReward is null || quantumReward is null)
+        {
+            throw new Exception("Rewards are no longer availible.");
+        }
         playerResources.Where(r => r.Name == "CarbonFiberResource").ToList().ForEach(r => r.Value += carbonReward.Value);
+
         playerResources.Where(r => r.Name == "QuantumGlassResource").ToList().ForEach(r => r.Value += quantumReward.Value);
     }
 }

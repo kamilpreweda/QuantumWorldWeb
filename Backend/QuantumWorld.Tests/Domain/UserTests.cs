@@ -1,5 +1,6 @@
 using System.Text;
 using QuantumWorld.Core.Domain;
+using MongoDB.Bson;
 
 namespace QuantumWorld.Tests.Domain
 {
@@ -38,9 +39,9 @@ namespace QuantumWorld.Tests.Domain
             };
 
             Battle battle = new Battle();
-            var userId = Guid.NewGuid();
+            var id = Guid.NewGuid();
 
-            User user = new User(userId, $"{userId}@test.com", "secret", Encoding.ASCII.GetBytes("12345"), Encoding.ASCII.GetBytes("12345"), "testUser");
+            User user = new User(id, $"{id}@test.com", "secret", Encoding.ASCII.GetBytes("12345"), Encoding.ASCII.GetBytes("12345"), "testUser");
 
             return user;
         }

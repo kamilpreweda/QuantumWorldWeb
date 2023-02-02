@@ -2,6 +2,7 @@ using System.Net;
 using System.Text;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using MongoDB.Bson;
 using Newtonsoft.Json;
 using QuantumWorld.Core.Domain;
 using QuantumWorld.Infrastructure.Commands.Users;
@@ -14,7 +15,7 @@ namespace QuantumWorld.TestsEndToEnd.Controllers
         [Fact]
         public async Task given_valid_email_user_should_exist()
         {
-            var email = "email@email";
+            var email = "string";
             var user = await GetUserAsync(email);
             user.Email.Should().BeEquivalentTo(email);
         }
