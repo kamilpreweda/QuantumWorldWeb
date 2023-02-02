@@ -1,0 +1,37 @@
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Resources</th>
+    <th>Buildings</th>
+    <th>Research</th>
+    <th>Ships</th>
+    <th>Enemies</th>
+  </thead>
+  <tbody>
+    
+      <td>{{ user?.username }}</td>
+      <td>{{ user?.email }}</td> 
+      <tr *ngFor = "let resource of user?.resources">
+      <td>{{ resource.name }}</td>
+      <td>{{ resource.value }}</td>
+      </tr>
+      <tr *ngFor = "let building of user?.buildings">
+      <!-- <buildings [building]="building"></buildings> -->
+      <td>{{ building.name }}</td>
+      <td>{{ building.description }}</td>
+      <td>{{ building.level }}</td>
+      <td>{{ building.timeToBuild }}</td>
+      <div *ngFor = "let cost of building.cost">
+        <td>{{ cost.name }}</td>
+        <td>{{ cost.value }}</td>
+      </div>
+      
+      
+    </tr>
+      <td>{{ user?.research }}</td>
+      <td>{{ user?.ships }}</td>
+      <td>{{ user?.enemies }}</td>
+    
+  </tbody>
+</table>
