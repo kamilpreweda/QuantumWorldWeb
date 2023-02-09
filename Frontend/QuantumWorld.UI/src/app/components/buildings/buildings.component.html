@@ -1,0 +1,15 @@
+
+<div class=buildingsContainer>
+    <div *ngFor = "let building of user?.buildings">
+        <div class="buildingContainer">
+            <img src="assets/images/Carbon Fiber Factory.jpg" *ngIf = 'building.name === "CarbonFiberFactory"'>
+            <img src="assets/images/Quantum Glass Factory.jpg" *ngIf = 'building.name === "QuantumGlassFactory"'>
+            <div class="buildingDetails">{{building.name}} lvl {{building.level}}
+                <div class="costContainer">Cost: 
+            <div class="cost" *ngFor = "let cost of building.cost">{{cost.name}} {{cost.value}}</div> 
+                </div>        
+            Time to Build: {{building.timeToBuild}}</div>
+            <button class="buildingButton">Build</button>
+        </div>
+    </div>   
+</div>

@@ -1,1 +1,100 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Goldman&display=swap');
+
+html, body, div, button {
+    font-family: "Goldman", sans-serif;
+    margin: 0;
+    font-size: 24px;
+}
+body {
+    background-image: url("assets/images/2020-02-09-kosmos_zvezdy_nebo_159567_3840x2160.jpg")
+}
+tbody {
+    display: grid;
+    grid-template-columns: 1fr 0fr 9fr;
+    grid-template-rows: 1;
+    grid-template-areas: "menu buildings";    
+    min-height: 90vh;
+    align-items: center;
+    justify-items: center;
+}
+thead {
+    display: flex;
+    min-width: 80vw;
+    justify-content: center;    
+}
+table{
+    display: grid;
+}
+img {
+    display: block;
+    max-width: 100%;
+    max-height: 270px;
+    }
+.buildingsContainer {    
+    border: 2px solid red;
+    min-width: 50vw;
+    display: block;
+    overflow-y: scroll;
+    background-color: #151829;
+    color: white;
+    grid-area: buildings;
+}
+.buildingContainer{
+    padding: 1em;
+    border: 2px solid red;
+    max-width: 1100px;
+    display: flex;
+    padding: 1em;
+    min-width: 50vw;    
+    border: 1px solid #E5E4E2;
+}
+.menuContainer {    
+    border: 2px solid red;
+    max-width: 200px;
+    display: grid;
+    grid-area: menu;    
+    margin-left: 1vw;
+    margin-right: 0;    
+}
+.resourcesContainer {
+    display: flex;
+    gap: 1em;
+    border: 2px solid red;
+    background-color: #151829; 
+    color: white;    
+    min-height: 5vh;
+    min-width: 80vw;
+    align-items: center;
+    justify-content: center;
+    flex: 1;   
+}
+
+.buildingButton{
+    min-width: 100px;
+    min-height: 50px;
+    margin-left: auto;
+    margin-top: auto;
+}
+
+.buildingDetails {
+    padding: 1em;    
+}
+
+.menuButton{
+    min-width: 200px;
+    min-height: 50px;
+    background-color: #151829;
+    color: white;
+    cursor: pointer;
+    transition: color 0.2s linear;
+    margin: 1px;
+    border-color: transparent;
+}
+
+.menuButton:hover{
+    color: #FFD700 !important;
+}
+
+.menuButton:active{
+    border: 1px solid #00FFFF
+}

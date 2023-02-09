@@ -1,0 +1,8 @@
+
+  <div class="resourcesContainer">
+    <div *ngFor = "let resource of user?.resources">
+      <div class=carbon *ngIf = 'resource.name === "CarbonFiberResource"'>{{resource.name}} : {{resource.value}}</div>
+      <div class=quantum *ngIf = 'resource.name === "QuantumGlassResource"'>{{resource.name}} : {{resource.value}}</div>      
+  </div>   
+</div>
+    
