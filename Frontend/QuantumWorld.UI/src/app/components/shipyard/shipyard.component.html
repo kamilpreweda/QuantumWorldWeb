@@ -1,0 +1,26 @@
+
+<div class=shipsContainer>
+    <div *ngFor = "let ship of user?.ships">
+        <div class="shipContainer">
+            <img src="assets/images/Light Fighter.jpg" *ngIf = 'ship.name === "LightFighterShip"'>
+            <img src="assets/images/Heavy Fighter.jpg" *ngIf = 'ship.name === "HeavyFighterShip"'>
+            <img src="assets/images/Battleship.jpg" *ngIf = 'ship.name === "Battleship"'>
+            <img src="assets/images/Destroyer.jpg" *ngIf = 'ship.name === "Destroyer"'>
+            <img src="assets/images/Dreadnought.jpg" *ngIf = 'ship.name === "Dreadnought"'>
+            <img src="assets/images/Mothership.jpg" *ngIf = 'ship.name === "Mothership"'>            
+            <div class="shipDetails">
+                <span>{{addSpaces(ship.name)}}</span>                
+                (Count:  {{ship.count}})
+                <div class="costContainer">Cost: 
+                    <div *ngFor = "let cost of ship.cost">
+                        <span *ngIf= 'cost.name === "CarbonFiberResource"' style="color:#00E676">{{changeDisplayedName(cost.name)}}</span>
+                        <span *ngIf= 'cost.name === "QuantumGlassResource"' style="color:#00B8D4">{{changeDisplayedName(cost.name)}}</span>
+                        <span *ngIf= 'cost.name === "HiggsBosonResource"' style="color:#FFD700">{{changeDisplayedName(cost.name)}}</span>
+                        {{numberWithDots(cost.value)}}
+                    </div> 
+                </div>        
+            Time to Build: {{ship.timeToBuild}}</div>
+            <button class="shipButton">Build</button>
+        </div>
+    </div>   
+</div>

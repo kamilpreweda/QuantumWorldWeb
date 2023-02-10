@@ -1,0 +1,22 @@
+<div class=researchesContainer>
+    <div *ngFor = "let research of user?.research">
+        <div class="researchContainer">
+            <img src="assets/images/The Expanse Research.jpg" *ngIf = 'research.name === "TheExpanseResearch"'>
+            <img src="assets/images/Art Of War Research.jpg" *ngIf = 'research.name === "ArtOfWarResearch"'>
+            <img src="assets/images/Hyperdrive Research.jpg" *ngIf = 'research.name === "HyperdriveResearch"'>
+            <div class="researchDetails">
+                <span>{{addSpaces(changeDisplayedName(research.name))}}</span>                
+                (lvl: {{research.level}})
+                <div class="costContainer">Cost: 
+                    <div *ngFor = "let cost of research.cost">
+                        <span *ngIf= 'cost.name === "CarbonFiberResource"' style="color:#00E676">{{changeDisplayedName(cost.name)}}</span>
+                        <span *ngIf= 'cost.name === "QuantumGlassResource"' style="color:#00B8D4">{{changeDisplayedName(cost.name)}}</span>
+                        <span *ngIf= 'cost.name === "HiggsBosonResource"' style="color:#FFD700">{{changeDisplayedName(cost.name)}}</span>
+                        {{numberWithDots(cost.value)}}
+                    </div> 
+                </div>        
+            Time to Build: {{research.timeToBuild}}</div>
+            <button class="researchButton">Build</button>
+        </div>
+    </div>   
+</div>

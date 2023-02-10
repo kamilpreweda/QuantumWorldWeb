@@ -10,8 +10,8 @@ namespace QuantumWorld.Core.Domain
 
         protected override List<Resource> Rewards => new List<Resource>()
         {
-            new CarbonFiberResource(2000),
-            new QuantumGlassResource(2000),
+            new CarbonFiberResource(5000),
+            new QuantumGlassResource(5000),
         };
 
         public override List<Ship> BaseShips => new List<Ship>()

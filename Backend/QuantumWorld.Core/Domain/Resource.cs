@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace QuantumWorld.Core.Domain
 {
-    [BsonKnownTypes(typeof(CarbonFiberResource), typeof(QuantumGlassResource))]
+    [BsonKnownTypes(typeof(CarbonFiberResource), typeof(QuantumGlassResource), typeof(HiggsBosonResource))]
     public abstract class Resource
     {
 

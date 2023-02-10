@@ -11,31 +11,44 @@ namespace QuantumWorld.Tests.Domain
             List<Resource> resources = new List<Resource>()
             {
                 new CarbonFiberResource(),
-                new QuantumGlassResource()
+                new QuantumGlassResource(),
+                new HiggsBosonResource()
             };
 
             List<Building> buildings = new List<Building>()
             {
                 new CarbonFiberFactory(),
                 new QuantumGlassFactory(),
+                new HiggsBosonDetector(),
+                new Labolatory(),
+                new SpaceshipFactory(),
             };
 
             List<Research> research = new List<Research>()
             {
                 new TheExpanseResearch(),
                 new ArtOfWarResearch(),
+                new HyperdriveResearch(),
             };
 
             List<Ship> ships = new List<Ship>()
             {
                 new LightFighterShip(),
                 new HeavyFighterShip(),
+                new Battleship(),
+                new Destroyer(),
+                new Dreadnought(),
+                new Mothership(),
             };
 
             List<Enemy> enemies = new List<Enemy>()
             {
                 new PiratesEnemy(),
                 new OutsidersEnemy(),
+                new RebelsEnemy(),
+                new ArmamentsEnemy(),
+                new DistantsEnemy(),
+                new AncientsEnemy()
             };
 
             Battle battle = new Battle();

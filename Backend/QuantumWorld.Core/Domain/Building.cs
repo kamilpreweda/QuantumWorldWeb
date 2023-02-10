@@ -2,7 +2,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace QuantumWorld.Core.Domain;
 
-[BsonKnownTypes(typeof(CarbonFiberFactory), typeof(QuantumGlassFactory))]
+[BsonKnownTypes(typeof(CarbonFiberFactory), typeof(QuantumGlassFactory), typeof(HiggsBosonDetector), typeof(Labolatory), typeof(SpaceshipFactory))]
 public abstract class Building
 {
     public string Name { get; protected set; } = string.Empty;

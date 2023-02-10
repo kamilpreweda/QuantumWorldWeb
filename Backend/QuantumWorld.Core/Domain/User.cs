@@ -45,26 +45,39 @@ namespace QuantumWorld.Core.Domain
             {
                 new CarbonFiberResource(),
                 new QuantumGlassResource(),
+                new HiggsBosonResource(),
             };
             Buildings = new List<Building>()
             {
                 new CarbonFiberFactory(),
-                new QuantumGlassFactory()
+                new QuantumGlassFactory(),
+                new HiggsBosonDetector(),
+                new Labolatory(),
+                new SpaceshipFactory(),
             };
             Research = new List<Research>()
             {
                 new TheExpanseResearch(),
-                new ArtOfWarResearch()
+                new ArtOfWarResearch(),
+                new HyperdriveResearch(),
             };
             Ships = new List<Ship>()
             {
                 new LightFighterShip(),
-                new HeavyFighterShip()
+                new HeavyFighterShip(),
+                new Battleship(),
+                new Destroyer(),
+                new Dreadnought(),
+                new Mothership(),
             };
             Enemies = new List<Enemy>()
             {
                 new PiratesEnemy(),
-                new OutsidersEnemy()
+                new OutsidersEnemy(),
+                new RebelsEnemy(),
+                new ArmamentsEnemy(),
+                new DistantsEnemy(),
+                new AncientsEnemy()
             };
             _battle = new Battle();
         }

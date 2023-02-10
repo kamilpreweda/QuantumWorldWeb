@@ -2,7 +2,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace QuantumWorld.Core.Domain
 {
-    [BsonKnownTypes(typeof(LightFighterShip), typeof(HeavyFighterShip))]
+    [BsonKnownTypes(typeof(LightFighterShip), typeof(HeavyFighterShip), typeof(Battleship), typeof(Destroyer), typeof(Dreadnought), typeof(Mothership))]
     public abstract class Ship
     {
         public string Name { get; protected set; } = string.Empty;

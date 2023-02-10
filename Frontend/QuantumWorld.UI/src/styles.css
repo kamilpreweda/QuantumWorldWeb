@@ -4,6 +4,7 @@ html, body, div, button {
     font-family: "Goldman", sans-serif;
     margin: 0;
     font-size: 24px;
+    color: white;
 }
 body {
     background-image: url("assets/images/2020-02-09-kosmos_zvezdy_nebo_159567_3840x2160.jpg")
@@ -15,7 +16,7 @@ tbody {
     grid-template-areas: "menu buildings";    
     min-height: 90vh;
     align-items: center;
-    justify-items: center;
+    justify-items: center;   
 }
 thead {
     display: flex;
@@ -30,24 +31,6 @@ img {
     max-width: 100%;
     max-height: 270px;
     }
-.buildingsContainer {    
-    border: 2px solid red;
-    min-width: 50vw;
-    display: block;
-    overflow-y: scroll;
-    background-color: #151829;
-    color: white;
-    grid-area: buildings;
-}
-.buildingContainer{
-    padding: 1em;
-    border: 2px solid red;
-    max-width: 1100px;
-    display: flex;
-    padding: 1em;
-    min-width: 50vw;    
-    border: 1px solid #E5E4E2;
-}
 .menuContainer {    
     border: 2px solid red;
     max-width: 200px;
@@ -55,32 +38,88 @@ img {
     grid-area: menu;    
     margin-left: 1vw;
     margin-right: 0;    
+    }
+.overviewContainer{
+    border: 2px solid red;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 1px;
+    grid-row-gap: 1px;
 }
+.buildingsContainer, .researchesContainer, .shipsContainer {    
+    border: 2px solid red;
+    min-width: 60vw;
+    max-height: 80vh;
+    display: block;
+    overflow-y: scroll;
+    background-color: #151829;
+    color: white;
+    grid-area: buildings;    
+}
+.buildingContainer, .researchContainer, .shipContainer{
+    padding: 1em;
+    border: 2px solid red;
+    max-width: 1100px;
+    display: flex;
+    padding: 1em;
+    min-width: 50vw;    
+    border: 1px solid #E5E4E2;    
+}
+
 .resourcesContainer {
     display: flex;
     gap: 1em;
-    border: 2px solid red;
+    padding: 0 1em;
+    border: 1px solid white;
+    border-radius: 25px;
     background-color: #151829; 
     color: white;    
-    min-height: 5vh;
-    min-width: 80vw;
+    min-height: 5vh;    
     align-items: center;
     justify-content: center;
     flex: 1;   
 }
+.mapContainer {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 1px;
+    grid-row-gap: 1px;
+    border: 2px solid red;
+    min-width: 80vw;
+    min-height: 80vh;
+    justify-items: center;
+    }
 
-.buildingButton{
+.enemyContainer {
+    border: 2px solid red;
+    display: grid;
+    justify-items: center;
+    align-items: center;   
+}
+
+.buildingButton, .researchButton, .shipButton{
     min-width: 100px;
     min-height: 50px;
     margin-left: auto;
     margin-top: auto;
+    color: black;
 }
 
-.buildingDetails {
-    padding: 1em;    
+.buildingDetails, .researchDetails, .shipDetails {
+    padding: 1em;
+    border: 2px solid red;  
+    flex: content;
 }
 
-.menuButton{
+.costContainer{
+    display: flex;
+    gap: 0.5em;
+    border: 2px solid red;
+}
+
+.menuButton, .mapButton{
     min-width: 200px;
     min-height: 50px;
     background-color: #151829;
@@ -88,13 +127,67 @@ img {
     cursor: pointer;
     transition: color 0.2s linear;
     margin: 1px;
-    border-color: transparent;
+    border-color: transparent;    
 }
 
-.menuButton:hover{
+.menuButton:hover, .mapButton:hover{
     color: #FFD700 !important;
 }
 
-.menuButton:active{
+.menuButton:active, .mapButton:active{
     border: 1px solid #00FFFF
+}
+
+.planetImage{
+    max-width: 150px;
+}
+
+.overviewPlanet{
+    min-width: 50vw;
+    min-height: 90vh;
+    grid-column-start: 1;
+    grid-column-end: span 2;
+    grid-row-start: 1;
+    grid-row-end: span 2;    
+}
+.logout{
+    background-color: #151829;
+    font-size: 2rem;
+}
+
+#pirates {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 3;
+    grid-row-end: 3;
+}
+#outsiders {
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 2;
+}
+#rebels {
+    grid-column-start: 3;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 1;
+}
+#armaments {
+    grid-column-start: 4;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 2;
+}
+#distants {
+    grid-column-start: 5;
+    grid-column-end: 5;
+    grid-row-start: 3;
+    grid-row-end: 3;
+}
+#ancients {
+    grid-column-start: 6;
+    grid-column-end: 6;
+    grid-row-start: 2;
+    grid-row-end: 2;
 }

@@ -9,15 +9,19 @@ import { BuildingsComponent } from './components/buildings/buildings.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OverviewComponent } from './components/overview/overview.component';
+import { ResearchComponent } from './components/research/research.component';
+import { ShipyardComponent } from './components/shipyard/shipyard.component';
+import { MapComponent } from './components/map/map.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 const appRoute: Routes = [
   { path: '', component: OverviewComponent },
   { path: 'Overview', component: OverviewComponent },
   { path: 'Buildings', component: BuildingsComponent },
-  // {path: 'Research', component: ResearchComponent},
-  // {path: 'Shipyard', component: ShipyardComponent},
-  // {path: 'Map', component: MapComponent},
-  // {path 'Logout', component: LogoutComponent}
+  { path: 'Research', component: ResearchComponent },
+  { path: 'Shipyard', component: ShipyardComponent },
+  { path: 'Map', component: MapComponent },
+  { path: 'Logout', component: LogoutComponent }
 ]
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ const appRoute: Routes = [
     HeaderResourcesComponent,
     BuildingsComponent,
     MenuComponent,
-    OverviewComponent
+    OverviewComponent,
+    ResearchComponent,
+    ShipyardComponent,
+    MapComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

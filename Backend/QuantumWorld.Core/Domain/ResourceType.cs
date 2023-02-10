@@ -4,4 +4,5 @@ public enum ResourceType
 {
     CarbonFiberResource,
     QuantumGlassResource,
+    HiggsBosonResource
 }

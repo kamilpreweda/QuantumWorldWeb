@@ -5,8 +5,8 @@ export interface User {
     email: string;
     username: string;
     resources?: Resource[];
-    buildings?: any[];
-    research?: any[];
+    buildings?: Building[];
+    research?: Research[];
     ships?: any[];
     enemies?: any[];
 }
@@ -17,6 +17,14 @@ export interface Resource {
 }
 
 export interface Building {
+    name: string;
+    description: string;
+    level: number;
+    timeToBuild: Time;
+    cost: Resource[];
+}
+
+export interface Research {
     name: string;
     description: string;
     level: number;

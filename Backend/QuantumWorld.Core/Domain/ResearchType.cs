@@ -3,6 +3,7 @@ namespace QuantumWorld.Core.Domain
     public enum ResearchType
     {
         TheExpanseResearch,
-        ArtOfWarResearch
+        ArtOfWarResearch,
+        HyperdriveResearch,
     }
 }

@@ -2,7 +2,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace QuantumWorld.Core.Domain
 {
-    [BsonKnownTypes(typeof(PiratesEnemy), typeof(OutsidersEnemy))]
+    [BsonKnownTypes(typeof(PiratesEnemy), typeof(OutsidersEnemy), typeof(RebelsEnemy), typeof(ArmamentsEnemy), typeof(DistantsEnemy), typeof(AncientsEnemy))]
     public abstract class Enemy
     {
         public string Name { get; protected set; } = string.Empty;

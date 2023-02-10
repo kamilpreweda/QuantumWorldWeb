@@ -4,5 +4,9 @@ namespace QuantumWorld.Core.Domain
     {
         CarbonFiberFactory,
         QuantumGlassFactory,
+        HiggsBosonDetector,
+        Labolatory,
+        SpaceshipFactory,
+
     }
 }

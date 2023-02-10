@@ -2,7 +2,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace QuantumWorld.Core.Domain
 {
-    [BsonKnownTypes(typeof(TheExpanseResearch), typeof(ArtOfWarResearch))]
+    [BsonKnownTypes(typeof(TheExpanseResearch), typeof(ArtOfWarResearch), typeof(HyperdriveResearch))]
     public abstract class Research
     {
         public string Name { get; protected set; } = string.Empty;

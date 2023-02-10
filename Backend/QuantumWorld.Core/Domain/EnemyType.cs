@@ -3,6 +3,10 @@ namespace QuantumWorld.Core.Domain
     public enum EnemyType
     {
         PiratesEnemy,
-        OutsidersEnemy
+        OutsidersEnemy,
+        RebelsEnemy,
+        ArmamentsEnemy,
+        DistantsEnemy,
+        AncientsEnemy
     }
 }
