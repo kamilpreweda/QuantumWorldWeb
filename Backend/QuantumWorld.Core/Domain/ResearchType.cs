@@ -5,5 +5,6 @@ namespace QuantumWorld.Core.Domain
         TheExpanseResearch,
         ArtOfWarResearch,
         HyperdriveResearch,
+        TerraformingResearch,
     }
 }

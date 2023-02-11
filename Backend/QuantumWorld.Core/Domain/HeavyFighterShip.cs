@@ -2,7 +2,7 @@ namespace QuantumWorld.Core.Domain
 {
     public class HeavyFighterShip : Ship
     {
-        public override string Description => "Heavy Fighter Ship Description";
+        public override string Description => "Heavy Fighter Description";
 
         protected override float CostMultiplier => 1;
 

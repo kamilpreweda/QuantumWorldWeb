@@ -33,6 +33,10 @@ public abstract class Building
             cost.Value *= CostMultiplier;
         }
     }
+    private void SetTime()
+    {
+        TimeToBuild = BaseTimeToBuild;
+    }
     private void SetNewTime()
     {
         TimeToBuild = BaseTimeToBuild * TimeMultiplier * (Level + 1);
@@ -42,7 +46,7 @@ public abstract class Building
         SetName();
         SetType();
         SetCost();
-        SetNewTime();
+        SetTime();
     }
     private void SetName()
     {

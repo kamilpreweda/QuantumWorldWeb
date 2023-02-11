@@ -18,9 +18,18 @@ export class ShipyardComponent {
   }
 
   changeDisplayedName(name: string): string {
-    var changedName = name.replace("Resource", "");
-    changedName = changedName.replace(/[^A-Z]+/g, "");
-    return changedName;
+    var changedName: string;
+
+    if (name.includes("Resource")) {
+      changedName = name.replace("Resource", "");
+      changedName = changedName.replace(/[^A-Z]+/g, "");
+      return changedName;
+    }
+    else if (name.includes("Ship")) {
+      changedName = name.replace("Ship", "");
+      return changedName;
+    }
+    return changedName = name;
   }
 
   addSpaces(name: string): string {

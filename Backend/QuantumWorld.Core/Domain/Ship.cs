@@ -57,6 +57,9 @@ namespace QuantumWorld.Core.Domain
         {
             Count += count;
         }
+        private void SetTime(){
+            TimeToBuild = BaseTimeToBuild;
+        }
         private void SetNewTime()
         {
             TimeToBuild = BaseTimeToBuild * TimeMultiplier;
@@ -67,7 +70,7 @@ namespace QuantumWorld.Core.Domain
             SetType();
             SetStats();
             SetCost();
-            SetNewTime();
+            SetTime();
         }
         private void SetName()
         {

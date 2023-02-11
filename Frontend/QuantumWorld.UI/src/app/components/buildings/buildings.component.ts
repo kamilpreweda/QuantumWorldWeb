@@ -17,7 +17,7 @@ export class BuildingsComponent {
     this.userService.getUsers().subscribe((result: User[]) => { this.users = result; this.user = this.users[0] });
   }
 
-  changeDisplayedName(name: string): string {
+  displayShortName(name: string): string {
     var changedName = name.replace("Resource", "");
     changedName = changedName.replace(/[^A-Z]+/g, "");
     return changedName;

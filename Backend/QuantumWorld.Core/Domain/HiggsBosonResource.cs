@@ -3,7 +3,7 @@ namespace QuantumWorld.Core.Domain
 {
     public class HiggsBosonResource : Resource
     {
-        protected override float BaseValue => 0;
+        protected override float BaseValue => 100000;
 
         public HiggsBosonResource() : base()
         {

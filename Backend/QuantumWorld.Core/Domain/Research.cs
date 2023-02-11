@@ -2,7 +2,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace QuantumWorld.Core.Domain
 {
-    [BsonKnownTypes(typeof(TheExpanseResearch), typeof(ArtOfWarResearch), typeof(HyperdriveResearch))]
+    [BsonKnownTypes(typeof(TheExpanseResearch), typeof(ArtOfWarResearch), typeof(HyperdriveResearch), typeof(TerraformingResearch))]
     public abstract class Research
     {
         public string Name { get; protected set; } = string.Empty;
@@ -33,6 +33,10 @@ namespace QuantumWorld.Core.Domain
                 cost.Value *= CostMultiplier;
             }
         }
+        private void SetTime()
+        {
+            TimeToBuild = BaseTimeToBuild;
+        }
         private void SetNewTime()
         {
             TimeToBuild = BaseTimeToBuild * TimeMultiplier * (Level + 1);
@@ -42,7 +46,7 @@ namespace QuantumWorld.Core.Domain
             SetName();
             SetType();
             SetCost();
-            SetNewTime();
+            SetTime();
         }
         private void SetName()
         {
@@ -64,8 +68,8 @@ namespace QuantumWorld.Core.Domain
         }
         public void UpgradeResearch()
         {
-            SetNewCost();
             SetNewTime();
+            SetNewCost();
             IncreaseLevel();
 
         }

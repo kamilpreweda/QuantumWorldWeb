@@ -29,6 +29,7 @@ namespace QuantumWorld.Tests.Domain
                 new TheExpanseResearch(),
                 new ArtOfWarResearch(),
                 new HyperdriveResearch(),
+                new TerraformingResearch(),
             };
 
             List<Ship> ships = new List<Ship>()
@@ -53,6 +54,7 @@ namespace QuantumWorld.Tests.Domain
 
             Battle battle = new Battle();
             var id = Guid.NewGuid();
+
 
             User user = new User(id, $"{id}@test.com", "secret", Encoding.ASCII.GetBytes("12345"), Encoding.ASCII.GetBytes("12345"), "testUser");
 
@@ -100,6 +102,29 @@ namespace QuantumWorld.Tests.Domain
         }
 
         [Fact]
+        public void User_UpgradeBuilding_Should_Increase_Used_Space()
+        {
+            var user = SetUser();
+            user.UpgradeBuilding(BuildingType.CarbonFiberFactory);
+
+            int expectedUsedSpace = 1;
+            int actualUsedSpace = user.UsedSpace;
+            Assert.Equal(expectedUsedSpace, actualUsedSpace);
+
+        }
+        [Fact]
+        public void User_UpgradeBuilding_Should_Calculate_Points_Properly()
+        {
+            var user = SetUser();
+            user.UpgradeBuilding(BuildingType.SpaceshipFactory);
+
+            double expectedResult = 0.9;
+            double actualResult = user.Points;
+            Assert.Equal(expectedResult, actualResult);
+
+        }
+
+        [Fact]
         public void User_UpgradeResearch_Should_Upgrade_Correct_Research_Based_On_Its_Type()
         {
             var user = SetUser();
@@ -116,6 +141,10 @@ namespace QuantumWorld.Tests.Domain
             TimeSpan actualTime = user.Research.SingleOrDefault(r => r.Name == "ArtOfWarResearch").TimeToBuild;
             List<Resource> actualCost = user.Research.SingleOrDefault(r => r.Name == "ArtOfWarResearch").Cost;
             int actualLevel = user.Research.SingleOrDefault(r => r.Name == "ArtOfWarResearch").Level;
+
+            Assert.Equal(expectedTime, actualTime);
+            actualCost.Should().BeEquivalentTo(expectedCost);
+            Assert.Equal(expectedLevel, actualLevel);
         }
 
         [Fact]
@@ -149,7 +178,23 @@ namespace QuantumWorld.Tests.Domain
             bool actualResult = user.Enemies.SingleOrDefault(e => e.Type == enemy.Type).IsDefeated;
 
             Assert.Equal(expectedResult, actualResult);
+        }
+        [Fact]
+        public void User_Start_Battle_Should_Increase_Number_Of_Defeated_Enemies_If_Won()
+        {
+            var user = SetUser();
 
+            user.Ships = new List<Ship>()
+            {
+                new LightFighterShip(1000),
+                new HeavyFighterShip(1000)
+            };
+            var enemy = new PiratesEnemy();
+
+            user.StartBattle(enemy.Type);
+            int expectedResult = 1;
+            int actualResult = user.EnemiesDefeated;
+            Assert.Equal(expectedResult, actualResult);
         }
     }
 }

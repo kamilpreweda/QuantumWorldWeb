@@ -35,5 +35,5 @@ export class OverviewComponent {
   addSpaces(name: string): string {
     var changedName = name.replace(/([A-Z])/g, ' $1').trim();
     return changedName;
-  }
+  }  
 }

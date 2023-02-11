@@ -8,7 +8,7 @@ namespace QuantumWorld.Core.Domain
 
         protected override float TimeMultiplier => 1;
 
-        protected override List<Resource> Rewards => new List<Resource>()
+        public override List<Resource> BaseRewards => new List<Resource>()
         {
             new CarbonFiberResource(50000),
             new QuantumGlassResource(50000),

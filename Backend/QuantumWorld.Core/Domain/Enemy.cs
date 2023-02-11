@@ -12,7 +12,8 @@ namespace QuantumWorld.Core.Domain
         public TimeSpan TimeToAttack { get; protected set; }
         protected abstract TimeSpan BaseTimeToAttack { get; }
         protected abstract float TimeMultiplier { get; }
-        protected abstract List<Resource> Rewards { get; }
+        public abstract List<Resource> BaseRewards { get; }
+        public List<Resource> Rewards { get; set; }
         public bool IsUnderAttack { get; protected set; }
         public DateTime FinishDate { get; protected set; }
         public abstract List<Ship> BaseShips { get; }
@@ -22,6 +23,8 @@ namespace QuantumWorld.Core.Domain
         {
             AutoSetBasicAttributes();
             Ships = GetEnemyBaseShips();
+            Rewards = GetBaseRewards();
+
         }
         public List<Ship> GetEnemyBaseShips()
         {
@@ -45,6 +48,10 @@ namespace QuantumWorld.Core.Domain
             }
             return result;
         }
+        public List<Resource> GetBaseRewards()
+        {
+            return BaseRewards;
+        }
         public List<Resource> GetRewards()
         {
             return Rewards;
@@ -55,11 +62,15 @@ namespace QuantumWorld.Core.Domain
             return Ships;
         }
 
-        public void Defeat()
+        public bool Defeat()
         {
             IsDefeated = true;
+            return true;
         }
-
+        private void SetTime()
+        {
+            TimeToAttack = BaseTimeToAttack;
+        }
         private void SetNewTime()
         {
             TimeToAttack = BaseTimeToAttack * TimeMultiplier;
@@ -68,7 +79,7 @@ namespace QuantumWorld.Core.Domain
         {
             SetName();
             SetType();
-            SetNewTime();
+            SetTime();
         }
         private void SetName()
         {

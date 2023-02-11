@@ -1,26 +1,57 @@
 <div class="mapContainer">
     <div class="enemyContainer" id="pirates">
         <img src="assets/images/pirates.png" class="planetImage">
-        <button class="mapButton">Pirates</button>
-    </div>
+        <button class="mapButton" id="piratesButton"(click)="changeAppearance('piratesButton'); showDetails = !showDetails">Pirates</button>
+        </div>
+        <div class="enemyContainer" id="piratesContainer" *ngIf="showDetails">
+            <div *ngFor="let enemy of user?.enemies">
+                <div class="enemyShipsDetails">
+                    <div *ngFor="let ship of enemy.ships">
+                        <div *ngIf='enemy.name ==="PiratesEnemy"'>
+                            {{addSpaces(changeDisplayedName(ship.name))}}: {{ship.count}}                        
+                        </div>                        
+                    </div>
+                </div>
+            <div *ngIf='enemy.name ==="PiratesEnemy"'>
+                Time To Travel: {{enemy.timeToAttack}}
+                <div>
+                Requirements: 
+                    <div class="enemyRequirements">
+                        <span id="red">The Expanse lvl 0</span>
+                        <span id="red">Art Of War lvl 0</span>
+                    </div>
+                </div>
+                <div class="enemyRewardsContainer">
+                Rewards: 
+                    <div *ngFor="let reward of enemy.rewards">
+                        <span *ngIf= 'reward.name === "CarbonFiberResource"' style="color:#00E676">{{displayShortName(reward.name)}}</span>
+                        <span *ngIf= 'reward.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayShortName(reward.name)}}</span>
+                        : {{reward.value}}                                          
+                    </div>                    
+                </div>                
+            </div>  
+            </div> 
+            <button class="attackButton">Attack</button>   
+        </div>           
+    
     <div class="enemyContainer" id="outsiders">
         <img src="assets/images/outsiders.png" class="planetImage">
-        <button class="mapButton">Outsiders</button>
+        <button class="mapButton" id="outsidersButton"(click)="changeAppearance('outsidersButton'); showDetails = !showDetails">Outsiders</button>
     </div>
     <div class="enemyContainer" id="rebels">
         <img src="assets/images/Rebels.png" class="planetImage">
-        <button class="mapButton">Rebels</button>
+        <button class="mapButton" id="rebelsButton"(click)="changeAppearance('rebelsButton'); showDetails = !showDetails">Rebels</button>
     </div>
     <div class="enemyContainer" id="armaments">
         <img src="assets/images/Armaments.png" class="planetImage">
-        <button class="mapButton">Armaments</button>
+        <button class="mapButton" id="armamentsButton"(click)="changeAppearance('armamentsButton'); showDetails = !showDetails">Armaments</button>
     </div>
     <div class="enemyContainer" id="distants">
         <img src="assets/images/Distants.png" class="planetImage">
-        <button class="mapButton">Distants</button>
+        <button class="mapButton" id="distantsButton"(click)="changeAppearance('distantsButton'); showDetails = !showDetails">Distants</button>
     </div>    
     <div class="enemyContainer" id="ancients">
         <img src="assets/images/Ancients.png" class="planetImage">
-        <button class="mapButton">Ancients</button>
+        <button class="mapButton" id="ancientsButton"(click)="changeAppearance('ancientsButton'); showDetails = !showDetails">Ancients</button>
     </div>
 </div>

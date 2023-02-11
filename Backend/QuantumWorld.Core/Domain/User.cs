@@ -23,9 +23,13 @@ namespace QuantumWorld.Core.Domain
         public DateTime LastUpdated { get; protected set; }
         public List<Resource> Resources { get; set; }
         public List<Building> Buildings { get; set; }
+        public int AvailibleSpace { get; set; }
+        public int UsedSpace { get; set; }
         public List<Research> Research { get; set; }
         public List<Ship> Ships { get; set; }
         public List<Enemy> Enemies { get; set; }
+        public int EnemiesDefeated { get; set; }
+        public double Points { get; set; }
 
         protected User()
         {
@@ -55,11 +59,15 @@ namespace QuantumWorld.Core.Domain
                 new Labolatory(),
                 new SpaceshipFactory(),
             };
+            AvailibleSpace = 15;
+            UsedSpace = 0;
+            Points = 0;
             Research = new List<Research>()
             {
                 new TheExpanseResearch(),
                 new ArtOfWarResearch(),
                 new HyperdriveResearch(),
+                new TerraformingResearch(),
             };
             Ships = new List<Ship>()
             {
@@ -79,6 +87,7 @@ namespace QuantumWorld.Core.Domain
                 new DistantsEnemy(),
                 new AncientsEnemy()
             };
+            EnemiesDefeated = 0;
             _battle = new Battle();
         }
 
@@ -127,10 +136,13 @@ namespace QuantumWorld.Core.Domain
                 throw new Exception("There is no such building.");
             }
 
-            if (CanAfford(building.Cost))
+            if (CanAfford(building.Cost) && HasEnoughSpace())
             {
                 SpendResources(Resources, building.Cost);
+                CalculatePoints(building.Cost);
                 building.UpgradeBuilding();
+                IncreaseUsedSpace();
+
             }
         }
         public void UpgradeResearch(ResearchType type)
@@ -145,7 +157,9 @@ namespace QuantumWorld.Core.Domain
             if (CanAfford(research.Cost))
             {
                 SpendResources(Resources, research.Cost);
+                CalculatePoints(research.Cost);
                 research.UpgradeResearch();
+
             }
         }
         public void BuildShip(ShipType type)
@@ -160,7 +174,9 @@ namespace QuantumWorld.Core.Domain
             if (CanAfford(ship.Cost))
             {
                 SpendResources(Resources, ship.Cost);
+                CalculatePoints(ship.Cost);
                 ship.BuildShip();
+
             }
         }
         public void StartBattle(EnemyType type)
@@ -172,6 +188,10 @@ namespace QuantumWorld.Core.Domain
                 throw new Exception("There is no such enemy");
             }
             _battle.StartBattle(Ships, Resources, enemy);
+            if (enemy.Defeat())
+            {
+                EnemiesDefeated++;
+            }
         }
         private bool CanAfford(List<Resource> cost)
         {
@@ -189,6 +209,15 @@ namespace QuantumWorld.Core.Domain
             }
             return true;
         }
+        private bool HasEnoughSpace()
+        {
+            if (AvailibleSpace > UsedSpace)
+            {
+                return true;
+            }
+            else
+                throw new Exception("Not enough space!");
+        }
         private void SpendResources(List<Resource> resources, List<Resource> cost)
         {
             foreach (var costResource in cost)
@@ -196,6 +225,20 @@ namespace QuantumWorld.Core.Domain
                 var currentPlayerResource = resources.Where(r => r.Type == costResource.Type).FirstOrDefault();
                 currentPlayerResource.Value -= costResource.Value;
             }
+        }
+        private void IncreaseUsedSpace()
+        {
+            UsedSpace++;
+        }
+
+        private void CalculatePoints(List<Resource> spentResources)
+        {
+            foreach (var resource in spentResources)
+            {
+                Points += resource.Value;
+            }
+            Points /= 1000;
+            Points = Math.Round(Points, 2);
         }
     }
 }

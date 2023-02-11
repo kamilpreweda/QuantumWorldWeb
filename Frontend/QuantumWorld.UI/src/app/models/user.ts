@@ -7,8 +7,12 @@ export interface User {
     resources?: Resource[];
     buildings?: Building[];
     research?: Research[];
-    ships?: any[];
-    enemies?: any[];
+    ships?: Ship[];
+    enemies?: Enemy[];
+    availibleSpace: number;
+    usedSpace: number;
+    enemiesDefeated: number;
+    points: number;
 }
 
 export interface Resource {
@@ -30,4 +34,22 @@ export interface Research {
     level: number;
     timeToBuild: Time;
     cost: Resource[];
+}
+
+export interface Ship {
+    name: string;
+    description: string;
+    count: number;
+    timeToBuild: Time;
+    cost: Resource[];
+    healthPoints: number;
+    attackPower: number;
+}
+
+export interface Enemy {
+    name: string;
+    description: string;
+    timeToAttack: Time;
+    rewards: Resource[];
+    ships: Ship[];
 }

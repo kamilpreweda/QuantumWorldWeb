@@ -4,7 +4,7 @@ namespace QuantumWorld.Core.Domain
     {
         public override string Description => "Quantum Glass Factory Description";
 
-        protected override TimeSpan BaseTimeToBuild => TimeSpan.FromSeconds(3);
+        protected override TimeSpan BaseTimeToBuild => TimeSpan.FromSeconds(2);
         protected override float TimeMultiplier => 3;
 
         protected override float CostMultiplier => 3;

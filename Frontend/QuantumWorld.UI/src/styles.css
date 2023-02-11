@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Goldman&display=swap');
 
-html, body, div, button {
+html, body, div, button, span {
     font-family: "Goldman", sans-serif;
     margin: 0;
     font-size: 24px;
-    color: white;
+    color: white;    
 }
 body {
     background-image: url("assets/images/2020-02-09-kosmos_zvezdy_nebo_159567_3840x2160.jpg")
@@ -32,7 +32,6 @@ img {
     max-height: 270px;
     }
 .menuContainer {    
-    border: 2px solid red;
     max-width: 200px;
     display: grid;
     grid-area: menu;    
@@ -40,15 +39,23 @@ img {
     margin-right: 0;    
     }
 .overviewContainer{
-    border: 2px solid red;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 1px;
-    grid-row-gap: 1px;
+    grid-row-gap: 300px;
+    min-width: 55vw;
+}
+.overviewDetails{
+    display: grid;
+    background-color: #151829;
+    grid-column-start: 2;
+    grid-row-start: 2;
+    border-radius: 25px;
+    border: 1px solid white;
+    padding: 1em;
 }
 .buildingsContainer, .researchesContainer, .shipsContainer {    
-    border: 2px solid red;
     min-width: 60vw;
     max-height: 80vh;
     display: block;
@@ -58,8 +65,7 @@ img {
     grid-area: buildings;    
 }
 .buildingContainer, .researchContainer, .shipContainer{
-    padding: 1em;
-    border: 2px solid red;
+    padding: 1em;    
     max-width: 1100px;
     display: flex;
     padding: 1em;
@@ -85,38 +91,43 @@ img {
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 1px;
-    grid-row-gap: 1px;
-    border: 2px solid red;
+    grid-row-gap: 1px;    
     min-width: 80vw;
     min-height: 80vh;
     justify-items: center;
+    position: relative;
     }
 
-.enemyContainer {
-    border: 2px solid red;
+.enemyContainer {    
     display: grid;
     justify-items: center;
-    align-items: center;   
+    align-items: center;     
+}
+.enemyRequirements{
+    display: grid;      
 }
 
-.buildingButton, .researchButton, .shipButton{
+.enemyRewardsContainer{
+    display: grid;
+}
+
+.buildingButton, .researchButton, .shipButton, .attackButton{
     min-width: 100px;
     min-height: 50px;
     margin-left: auto;
     margin-top: auto;
     color: black;
+    cursor: pointer;
 }
 
 .buildingDetails, .researchDetails, .shipDetails {
     padding: 1em;
-    border: 2px solid red;  
     flex: content;
 }
 
 .costContainer{
     display: flex;
-    gap: 0.5em;
-    border: 2px solid red;
+    gap: 0.5em;    
 }
 
 .menuButton, .mapButton{
@@ -128,6 +139,10 @@ img {
     transition: color 0.2s linear;
     margin: 1px;
     border-color: transparent;    
+}
+
+.mapButton {
+    border: 1px solid white;
 }
 
 .menuButton:hover, .mapButton:hover{
@@ -150,17 +165,33 @@ img {
     grid-row-start: 1;
     grid-row-end: span 2;    
 }
+
 .logout{
     background-color: #151829;
     font-size: 2rem;
 }
 
 #pirates {
+    display: grid;
     grid-column-start: 1;
     grid-column-end: 1;
     grid-row-start: 3;
     grid-row-end: 3;
+    
 }
+#piratesContainer{
+    display: grid;
+    grid-column-start: 2;
+    grid-column-end: span 2;
+    grid-row-start: 3;
+    grid-row-end: 3;
+    border: 1px solid white;
+    background-color: #151829;
+    border-radius: 25px;
+    padding: 1em;
+    position: absolute;     
+}
+
 #outsiders {
     grid-column-start: 2;
     grid-column-end: 2;
@@ -190,4 +221,7 @@ img {
     grid-column-end: 6;
     grid-row-start: 2;
     grid-row-end: 2;
+}
+#red {
+    color: red;
 }

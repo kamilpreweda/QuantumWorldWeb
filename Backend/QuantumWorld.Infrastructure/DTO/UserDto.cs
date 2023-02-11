@@ -11,5 +11,9 @@ namespace QuantumWorld.Infrastructure.DTO
         public List<Research> Research { get; set; }
         public List<Ship> Ships { get; set; }
         public List<Enemy> Enemies { get; set; }
+        public int AvailibleSpace { get; set; }
+        public int UsedSpace { get; set; }
+        public int EnemiesDefeated { get; set; }
+        public int Points { get; set; }
     }
 }

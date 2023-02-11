@@ -4,9 +4,9 @@ namespace QuantumWorld.Core.Domain
     {
         public override string Description => "Higgs Boson Detector Description";
 
-        protected override float CostMultiplier => 2;
+        protected override float CostMultiplier => 4;
 
-        protected override float TimeMultiplier => 2;
+        protected override float TimeMultiplier => 4;
 
         protected override TimeSpan BaseTimeToBuild => TimeSpan.FromSeconds(3);
 
