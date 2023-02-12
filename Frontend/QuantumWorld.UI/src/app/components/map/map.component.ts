@@ -10,7 +10,6 @@ import { UserService } from 'src/app/services/user.service'
 export class MapComponent {
   user: User;
   users: User[] = [];
-  showDetails: boolean = false;
 
   constructor(private userService: UserService) { }
 
@@ -53,22 +52,35 @@ export class MapComponent {
     if (menuButton === null) {
       return;
     }
-    const buttons = document.getElementsByClassName("menuButton");
+    const buttons = document.getElementsByClassName("mapButton");
     Array.prototype.filter.call(
       buttons,
-      (button) => { button.style.borderWidth = "0px", button.style.color = '#FFFFFF' }
+      (button) => { button.classList.remove("active") }
+    )
+    menuButton.classList.toggle("active");
+  }
 
-    );
-    if (!this.showDetails) {
-      menuButton.style.borderWidth = "1px";
-      menuButton.style.borderColor = "#00FFFF";
-      menuButton.style.color = '#FFD700';
-    }
-    else {
-      menuButton.style.borderWidth = "1px";
-      menuButton.style.borderColor = "#FFFFFF";
-      menuButton.style.color = '#FFFFFF';
-    }    
+  showPopup(id: string) {
+    var popup = document.getElementById(id);
+    popup?.classList.toggle("show");
+  }
+
+  hideAllPopups() {
+    const popups = [];
+    var piratesPopup = document.getElementById('piratesContainer');
+    var outsidersPopup = document.getElementById('outsidersContainer');
+    var rebelsPopup = document.getElementById('rebelsContainer');
+    var armamentsPopup = document.getElementById('armamentsContainer');
+    var distantsPopup = document.getElementById('distantsContainer');
+    var ancientsPopup = document.getElementById('ancientsContainer');
+    popups.push(piratesPopup, outsidersPopup, rebelsPopup, armamentsPopup, distantsPopup, ancientsPopup)
+    popups.forEach(popup => {
+      if (popup?.classList.contains("show")) {
+        popup!.classList.remove("show");
+      }
+    });
+  }
+  numberWithDots(number: number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 }
-

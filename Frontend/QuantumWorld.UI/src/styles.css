@@ -101,10 +101,11 @@ img {
 .enemyContainer {    
     display: grid;
     justify-items: center;
-    align-items: center;     
+    align-items: center;    
 }
+
 .enemyRequirements{
-    display: grid;      
+    display: grid;        
 }
 
 .enemyRewardsContainer{
@@ -149,8 +150,14 @@ img {
     color: #FFD700 !important;
 }
 
-.menuButton:active, .mapButton:active{
-    border: 1px solid #00FFFF
+.menuButton:active {
+    border: 1px solid #00FFFF;
+    color: #FFD700
+}
+
+.mapButton.active{
+    border: 1px solid #00FFFF;
+    color: #FFD700 !important;
 }
 
 .planetImage{
@@ -176,20 +183,56 @@ img {
     grid-column-start: 1;
     grid-column-end: 1;
     grid-row-start: 3;
-    grid-row-end: 3;
-    
+    grid-row-end: 3;   
 }
-#piratesContainer{
+
+#piratesContainer, #outsidersContainer, #rebelsContainer, #armamentsContainer, #distantsContainer, #ancientsContainer{
     display: grid;
-    grid-column-start: 2;
-    grid-column-end: span 2;
+    grid-column-start: 1;
+    grid-column-end: span 3;    
     grid-row-start: 3;
     grid-row-end: 3;
-    border: 1px solid white;
+    border: 1px solid #00FFFF;
     background-color: #151829;
     border-radius: 25px;
     padding: 1em;
-    position: absolute;     
+    position: absolute; 
+    visibility: hidden;    
+}
+#outsidersContainer{
+    grid-column-start: 2;
+    grid-column-end: span 3;
+    grid-row-start: 2;
+    grid-row-end: 2;
+}
+#rebelsContainer{
+    grid-column-start: 3;
+    grid-column-end: span 3;
+    grid-row-start: 1;
+    grid-row-end: 1;
+}
+#armamentsContainer{
+    grid-column-start: 4;
+    grid-column-end: span 4;
+    grid-row-start: 2;
+    grid-row-end: 2;
+}
+#distantsContainer{
+    grid-column-start: 3;
+    grid-column-end: span 3;
+    grid-row-start: 3;
+    grid-row-end: 3;
+    transform: translateY(-4vh); 
+}
+#ancientsContainer{
+    grid-column-start: 4;
+    grid-column-end: span 4;
+    grid-row-start: 2;
+    grid-row-end: 2;
+}
+
+#piratesContainer.show, #outsidersContainer.show, #rebelsContainer.show, #armamentsContainer.show, #distantsContainer.show, #ancientsContainer.show{
+    visibility: visible;    
 }
 
 #outsiders {
