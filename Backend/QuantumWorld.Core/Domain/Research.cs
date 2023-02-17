@@ -22,6 +22,11 @@ namespace QuantumWorld.Core.Domain
         {
             AutoSetBasicAttributes();
         }
+        public Research(int level)
+        {
+            AutoSetBasicAttributes();
+            SetLevel(level);
+        }
         private void IncreaseLevel()
         {
             Level++;
@@ -66,12 +71,15 @@ namespace QuantumWorld.Core.Domain
         {
             Cost = BaseCost;
         }
+        private void SetLevel(int level)
+        {
+            Level = level;
+        }
         public void UpgradeResearch()
         {
             SetNewTime();
             SetNewCost();
             IncreaseLevel();
-
         }
     }
 }

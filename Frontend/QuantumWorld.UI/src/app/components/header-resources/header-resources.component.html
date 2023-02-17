@@ -1,10 +1,10 @@
 
   <div class="resourcesContainer">
     <div *ngFor = "let resource of user?.resources">      
-        <span *ngIf= 'resource.name === "CarbonFiberResource"' style="color:#00E676">{{changeDisplayedName(resource.name)}}</span>
-        <span *ngIf= 'resource.name === "QuantumGlassResource"' style="color:#00B8D4">{{changeDisplayedName(resource.name)}}</span>
-        <span *ngIf= 'resource.name === "HiggsBosonResource"' style="color:#FFD700">{{changeDisplayedName(resource.name)}}</span>
-        : {{numberWithDots(resource.value)}}
+        <span *ngIf= 'resource.name === "CarbonFiberResource"' style="color:#00E676">{{displayHelper.addSpaces(displayHelper.changeDisplayedName(resource.name))}}</span>
+        <span *ngIf= 'resource.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayHelper.addSpaces(displayHelper.changeDisplayedName(resource.name))}}</span>
+        <span *ngIf= 'resource.name === "HiggsBosonResource"' style="color:#FFD700">{{displayHelper.addSpaces(displayHelper.changeDisplayedName(resource.name))}}</span>
+        : {{displayHelper.numberWithDots(resource.value)}}
       </div>
   </div>   
 

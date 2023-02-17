@@ -15,5 +15,14 @@ namespace QuantumWorld.Core.Domain
             new CarbonFiberResource(200),
             new QuantumGlassResource(200),
         };
+        public ArtOfWarResearch() : base()
+        {
+
+        }
+        public ArtOfWarResearch(int level) : base(level)
+        {
+
+        }
+        
     }
 }

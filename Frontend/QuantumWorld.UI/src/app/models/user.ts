@@ -22,6 +22,7 @@ export interface Resource {
 
 export interface Building {
     name: string;
+    type: BuildingType;
     description: string;
     level: number;
     timeToBuild: Time;
@@ -52,4 +53,10 @@ export interface Enemy {
     timeToAttack: Time;
     rewards: Resource[];
     ships: Ship[];
+    requirements: Research[];
 }
+
+export type BuildingType =
+    "CarbonFiberFactory" |
+    "QuantumGlassFactory"
+

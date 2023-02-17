@@ -20,5 +20,11 @@ namespace QuantumWorld.Core.Domain
             new Battleship(50),
             new Destroyer(50)
         };
+         public override List<Research> BaseRequirements => new List<Research>()
+        {
+            new TheExpanseResearch(8),
+            new ArtOfWarResearch(6),
+            new HyperdriveResearch(4),
+        };
     }
 }

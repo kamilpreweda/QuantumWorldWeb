@@ -16,5 +16,13 @@ namespace QuantumWorld.Core.Domain
             new QuantumGlassResource(300),
             new HiggsBosonResource(200)
         };
+         public HyperdriveResearch() : base()
+        {
+
+        }
+        public HyperdriveResearch(int level) : base(level)
+        {
+
+        }
     }
 }

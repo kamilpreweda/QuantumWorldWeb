@@ -18,12 +18,15 @@ namespace QuantumWorld.Core.Domain
         public DateTime FinishDate { get; protected set; }
         public abstract List<Ship> BaseShips { get; }
         public List<Ship> Ships { get; protected set; }
+        public abstract List<Research> BaseRequirements { get; }
+        public List<Research> Requirements { get; protected set; }
 
         public Enemy()
         {
             AutoSetBasicAttributes();
             Ships = GetEnemyBaseShips();
             Rewards = GetBaseRewards();
+            Requirements = GetBaseRequirements();
 
         }
         public List<Ship> GetEnemyBaseShips()
@@ -55,6 +58,11 @@ namespace QuantumWorld.Core.Domain
         public List<Resource> GetRewards()
         {
             return Rewards;
+        }
+
+        public List<Research> GetBaseRequirements()
+        {
+            return BaseRequirements;
         }
 
         public List<Ship> GetShips()

@@ -6,14 +6,14 @@
             <img src="assets/images/Hyperdrive Research.jpg" *ngIf = 'research.name === "HyperdriveResearch"'>
             <img src="assets/images/Terraforming Research.jpg" *ngIf = 'research.name === "TerraformingResearch"'>
             <div class="researchDetails">
-                <span>{{addSpaces(changeDisplayedName(research.name))}}</span>                
+                <span>{{displayHelper.addSpaces(displayHelper.changeDisplayedName(research.name))}}</span>                
                 (lvl: {{research.level}})
                 <div class="costContainer">Cost: 
                     <div *ngFor = "let cost of research.cost">
-                        <span *ngIf= 'cost.name === "CarbonFiberResource"' style="color:#00E676">{{changeDisplayedName(cost.name)}}</span>
-                        <span *ngIf= 'cost.name === "QuantumGlassResource"' style="color:#00B8D4">{{changeDisplayedName(cost.name)}}</span>
-                        <span *ngIf= 'cost.name === "HiggsBosonResource"' style="color:#FFD700">{{changeDisplayedName(cost.name)}}</span>
-                        {{numberWithDots(cost.value)}}
+                        <span *ngIf= 'cost.name === "CarbonFiberResource"' style="color:#00E676">{{displayHelper.displayShortName(cost.name)}}</span>
+                        <span *ngIf= 'cost.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayHelper.displayShortName(cost.name)}}</span>
+                        <span *ngIf= 'cost.name === "HiggsBosonResource"' style="color:#FFD700">{{displayHelper.displayShortName(cost.name)}}</span>
+                        {{displayHelper.numberWithDots(cost.value)}}
                     </div> 
                 </div>        
             Time to Build: {{research.timeToBuild}}</div>

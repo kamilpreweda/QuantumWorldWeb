@@ -13,6 +13,7 @@ import { ResearchComponent } from './components/research/research.component';
 import { ShipyardComponent } from './components/shipyard/shipyard.component';
 import { MapComponent } from './components/map/map.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { EnemyPopupComponent } from './components/enemy-popup/enemy-popup.component';
 
 const appRoute: Routes = [
   { path: '', component: OverviewComponent },
@@ -33,7 +34,8 @@ const appRoute: Routes = [
     ResearchComponent,
     ShipyardComponent,
     MapComponent,
-    LogoutComponent
+    LogoutComponent,
+    EnemyPopupComponent
   ],
   imports: [
     BrowserModule,

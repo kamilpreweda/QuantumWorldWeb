@@ -15,5 +15,13 @@ namespace QuantumWorld.Core.Domain
             new CarbonFiberResource(1000),
             new QuantumGlassResource(1000),
         };
+        public TerraformingResearch() : base()
+        {
+
+        }
+        public TerraformingResearch(int level) : base(level)
+        {
+
+        }
     }
 }

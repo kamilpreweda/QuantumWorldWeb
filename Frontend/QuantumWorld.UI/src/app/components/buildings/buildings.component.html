@@ -8,13 +8,13 @@
             <img src="assets/images/Labolatory.jpg" *ngIf = 'building.name === "Labolatory"'>
             <img src="assets/images/Spaceship Factory.jpg" *ngIf = 'building.name === "SpaceshipFactory"'>
             <div class="buildingDetails">
-                <span>{{addSpaces(building.name)}}</span>                
+                <span>{{displayHelper.addSpaces(building.name)}}</span>                
                 (lvl: {{building.level}})
                 <div class="costContainer">Cost: 
                     <div *ngFor = "let cost of building.cost">
-                        <span *ngIf= 'cost.name === "CarbonFiberResource"' style="color:#00E676">{{displayShortName(cost.name)}}</span>
-                        <span *ngIf= 'cost.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayShortName(cost.name)}}</span>
-                        {{numberWithDots(cost.value)}}
+                        <span *ngIf= 'cost.name === "CarbonFiberResource"' style="color:#00E676">{{displayHelper.displayShortName(cost.name)}}</span>
+                        <span *ngIf= 'cost.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayHelper.displayShortName(cost.name)}}</span>
+                        {{displayHelper.numberWithDots(cost.value)}}
                     </div> 
                 </div>        
             Time to Build: {{building.timeToBuild}}</div>

@@ -2,7 +2,7 @@ namespace QuantumWorld.Core.Domain
 {
     public class PiratesEnemy : Enemy
     {
-        public override string Description => "Pirates Description";        
+        public override string Description => "Pirates Description";
 
         protected override TimeSpan BaseTimeToAttack => TimeSpan.FromSeconds(30);
 
@@ -18,6 +18,11 @@ namespace QuantumWorld.Core.Domain
         {
             new LightFighterShip(10),
             new HeavyFighterShip(10),
+        };
+        public override List<Research> BaseRequirements => new List<Research>()
+        {
+            new TheExpanseResearch(4),
+            new ArtOfWarResearch(2),
         };
     }
 }

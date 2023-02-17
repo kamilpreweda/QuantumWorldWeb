@@ -9,14 +9,14 @@
             <img src="assets/images/Dreadnought.jpg" *ngIf = 'ship.name === "Dreadnought"'>
             <img src="assets/images/Mothership.jpg" *ngIf = 'ship.name === "Mothership"'>            
             <div class="shipDetails">                
-                <span>{{addSpaces(changeDisplayedName(ship.name))}}</span>                
+                <span>{{displayHelper.addSpaces(displayHelper.changeDisplayedName(ship.name))}}</span>                
                 (Count:  {{ship.count}})
                 <div class="costContainer">Cost: 
                     <div *ngFor = "let cost of ship.cost">
-                        <span *ngIf= 'cost.name === "CarbonFiberResource"' style="color:#00E676">{{changeDisplayedName(cost.name)}}</span>
-                        <span *ngIf= 'cost.name === "QuantumGlassResource"' style="color:#00B8D4">{{changeDisplayedName(cost.name)}}</span>
-                        <span *ngIf= 'cost.name === "HiggsBosonResource"' style="color:#FFD700">{{changeDisplayedName(cost.name)}}</span>
-                        {{numberWithDots(cost.value)}}
+                        <span *ngIf= 'cost.name === "CarbonFiberResource"' style="color:#00E676">{{displayHelper.displayShortName(cost.name)}}</span>
+                        <span *ngIf= 'cost.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayHelper.displayShortName(cost.name)}}</span>
+                        <span *ngIf= 'cost.name === "HiggsBosonResource"' style="color:#FFD700">{{displayHelper.displayShortName(cost.name)}}</span>
+                        {{displayHelper.numberWithDots(cost.value)}}
                     </div> 
                 </div>        
             Time to Build: {{ship.timeToBuild}}</div>

@@ -204,12 +204,14 @@ img {
     grid-column-end: span 3;
     grid-row-start: 2;
     grid-row-end: 2;
+    z-index: 1;
 }
 #rebelsContainer{
     grid-column-start: 3;
     grid-column-end: span 3;
     grid-row-start: 1;
     grid-row-end: 1;
+    z-index: 1;
 }
 #armamentsContainer{
     grid-column-start: 4;
@@ -222,13 +224,15 @@ img {
     grid-column-end: span 3;
     grid-row-start: 3;
     grid-row-end: 3;
-    transform: translateY(-4vh); 
+    transform: translateY(-8vh);
+    z-index: 1;
 }
 #ancientsContainer{
     grid-column-start: 4;
     grid-column-end: span 4;
     grid-row-start: 2;
     grid-row-end: 2;
+    z-index: 1;
 }
 
 #piratesContainer.show, #outsidersContainer.show, #rebelsContainer.show, #armamentsContainer.show, #distantsContainer.show, #ancientsContainer.show{
@@ -252,6 +256,7 @@ img {
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 2;
+    transform: translateY(-4vh);    
 }
 #distants {
     grid-column-start: 5;

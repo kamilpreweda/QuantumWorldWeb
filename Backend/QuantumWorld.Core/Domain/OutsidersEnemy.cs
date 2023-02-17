@@ -19,5 +19,11 @@ namespace QuantumWorld.Core.Domain
             new LightFighterShip(50),
             new HeavyFighterShip(25),
         };
+        public override List<Research> BaseRequirements => new List<Research>()
+        {
+            new TheExpanseResearch(6),
+            new ArtOfWarResearch(4),
+            new HyperdriveResearch(2),
+        };
     }
 }

@@ -1,216 +1,40 @@
 <div class="mapContainer">
     <div class="enemyContainer" id="pirates">
         <img src="assets/images/pirates.png" class="planetImage">
-        <button class="mapButton" id="piratesButton"(click)="changeAppearance('piratesButton'); hideAllPopups(); showPopup('piratesContainer');">Pirates</button>
+        <button class="mapButton" id="piratesButton"(click)="displayHelper.changeAppearance('piratesButton'); hideAllPopups(); showPopup('piratesContainer');">Pirates</button>
         </div>
-        <div id="piratesContainer">
-            <div *ngFor="let enemy of user?.enemies">
-                <div class="enemyShipsDetails">
-                    <div *ngFor="let ship of enemy.ships">
-                        <div *ngIf='enemy.name ==="PiratesEnemy"'>
-                            {{addSpaces(changeDisplayedName(ship.name))}}: {{ship.count}}                        
-                        </div>                        
-                    </div>
-                </div>
-            <div *ngIf='enemy.name ==="PiratesEnemy"'>
-                Time To Travel: {{enemy.timeToAttack}}
-                <div>
-                Requirements: 
-                    <div class="enemyRequirements">
-                        <span id="red">The Expanse lvl 0</span>
-                        <span id="red">Art Of War lvl 0</span>
-                    </div>
-                </div>
-                <div class="enemyRewardsContainer">
-                Rewards: 
-                    <div *ngFor="let reward of enemy.rewards">
-                        <span *ngIf= 'reward.name === "CarbonFiberResource"' style="color:#00E676">{{displayShortName(reward.name)}}</span>
-                        <span *ngIf= 'reward.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayShortName(reward.name)}}</span>
-                        : {{numberWithDots(reward.value)}}                                          
-                    </div>                    
-                </div>                
-            </div>            
-            </div>
-            <button class="attackButton">Attack</button>     
-        </div>           
-    
+        <app-enemy-popup id='piratesContainer' [enemy]="piratesEnemy"></app-enemy-popup>   
+
     <div class="enemyContainer" id="outsiders">
         <img src="assets/images/outsiders.png" class="planetImage">
-        <button class="mapButton" id="outsidersButton"(click)="changeAppearance('outsidersButton'); hideAllPopups(); showPopup('outsidersContainer');">Outsiders</button>
+        <button class="mapButton" id="outsidersButton"(click)="displayHelper.changeAppearance('outsidersButton'); hideAllPopups(); showPopup('outsidersContainer');">Outsiders</button>        
     </div>
-    <div id="outsidersContainer">
-        <div *ngFor="let enemy of user?.enemies">
-            <div class="enemyShipsDetails">
-                <div *ngFor="let ship of enemy.ships">
-                    <div *ngIf='enemy.name ==="OutsidersEnemy"'>
-                        {{addSpaces(changeDisplayedName(ship.name))}}: {{ship.count}}                        
-                    </div>                        
-                </div>
-            </div>
-        <div *ngIf='enemy.name ==="OutsidersEnemy"'>
-            Time To Travel: {{enemy.timeToAttack}}
-            <div>
-            Requirements: 
-                <div class="enemyRequirements">
-                    <span id="red">The Expanse lvl 0</span>
-                    <span id="red">Art Of War lvl 0</span>
-                </div>
-            </div>
-            <div class="enemyRewardsContainer">
-            Rewards: 
-                <div *ngFor="let reward of enemy.rewards">
-                    <span *ngIf= 'reward.name === "CarbonFiberResource"' style="color:#00E676">{{displayShortName(reward.name)}}</span>
-                    <span *ngIf= 'reward.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayShortName(reward.name)}}</span>
-                    : {{numberWithDots(reward.value)}}                                          
-                </div>                    
-            </div>           
-        </div>
-        </div>
-        <button class="attackButton">Attack</button>        
-    </div> 
+    <app-enemy-popup id='outsidersContainer' [enemy]="outsidersEnemy"></app-enemy-popup>
 
     <div class="enemyContainer" id="rebels">
         <img src="assets/images/Rebels.png" class="planetImage">
-        <button class="mapButton" id="rebelsButton"(click)="changeAppearance('rebelsButton'); hideAllPopups(); showPopup('rebelsContainer')">Rebels</button>
+        <button class="mapButton" id="rebelsButton"(click)="displayHelper.changeAppearance('rebelsButton'); hideAllPopups(); showPopup('rebelsContainer')">Rebels</button>
     </div>
-    <div id="rebelsContainer">
-        <div *ngFor="let enemy of user?.enemies">
-            <div class="enemyShipsDetails">
-                <div *ngFor="let ship of enemy.ships">
-                    <div *ngIf='enemy.name ==="RebelsEnemy"'>
-                        {{addSpaces(changeDisplayedName(ship.name))}}: {{ship.count}}                        
-                    </div>                        
-                </div>
-            </div>
-        <div *ngIf='enemy.name ==="RebelsEnemy"'>
-            Time To Travel: {{enemy.timeToAttack}}
-            <div>
-            Requirements: 
-                <div class="enemyRequirements">
-                    <span id="red">The Expanse lvl 0</span>
-                    <span id="red">Art Of War lvl 0</span>
-                </div>
-            </div>
-            <div class="enemyRewardsContainer">
-            Rewards: 
-                <div *ngFor="let reward of enemy.rewards">
-                    <span *ngIf= 'reward.name === "CarbonFiberResource"' style="color:#00E676">{{displayShortName(reward.name)}}</span>
-                    <span *ngIf= 'reward.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayShortName(reward.name)}}</span>
-                    <span *ngIf= 'reward.name === "HiggsBosonResource"' style="color:#FFD700">{{displayShortName(reward.name)}}</span>
-                    : {{numberWithDots(reward.value)}}                                          
-                </div>                    
-            </div>           
-        </div>
-        </div>
-        <button class="attackButton">Attack</button>        
-    </div> 
+    <app-enemy-popup id='rebelsContainer' [enemy]="rebelsEnemy"></app-enemy-popup>
 
     <div class="enemyContainer" id="armaments">
         <img src="assets/images/Armaments.png" class="planetImage">
-        <button class="mapButton" id="armamentsButton"(click)="changeAppearance('armamentsButton'); hideAllPopups(); showPopup('armamentsContainer')">Armaments</button>
+        <button class="mapButton" id="armamentsButton"(click)="displayHelper.changeAppearance('armamentsButton'); hideAllPopups(); showPopup('armamentsContainer')">Armaments</button>
     </div>
-    <div id="armamentsContainer">
-        <div *ngFor="let enemy of user?.enemies">
-            <div class="enemyShipsDetails">
-                <div *ngFor="let ship of enemy.ships">
-                    <div *ngIf='enemy.name ==="ArmamentsEnemy"'>
-                        {{addSpaces(changeDisplayedName(ship.name))}}: {{ship.count}}                        
-                    </div>                        
-                </div>
-            </div>
-        <div *ngIf='enemy.name ==="ArmamentsEnemy"'>
-            Time To Travel: {{enemy.timeToAttack}}
-            <div>
-            Requirements: 
-                <div class="enemyRequirements">
-                    <span id="red">The Expanse lvl 0</span>
-                    <span id="red">Art Of War lvl 0</span>
-                </div>
-            </div>
-            <div class="enemyRewardsContainer">
-            Rewards: 
-                <div *ngFor="let reward of enemy.rewards">
-                    <span *ngIf= 'reward.name === "CarbonFiberResource"' style="color:#00E676">{{displayShortName(reward.name)}}</span>
-                    <span *ngIf= 'reward.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayShortName(reward.name)}}</span>
-                    <span *ngIf= 'reward.name === "HiggsBosonResource"' style="color:#FFD700">{{displayShortName(reward.name)}}</span>
-                    : {{numberWithDots(reward.value)}}                                          
-                </div>                    
-            </div>           
-        </div>
-        </div>
-        <button class="attackButton">Attack</button>        
-    </div> 
+    <app-enemy-popup id='armamentsContainer' [enemy]="armamentsEnemy"></app-enemy-popup>
+    
 
     <div class="enemyContainer" id="distants">
         <img src="assets/images/Distants.png" class="planetImage">
-        <button class="mapButton" id="distantsButton"(click)="changeAppearance('distantsButton'); hideAllPopups(); showPopup('distantsContainer')">Distants</button>
+        <button class="mapButton" id="distantsButton"(click)="displayHelper.changeAppearance('distantsButton'); hideAllPopups(); showPopup('distantsContainer')">Distants</button>
     </div>
-    <div id="distantsContainer">
-        <div *ngFor="let enemy of user?.enemies">
-            <div class="enemyShipsDetails">
-                <div *ngFor="let ship of enemy.ships">
-                    <div *ngIf='enemy.name ==="DistantsEnemy"'>
-                        {{addSpaces(changeDisplayedName(ship.name))}}: {{ship.count}}                        
-                    </div>                        
-                </div>
-            </div>
-        <div *ngIf='enemy.name ==="DistantsEnemy"'>
-            Time To Travel: {{enemy.timeToAttack}}
-            <div>
-            Requirements: 
-                <div class="enemyRequirements">
-                    <span id="red">The Expanse lvl 0</span>
-                    <span id="red">Art Of War lvl 0</span>
-                </div>
-            </div>
-            <div class="enemyRewardsContainer">
-            Rewards: 
-                <div *ngFor="let reward of enemy.rewards">
-                    <span *ngIf= 'reward.name === "CarbonFiberResource"' style="color:#00E676">{{displayShortName(reward.name)}}</span>
-                    <span *ngIf= 'reward.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayShortName(reward.name)}}</span>
-                    <span *ngIf= 'reward.name === "HiggsBosonResource"' style="color:#FFD700">{{displayShortName(reward.name)}}</span>
-                    : {{numberWithDots(reward.value)}}                                          
-                </div>                    
-            </div>           
-        </div>
-        </div>
-        <button class="attackButton">Attack</button>        
-    </div> 
+    <app-enemy-popup id='distantsContainer' [enemy]="distantsEnemy"></app-enemy-popup>
+    
 
     <div class="enemyContainer" id="ancients">
         <img src="assets/images/Ancients.png" class="planetImage">
-        <button class="mapButton" id="ancientsButton"(click)="changeAppearance('ancientsButton'); hideAllPopups(); showPopup('ancientsContainer')">Ancients</button>
+        <button class="mapButton" id="ancientsButton"(click)="displayHelper.changeAppearance('ancientsButton'); hideAllPopups(); showPopup('ancientsContainer')">Ancients</button>
     </div>
-    <div id="ancientsContainer">
-        <div *ngFor="let enemy of user?.enemies">
-            <div class="enemyShipsDetails">
-                <div *ngFor="let ship of enemy.ships">
-                    <div *ngIf='enemy.name ==="AncientsEnemy"'>
-                        {{addSpaces(changeDisplayedName(ship.name))}}: {{ship.count}}                        
-                    </div>                        
-                </div>
-            </div>
-        <div *ngIf='enemy.name ==="AncientsEnemy"'>
-            Time To Travel: {{enemy.timeToAttack}}
-            <div>
-            Requirements: 
-                <div class="enemyRequirements">
-                    <span id="red">The Expanse lvl 0</span>
-                    <span id="red">Art Of War lvl 0</span>
-                </div>
-            </div>
-            <div class="enemyRewardsContainer">
-            Rewards: 
-                <div *ngFor="let reward of enemy.rewards">
-                    <span *ngIf= 'reward.name === "CarbonFiberResource"' style="color:#00E676">{{displayShortName(reward.name)}}</span>
-                    <span *ngIf= 'reward.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayShortName(reward.name)}}</span>
-                    <span *ngIf= 'reward.name === "HiggsBosonResource"' style="color:#FFD700">{{displayShortName(reward.name)}}</span>
-                    : {{numberWithDots(reward.value)}}                                          
-                </div>                    
-            </div>           
-        </div>
-        </div>
-        <button class="attackButton">Attack</button>        
-    </div> 
+    <app-enemy-popup id='ancientsContainer' [enemy]="ancientsEnemy"></app-enemy-popup>
 
 </div>
