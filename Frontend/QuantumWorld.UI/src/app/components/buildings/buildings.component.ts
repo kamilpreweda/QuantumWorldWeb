@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { User } from 'src/app/models/user';
+import { BuildingType, User } from 'src/app/models/user';
+import { BuildingService } from 'src/app/services/building.service';
 import { DisplayHelperService } from 'src/app/services/display-helper.service';
 import { UserService } from 'src/app/services/user.service'
 
@@ -11,10 +12,19 @@ import { UserService } from 'src/app/services/user.service'
 export class BuildingsComponent {
   user: User;
   users: User[] = [];
+  type: BuildingType;
+  email: string = "string";
 
-  constructor(private userService: UserService, public displayHelper: DisplayHelperService) { }
+  constructor(private userService: UserService, public displayHelper: DisplayHelperService, private buildingService: BuildingService) { }
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe((result: User[]) => { this.users = result; this.user = this.users[0] });
+  }
+
+  build(type: BuildingType): void {
+    this.buildingService.upgradeBuilding(type, this.email).subscribe(() => {
+      window.location.reload();
+    });
+    console.log("button clicked");
   }
 }

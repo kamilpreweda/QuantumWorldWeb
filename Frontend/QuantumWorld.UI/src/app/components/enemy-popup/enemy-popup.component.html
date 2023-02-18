@@ -19,5 +19,5 @@ Time To Travel: {{enemy?.timeToAttack}}
             : {{displayHelper.numberWithDots(reward.value)}}                                          
         </div>                    
     </div>                
- <button class="attackButton">Attack</button>     
+ <button class="attackButton" (click)="attack(enemy!.type)">Attack</button>     
          

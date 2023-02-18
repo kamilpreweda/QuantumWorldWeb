@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Enemy, User } from 'src/app/models/user';
+import { Enemy, EnemyType, User } from 'src/app/models/user';
 import { DisplayHelperService } from 'src/app/services/display-helper.service';
 import { UserService } from 'src/app/services/user.service'
 
@@ -18,7 +18,6 @@ export class MapComponent {
   armamentsEnemy?: Enemy;
   distantsEnemy?: Enemy;
   ancientsEnemy?: Enemy;
-
 
   constructor(private userService: UserService, public displayHelper: DisplayHelperService) { }
 

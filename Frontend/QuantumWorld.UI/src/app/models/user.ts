@@ -31,6 +31,7 @@ export interface Building {
 
 export interface Research {
     name: string;
+    type: ResearchType;
     description: string;
     level: number;
     timeToBuild: Time;
@@ -39,6 +40,7 @@ export interface Research {
 
 export interface Ship {
     name: string;
+    type: ShipType;
     description: string;
     count: number;
     timeToBuild: Time;
@@ -49,6 +51,7 @@ export interface Ship {
 
 export interface Enemy {
     name: string;
+    type: EnemyType;
     description: string;
     timeToAttack: Time;
     rewards: Resource[];
@@ -56,7 +59,38 @@ export interface Enemy {
     requirements: Research[];
 }
 
-export type BuildingType =
-    "CarbonFiberFactory" |
-    "QuantumGlassFactory"
+export enum BuildingType {
+    CarbonFiberFactory,
+    QuantumGlassFactory,
+    HiggsBosonDetector,
+    Labolatory,
+    SpaceshipFactory
+
+}
+
+export enum ResearchType {
+    TheExpanseResearch,
+    ArtOfWarResearch,
+    HyperdriveResearch,
+    TerraformingResearch
+}
+
+export enum ShipType {
+    LightFighterShip,
+    HeavyFighterShip,
+    Battleship,
+    Destroyer,
+    Dreadnought,
+    Mothership
+}
+
+export enum EnemyType {
+    PiratesEnemy,
+    OutsidersEnemy,
+    RebelsEnemy,
+    ArmamentsEnemy,
+    DistantsEnemy,
+    AncientsEnemy
+}
+
 
