@@ -18,8 +18,7 @@ namespace QuantumWorld.Infrastructure.Services
                 throw new Exception($"User with {email} doesn't exist!");
             }
             user.StartBattle(type);
-            _userRepository.UpdateAsync(user);
-            await Task.CompletedTask;
+            await _userRepository.UpdateAsync(user);
         }
     }
 }

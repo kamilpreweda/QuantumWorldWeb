@@ -12,7 +12,7 @@ namespace QuantumWorld.Core.Domain
         [BsonRepresentation(BsonType.ObjectId)]
 
         private static readonly Regex NameRegex = new Regex(@"^\w+$");
-        public IBattle _battle;
+        private IBattle _battle;
         public Guid Id { get; protected set; }
         public string Email { get; protected set; } = string.Empty;
         public string Password { get; protected set; } = string.Empty;
@@ -88,7 +88,6 @@ namespace QuantumWorld.Core.Domain
                 new AncientsEnemy()
             };
             EnemiesDefeated = 0;
-            // _battle = new Battle();
         }
 
         public void SetEmail(string email)
@@ -189,10 +188,10 @@ namespace QuantumWorld.Core.Domain
                 throw new Exception("There is no such enemy");
             }
             _battle.StartBattle(Ships, Resources, enemy);
-            if (enemy.Defeat())
+            if (enemy.IsDefeated)
             {
                 EnemiesDefeated++;
-            }
+            }            
         }
         private bool CanAfford(List<Resource> cost)
         {

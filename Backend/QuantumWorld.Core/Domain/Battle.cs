@@ -90,14 +90,14 @@ public class Battle : IBattle
                 var enemyRewards = CollectRewards(enemy);
                 AssignRewards(playerResources, enemyRewards);
                 enemy.Defeat();
-                continiueFight = false; ;
+                continiueFight = false;
                 break;
             }
             playerTotalHP = Attack(enemyTotalAP, playerTotalHP);
             if (playerTotalHP <= 0)
             {
                 CalculateDestroyedShips(playerShips, enemyTotalAP, out remainingDamage);
-                continiueFight = false;
+                continiueFight = false;                
                 break;
             }
             else if (playerTotalHP > 0)

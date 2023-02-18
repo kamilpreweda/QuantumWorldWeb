@@ -1,4 +1,4 @@
-
+<!-- 
   <div class="resourcesContainer">
     <div *ngFor = "let resource of user?.resources">      
         <span *ngIf= 'resource.name === "CarbonFiberResource"' style="color:#00E676">{{displayHelper.addSpaces(displayHelper.changeDisplayedName(resource.name))}}</span>
@@ -8,4 +8,13 @@
       </div>
   </div>   
 
-    
+     -->
+
+     <!-- TEST -->
+
+     <div>
+      <h3>Carbon Fiber: {{carbonFiberResource}}</h3>
+      <button (click)="(onIncrement())">Increment</button>
+      <button (click)="onDecrement()">Decrement</button>
+      <button (click)="onReset()">Reset</button>
+    </div>
