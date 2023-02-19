@@ -178,6 +178,10 @@ img {
     font-size: 2rem;
 }
 
+.defeated{
+    transform: translateY(20vh);
+}
+
 #pirates {
     display: grid;
     grid-column-start: 1;

@@ -4,11 +4,11 @@ export interface User {
     id: string;
     email: string;
     username: string;
-    resources?: Resource[];
-    buildings?: Building[];
-    research?: Research[];
-    ships?: Ship[];
-    enemies?: Enemy[];
+    resources: Resource[];
+    buildings: Building[];
+    research: Research[];
+    ships: Ship[];
+    enemies: Enemy[];
     availibleSpace: number;
     usedSpace: number;
     enemiesDefeated: number;
@@ -57,6 +57,7 @@ export interface Enemy {
     rewards: Resource[];
     ships: Ship[];
     requirements: Research[];
+    isDefeated: boolean;
 }
 
 export enum BuildingType {

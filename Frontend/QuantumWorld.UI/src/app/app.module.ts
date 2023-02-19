@@ -14,8 +14,6 @@ import { ShipyardComponent } from './components/shipyard/shipyard.component';
 import { MapComponent } from './components/map/map.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { EnemyPopupComponent } from './components/enemy-popup/enemy-popup.component';
-import { StoreModule } from '@ngrx/store';
-import { appReducer } from './state/app.reducer';
 
 const appRoute: Routes = [
   { path: '', component: OverviewComponent },
@@ -44,8 +42,7 @@ const appRoute: Routes = [
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoute),
-    StoreModule.forRoot({app: appReducer}),
+    RouterModule.forRoot(appRoute),    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { EnemyType } from '../models/user';
 
@@ -16,9 +17,6 @@ export class MapService {
       type: type,
       email: email,
     }
-    console.log(body);
-    console.log(JSON.stringify(body));
-    console.log(`${environment.apiUrl}/${this.url}`);
     return this.http.post(`${environment.apiUrl}/${this.url}`, JSON.stringify(body), { headers })
   }
 }

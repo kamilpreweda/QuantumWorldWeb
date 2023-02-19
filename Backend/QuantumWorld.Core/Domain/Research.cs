@@ -27,6 +27,9 @@ namespace QuantumWorld.Core.Domain
             AutoSetBasicAttributes();
             SetLevel(level);
         }
+        public int GetLevel(){
+            return Level;
+        }
         private void IncreaseLevel()
         {
             Level++;

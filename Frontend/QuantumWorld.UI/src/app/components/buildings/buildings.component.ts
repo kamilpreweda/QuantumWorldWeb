@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { BuildingType, User } from 'src/app/models/user';
+import { Component, Input } from '@angular/core';
+import { BuildingType, Resource, User } from 'src/app/models/user';
 import { BuildingService } from 'src/app/services/building.service';
 import { DisplayHelperService } from 'src/app/services/display-helper.service';
 import { UserService } from 'src/app/services/user.service'
@@ -28,3 +28,4 @@ export class BuildingsComponent {
     console.log("button clicked");
   }
 }
+

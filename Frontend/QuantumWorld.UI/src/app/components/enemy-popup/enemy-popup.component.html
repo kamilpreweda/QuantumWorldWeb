@@ -1,3 +1,4 @@
+<ng-container *ngIf="!enemy?.isDefeated">
 <div class="enemyShipsDetails">
     <div *ngFor="let ship of enemy?.ships">
         {{displayHelper.addSpaces(displayHelper.changeDisplayedName(ship.name))}}: {{ship.count}}                        
@@ -19,5 +20,8 @@ Time To Travel: {{enemy?.timeToAttack}}
             : {{displayHelper.numberWithDots(reward.value)}}                                          
         </div>                    
     </div>                
- <button class="attackButton" (click)="attack(enemy!.type)">Attack</button>     
-         
+ <button class="attackButton" [disabled]="!canAttack()" (click)="attack(enemy!.type)">Attack</button>
+</ng-container>
+<ng-container *ngIf="enemy?.isDefeated">
+<div>{{displayHelper.changeDisplayedName(enemy!.name)}} are already defeated.</div>
+</ng-container>

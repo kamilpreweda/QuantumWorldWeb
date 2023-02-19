@@ -24,7 +24,7 @@ export class MapComponent {
   ngOnInit(): void {
     this.userService.getUsers().subscribe((result: User[]) => {
       this.users = result; this.user = this.users[0];
-      this.piratesEnemy = this.user.enemies?.find(enemy => enemy.name === "PiratesEnemy")
+      this.piratesEnemy = this.user.enemies.find(enemy => enemy.name === "PiratesEnemy")
       this.outsidersEnemy = this.user.enemies?.find(enemy => enemy.name === "OutsidersEnemy")
       this.rebelsEnemy = this.user.enemies?.find(enemy => enemy.name === "RebelsEnemy")
       this.armamentsEnemy = this.user.enemies?.find(enemy => enemy.name === "ArmamentsEnemy")

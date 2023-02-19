@@ -11,7 +11,7 @@ export class DisplayHelperService {
     var changedName: string;
 
     if (name.includes("Resource")) {
-      changedName = name.replace("Resource", "");  
+      changedName = name.replace("Resource", "");
       return changedName;
     }
     else if (name.includes("Research")) {
@@ -20,6 +20,10 @@ export class DisplayHelperService {
     }
     else if (name.includes("Ship")) {
       changedName = name.replace("Ship", "");
+      return changedName;
+    }
+    else if (name.includes("Enemy")) {
+      changedName = name.replace("Enemy", "");
       return changedName;
     }
     return changedName = name;

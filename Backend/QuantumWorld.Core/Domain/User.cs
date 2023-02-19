@@ -59,9 +59,6 @@ namespace QuantumWorld.Core.Domain
                 new Labolatory(),
                 new SpaceshipFactory(),
             };
-            AvailibleSpace = 15;
-            UsedSpace = 0;
-            Points = 0;
             Research = new List<Research>()
             {
                 new TheExpanseResearch(),
@@ -88,6 +85,9 @@ namespace QuantumWorld.Core.Domain
                 new AncientsEnemy()
             };
             EnemiesDefeated = 0;
+            AvailibleSpace = 15;
+            UsedSpace = 0;
+            Points = 0;
         }
 
         public void SetEmail(string email)
@@ -158,7 +158,7 @@ namespace QuantumWorld.Core.Domain
                 SpendResources(Resources, research.Cost);
                 CalculatePoints(research.Cost);
                 research.UpgradeResearch();
-
+                IncreaseAvailibleSpace(research);
             }
         }
         public void BuildShip(ShipType type)
@@ -175,7 +175,6 @@ namespace QuantumWorld.Core.Domain
                 SpendResources(Resources, ship.Cost);
                 CalculatePoints(ship.Cost);
                 ship.BuildShip();
-
             }
         }
         public void StartBattle(EnemyType type)
@@ -187,11 +186,15 @@ namespace QuantumWorld.Core.Domain
             {
                 throw new Exception("There is no such enemy");
             }
-            _battle.StartBattle(Ships, Resources, enemy);
+            if (CheckRequirements(enemy))
+            {
+                _battle.StartBattle(Ships, Resources, enemy);
+            }
             if (enemy.IsDefeated)
             {
                 EnemiesDefeated++;
-            }            
+            }
+
         }
         private bool CanAfford(List<Resource> cost)
         {
@@ -230,7 +233,13 @@ namespace QuantumWorld.Core.Domain
         {
             UsedSpace++;
         }
-
+        private void IncreaseAvailibleSpace(Research research)
+        {
+            if (research.Name == "TerraformingResearch")
+            {
+                AvailibleSpace += 15;
+            }
+        }
         private void CalculatePoints(List<Resource> spentResources)
         {
             foreach (var resource in spentResources)
@@ -239,6 +248,19 @@ namespace QuantumWorld.Core.Domain
             }
             Points /= 1000;
             Points = Math.Round(Points, 2);
+        }
+        private bool CheckRequirements(Enemy enemy)
+        {
+            foreach (var requirement in enemy.Requirements)
+            {
+                var currentPlayerResearch = Research.Where(r => r.Type == requirement.Type).FirstOrDefault();
+                if (currentPlayerResearch.Level < requirement.Level)
+                {
+                    return false;
+                    throw new Exception("Requirements not met!");
+                }
+            }
+            return true;
         }
     }
 }
