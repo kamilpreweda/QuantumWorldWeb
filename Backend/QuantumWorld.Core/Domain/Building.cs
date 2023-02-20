@@ -7,7 +7,8 @@ public abstract class Building
 {
     public string Name { get; protected set; } = string.Empty;
     public BuildingType Type { get; protected set; }
-    public abstract string Description { get; }
+    public abstract string BaseDescription { get; }
+    public string Description { get; set; }
     public int Level { get; protected set; } = 0;
     public TimeSpan TimeToBuild { get; protected set; }
     protected abstract TimeSpan BaseTimeToBuild { get; }
@@ -47,6 +48,7 @@ public abstract class Building
         SetType();
         SetCost();
         SetTime();
+        SetDescription();
     }
     private void SetName()
     {
@@ -65,6 +67,10 @@ public abstract class Building
     private void SetCost()
     {
         Cost = BaseCost;
+    }
+    private void SetDescription()
+    {
+        Description = BaseDescription;
     }
     public void UpgradeBuilding()
     {

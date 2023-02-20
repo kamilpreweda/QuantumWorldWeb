@@ -7,7 +7,8 @@ namespace QuantumWorld.Core.Domain
     {
         public string Name { get; protected set; } = string.Empty;
         public ShipType Type { get; protected set; }
-        public abstract string Description { get; }
+        public abstract string BaseDescription { get; }
+        public string Description { get; set; }
         public int Count { get; protected set; }
         public TimeSpan TimeToBuild { get; protected set; }
         protected abstract TimeSpan BaseTimeToBuild { get; }
@@ -57,7 +58,8 @@ namespace QuantumWorld.Core.Domain
         {
             Count += count;
         }
-        private void SetTime(){
+        private void SetTime()
+        {
             TimeToBuild = BaseTimeToBuild;
         }
         private void SetNewTime()
@@ -71,10 +73,15 @@ namespace QuantumWorld.Core.Domain
             SetStats();
             SetCost();
             SetTime();
+            SetDescription();
         }
         private void SetName()
         {
             Name = this.GetType().Name;
+        }
+        private void SetDescription()
+        {
+            Description = BaseDescription;
         }
         private void SetType()
         {

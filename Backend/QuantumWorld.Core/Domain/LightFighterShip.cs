@@ -2,7 +2,7 @@ namespace QuantumWorld.Core.Domain
 {
     public class LightFighterShip : Ship
     {
-        public override string Description => "Light Fighter Description";
+        public override string BaseDescription => "The Light Fighter is a small but highly agile spaceship designed for quick strikes and nimble maneuvers. While not the most powerful ship in the fleet, its speed and agility make it an ideal choice for reconnaissance missions, hit-and-run attacks, and surgical strikes on enemy targets. ";
 
         protected override float CostMultiplier => 1;
 

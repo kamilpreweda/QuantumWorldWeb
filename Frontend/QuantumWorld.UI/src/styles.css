@@ -31,6 +31,12 @@ img {
     max-width: 100%;
     max-height: 270px;
     }
+
+ .description{
+    font-size: 0.6em;
+    padding: 0.5em;    
+ }
+    
 .menuContainer {    
     max-width: 200px;
     display: grid;
@@ -64,13 +70,16 @@ img {
     color: white;
     grid-area: buildings;    
 }
-.buildingContainer, .researchContainer, .shipContainer{
-    padding: 1em;    
+.buildingContainer, .researchContainer, .shipContainer{       
     max-width: 1100px;
     display: flex;
     padding: 1em;
     min-width: 50vw;    
-    border: 1px solid #E5E4E2;    
+    border: 1px solid #E5E4E2;   
+}
+
+.descriptionContainer{
+    display: flex;
 }
 
 .resourcesContainer {
@@ -112,7 +121,19 @@ img {
     display: grid;
 }
 
-.buildingButton, .researchButton, .shipButton, .attackButton{
+.buildingButton, .researchButton, .shipButton{
+    min-width: 100px;
+    min-height: 50px;
+    margin-left: auto;
+    margin-top: auto;
+    color: black;
+    cursor: pointer;
+    position: absolute;
+    right: 0em;
+    bottom: 0em;
+}
+
+.attackButton{
     min-width: 100px;
     min-height: 50px;
     margin-left: auto;
@@ -121,9 +142,28 @@ img {
     cursor: pointer;
 }
 
+.shipCountInput{
+    max-width: 75px;
+    max-height: 50px;
+    font-size: inherit;    
+    position: absolute;
+    bottom: 0em;
+    right: 4.5em;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number]{
+    -moz-appearance: textfield;
+}
+
 .buildingDetails, .researchDetails, .shipDetails {
-    padding: 1em;
+    padding: 0.5em;
     flex: content;
+    position: relative;  
 }
 
 .costContainer{

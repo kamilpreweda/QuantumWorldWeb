@@ -2,7 +2,7 @@ namespace QuantumWorld.Core.Domain
 {
     public class RebelsEnemy : Enemy
     {
-        public override string Description => "Rebels Enemy Description";
+        public override string BaseDescription => "The Rebels are a dangerous and extremist faction that has long been in conflict with humanity. They reject the authority of established governments and institutions and seek to overthrow the status quo by any means necessary. Led by charismatic and ruthless leaders, the Rebels have amassed a sizable fleet of warships and are not afraid to use them to further their cause. They are known for their guerrilla tactics and surprise attacks, often targeting civilian populations and infrastructure in an attempt to disrupt the normal functioning of society.";
 
         protected override TimeSpan BaseTimeToAttack => TimeSpan.FromSeconds(80);
 

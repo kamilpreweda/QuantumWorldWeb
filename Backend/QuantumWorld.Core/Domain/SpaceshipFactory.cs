@@ -2,7 +2,7 @@ namespace QuantumWorld.Core.Domain
 {
     public class SpaceshipFactory : Building
     {
-        public override string Description => "Spaceship Factory Description";
+        public override string BaseDescription => "The Spaceship Factory is a massive industrial complex that plays a critical role in the ongoing colonization effort. It is where the most advanced and powerful spaceships are created. The ships themselves are immense, with some spanning kilometers in length, and are designed to support entire communities of people and resources. The factory is a testament to humanity's ingenuity and determination to push the boundaries of what is possible, and its products are a symbol of our never-ending quest for exploration and discovery.";
 
         protected override float CostMultiplier => 2;
 

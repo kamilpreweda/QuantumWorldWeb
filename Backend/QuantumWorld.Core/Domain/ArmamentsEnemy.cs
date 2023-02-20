@@ -2,7 +2,7 @@ namespace QuantumWorld.Core.Domain
 {
     public class ArmamentsEnemy : Enemy
     {
-        public override string Description => "Armaments Enemy Description";
+        public override string BaseDescription => "The Armaments are a highly trained and well-equipped military organization that operates outside of the normal chain of command. Made up of the most elite soldiers from various nations and factions, they are feared and respected throughout the galaxy for their deadly precision and unwavering loyalty to their cause. Engaging the Armaments requires careful planning and preparation, as they are known for their discipline and tactics.";
 
         protected override TimeSpan BaseTimeToAttack => TimeSpan.FromSeconds(100);
 

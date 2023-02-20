@@ -2,7 +2,7 @@ namespace QuantumWorld.Core.Domain
 {
     public class TheExpanseResearch : Research
     {
-        public override string Description => "The Expanse Research Description";
+        public override string BaseDescription => "The Expanse research is a groundbreaking discovery that has revolutionized humanity's ability to explore the vast reaches of space. With this technology, the farthest corners of the galaxy are now within reach, and distant planets that were once thought to be unreachable are now accessible. The Expanse research has unlocked the secrets of faster-than-light travel, allowing spaceships to traverse incredible distances in a fraction of the time it once took. The technology is based on an entirely new understanding of space-time, and relies on a complex network of quantum entanglements and wormholes to create a stable and navigable path through the void.";
 
         protected override float CostMultiplier => 3;
 

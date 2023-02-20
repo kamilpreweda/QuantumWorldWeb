@@ -15,9 +15,17 @@
                         <span *ngIf= 'cost.name === "HiggsBosonResource"' style="color:#FFD700">{{displayHelper.displayShortName(cost.name)}}</span>
                         {{displayHelper.numberWithDots(cost.value)}}
                     </div> 
-                </div>        
-            Time to Build: {{research.timeToBuild}}</div>
-            <button class="researchButton" (click)="discover(research.type)">Discover</button>
-        </div>
+                    </div>                    
+                    <div>
+                        Time to Build: {{research.timeToBuild}}
+                        </div>
+                        <div class="descriptionContainer">
+                    <div class="description">
+                    {{research.description}}
+                    </div>
+        </div> 
+        <button class="researchButton" [disabled]="!canBuild(research.type)" (click)="discover(research.type)">Discover</button>              
     </div>   
+</div>
+    </div>
 </div>

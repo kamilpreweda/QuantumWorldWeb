@@ -2,7 +2,7 @@ namespace QuantumWorld.Core.Domain
 {
     public class Dreadnought : Ship
     {
-        public override string Description => "Dreadnought Description";
+        public override string BaseDescription => "The Dreadnought is an awe-inspiring war machine that is capable of transforming from a massive spacecraft into a towering walking behemoth that can be deployed on hostile planets from orbit. This ability to transition from space to planetary combat makes the Dreadnought one of the most versatile and powerful spacecraft in the galaxy. Standing over 100 meters tall and weighing over 100,000 tons, the Dreadnought is an imposing presence on any battlefield.";
 
         protected override float CostMultiplier => 1;
 

@@ -7,7 +7,8 @@ namespace QuantumWorld.Core.Domain
     {
         public string Name { get; protected set; } = string.Empty;
         public EnemyType Type { get; protected set; }
-        public abstract string Description { get; }
+        public abstract string BaseDescription { get; }
+        public string Description { get; set; }
         public bool IsDefeated { get; protected set; } = false;
         public TimeSpan TimeToAttack { get; protected set; }
         protected abstract TimeSpan BaseTimeToAttack { get; }
@@ -74,7 +75,7 @@ namespace QuantumWorld.Core.Domain
         {
             IsDefeated = true;
             return IsDefeated;
-            
+
         }
         private void SetTime()
         {

@@ -2,7 +2,7 @@ namespace QuantumWorld.Core.Domain
 {
     public class TerraformingResearch : Research
     {
-        public override string Description => "Terraforming Research Description";
+        public override string BaseDescription => "The Terraforming research is based on a deep understanding of the geological, atmospheric, and biological processes that shape a planet's environment. By carefully manipulating these processes, researchers can alter a planet's climate, composition, and ecosystem, making it more suitable for human life. The Terraforming research is a complex and multi-disciplinary field, drawing on expertise in engineering, geology, biology, and many other fields. It requires the use of cutting-edge technologies.";
 
         protected override float CostMultiplier => 5;
 

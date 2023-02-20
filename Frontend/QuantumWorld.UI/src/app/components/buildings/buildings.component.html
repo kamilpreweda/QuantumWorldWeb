@@ -16,9 +16,17 @@
                         <span *ngIf= 'cost.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayHelper.displayShortName(cost.name)}}</span>
                         {{displayHelper.numberWithDots(cost.value)}}
                     </div> 
-                </div>        
-            Time to Build: {{building.timeToBuild}}</div>
-            <button class="buildingButton" (click)="build(building.type)">Build</button>
+                </div>
+                <div>
+                Time to Build: {{building.timeToBuild}}
+                </div>
+                <div class="descriptionContainer">
+            <div class="description">
+            {{building.description}}
+            </div>            
         </div>
+        <button class="buildingButton" [disabled]="!canBuild(building.type)" (click)="build(building.type)">Build</button>
+    </div>
     </div>   
+</div>
 </div>

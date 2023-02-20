@@ -2,7 +2,7 @@ namespace QuantumWorld.Core.Domain
 {
     public class Destroyer : Ship
     {
-        public override string Description => "Destroyer Description";
+        public override string BaseDescription => "The Destroyer is the ultimate expression of military power in the galaxy, a true juggernaut of a spacecraft that can turn the tide of any battle. Whether engaging in large-scale fleet battles or surgical strikes on key enemy targets, the Destroyer is a force to be reckoned with, capable of overwhelming even the most advanced enemy defenses.";
 
         protected override float CostMultiplier => 1;
 

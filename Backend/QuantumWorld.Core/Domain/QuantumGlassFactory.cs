@@ -2,7 +2,7 @@ namespace QuantumWorld.Core.Domain
 {
     public class QuantumGlassFactory : Building
     {
-        public override string Description => "Quantum Glass Factory Description";
+        public override string BaseDescription => "Quantum Mechanics has advanced to the point where it has revolutionized the construction industry. Quantum Glass is a breakthrough material that is synthesized using quantum mechanics principles. It is an ultra-strong and ultra-transparent material that is used for building structures that can withstand the most extreme conditions. With the ability to harness the power of quantum mechanics, the Quantum Glass Factory is at the forefront of modern technology, paving the way for a brighter and more advanced future.";
 
         protected override TimeSpan BaseTimeToBuild => TimeSpan.FromSeconds(2);
         protected override float TimeMultiplier => 3;

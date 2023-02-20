@@ -18,9 +18,18 @@
                         <span *ngIf= 'cost.name === "HiggsBosonResource"' style="color:#FFD700">{{displayHelper.displayShortName(cost.name)}}</span>
                         {{displayHelper.numberWithDots(cost.value)}}
                     </div> 
-                </div>        
-            Time to Build: {{ship.timeToBuild}}</div>
-            <button class="shipButton" (click)="build(ship.type)">Build</button>
+                </div>
+                <div>      
+            Time to Build: {{ship.timeToBuild}}
+            </div>
+            <div class="descriptionContainer">
+                <div class="description">
+                {{ship.description}}
+                </div>
+                </div>                
+            <input class="shipCountInput" type="number" maxlength="4" placeholder="0" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+            <button class="shipButton" [disabled]="!canBuild(ship.type)" (click)="build(ship.type)">Build</button>           
         </div>
+        <div>
     </div>   
 </div>

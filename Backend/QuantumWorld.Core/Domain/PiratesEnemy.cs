@@ -2,7 +2,7 @@ namespace QuantumWorld.Core.Domain
 {
     public class PiratesEnemy : Enemy
     {
-        public override string Description => "Pirates Description";
+        public override string BaseDescription => "Pirates are a common threat in the galaxy, preying on unsuspecting travelers and raiding valuable cargo. While they may not be the most powerful or advanced foes out there, they can still pose a serious threat to those who underestimate them. ";
 
         protected override TimeSpan BaseTimeToAttack => TimeSpan.FromSeconds(30);
 

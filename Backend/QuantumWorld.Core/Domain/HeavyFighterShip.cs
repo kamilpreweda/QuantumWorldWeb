@@ -2,7 +2,7 @@ namespace QuantumWorld.Core.Domain
 {
     public class HeavyFighterShip : Ship
     {
-        public override string Description => "Heavy Fighter Description";
+        public override string BaseDescription => "The Heavy Fighter is a larger, more powerful version of the Light Fighter, designed to pack a greater punch while sacrificing some of its agility. While not as nimble as its smaller counterpart, the Heavy Fighter makes up for it with its superior firepower and durability.";
 
         protected override float CostMultiplier => 1;
 

@@ -7,7 +7,8 @@ namespace QuantumWorld.Core.Domain
     {
         public string Name { get; protected set; } = string.Empty;
         public ResearchType Type { get; protected set; }
-        public abstract string Description { get; }
+        public abstract string BaseDescription { get; }
+        public string Description { get; set; }
         public int Level { get; protected set; } = 0;
         public TimeSpan TimeToBuild { get; protected set; }
         protected abstract TimeSpan BaseTimeToBuild { get; }
@@ -27,7 +28,8 @@ namespace QuantumWorld.Core.Domain
             AutoSetBasicAttributes();
             SetLevel(level);
         }
-        public int GetLevel(){
+        public int GetLevel()
+        {
             return Level;
         }
         private void IncreaseLevel()
@@ -49,12 +51,17 @@ namespace QuantumWorld.Core.Domain
         {
             TimeToBuild = BaseTimeToBuild * TimeMultiplier * (Level + 1);
         }
+        private void SetDescription()
+        {
+            Description = BaseDescription;
+        }
         private void AutoSetBasicAttributes()
         {
             SetName();
             SetType();
             SetCost();
             SetTime();
+            SetDescription();
         }
         private void SetName()
         {
