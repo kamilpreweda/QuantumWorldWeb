@@ -30,6 +30,8 @@ namespace QuantumWorld.Core.Domain
         public List<Enemy> Enemies { get; set; }
         public int EnemiesDefeated { get; set; }
         public double Points { get; set; }
+        public List<string> BattleRaport { get; set; }
+        public List<Message> Messages { get; set; }
 
         protected User()
         {
@@ -88,6 +90,7 @@ namespace QuantumWorld.Core.Domain
             AvailibleSpace = 15;
             UsedSpace = 0;
             Points = 0;
+            Messages = new();
         }
 
         public void SetEmail(string email)
@@ -195,6 +198,13 @@ namespace QuantumWorld.Core.Domain
                 EnemiesDefeated++;
             }
 
+            BattleRaport = _battle.GetRaport();
+            Messages.Add(new Message(BattleRaport));
+        }
+
+        public void DeleteMessage(int id){
+            var message = Messages.FirstOrDefault(m => m.Id == id);
+            Messages.Remove(message);
         }
         private bool CanAfford(List<Resource> cost)
         {

@@ -13,6 +13,7 @@ export interface User {
     usedSpace: number;
     enemiesDefeated: number;
     points: number;
+    messages: Message[];
 }
 
 export interface Resource {
@@ -58,6 +59,12 @@ export interface Enemy {
     ships: Ship[];
     requirements: Research[];
     isDefeated: boolean;
+}
+
+export interface Message {
+    date: string;
+    content: string[];
+    id: number;
 }
 
 export enum BuildingType {

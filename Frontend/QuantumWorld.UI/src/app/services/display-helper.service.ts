@@ -56,4 +56,16 @@ export class DisplayHelperService {
     )
     menuButton.classList.toggle("active");
   }
+
+  replaceComasWithNewLine(message: string[]): string { 
+    return message.join(',').replaceAll(',', '\n');
+  }
+
+  formatDate(date: Date): string{
+    var stringDate = date.toString();
+    stringDate.replaceAll('T', '\n');
+    return stringDate;
+  }
 }
+
+

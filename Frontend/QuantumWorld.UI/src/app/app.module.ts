@@ -14,6 +14,7 @@ import { ShipyardComponent } from './components/shipyard/shipyard.component';
 import { MapComponent } from './components/map/map.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { EnemyPopupComponent } from './components/enemy-popup/enemy-popup.component';
+import { MessagesComponent } from './components/messages/messages.component';
 
 const appRoute: Routes = [
   { path: '', component: OverviewComponent },
@@ -22,7 +23,8 @@ const appRoute: Routes = [
   { path: 'Research', component: ResearchComponent },
   { path: 'Shipyard', component: ShipyardComponent },
   { path: 'Map', component: MapComponent },
-  { path: 'Logout', component: LogoutComponent }
+  { path: 'Logout', component: LogoutComponent },
+  { path: 'Messages', component: MessagesComponent}
 ]
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ const appRoute: Routes = [
     ShipyardComponent,
     MapComponent,
     LogoutComponent,
-    EnemyPopupComponent
+    EnemyPopupComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

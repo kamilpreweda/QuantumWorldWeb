@@ -27,6 +27,7 @@ builder.Services.AddScoped<IBuildingService, BuildingService>();
 builder.Services.AddScoped<IResearchService, ResearchService>();
 builder.Services.AddScoped<IShipService, ShipService>();
 builder.Services.AddScoped<IBattleService, BattleService>();
+builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.Configure<MongoSettings>(builder.Configuration.GetSection("mongo"));

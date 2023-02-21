@@ -61,7 +61,7 @@ img {
     border: 1px solid white;
     padding: 1em;
 }
-.buildingsContainer, .researchesContainer, .shipsContainer {    
+.buildingsContainer, .researchesContainer, .shipsContainer, .messagesContainer {    
     min-width: 60vw;
     max-height: 80vh;
     display: block;
@@ -70,7 +70,7 @@ img {
     color: white;
     grid-area: buildings;    
 }
-.buildingContainer, .researchContainer, .shipContainer{       
+.buildingContainer, .researchContainer, .shipContainer, .messageContainer{       
     max-width: 1100px;
     display: flex;
     padding: 1em;
@@ -121,7 +121,7 @@ img {
     display: grid;
 }
 
-.buildingButton, .researchButton, .shipButton{
+.buildingButton, .researchButton, .shipButton, .messageButton{
     min-width: 100px;
     min-height: 50px;
     margin-left: auto;
@@ -131,6 +131,10 @@ img {
     position: absolute;
     right: 0em;
     bottom: 0em;
+}
+
+.content{
+    white-space:pre-wrap;
 }
 
 .attackButton{
@@ -160,7 +164,7 @@ input[type=number]{
     -moz-appearance: textfield;
 }
 
-.buildingDetails, .researchDetails, .shipDetails {
+.buildingDetails, .researchDetails, .shipDetails, .messageDetails {
     padding: 0.5em;
     flex: content;
     position: relative;  

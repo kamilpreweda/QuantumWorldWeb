@@ -2,6 +2,7 @@
 namespace QuantumWorld.Core.Domain;
 public class Battle : IBattle
 {
+    private List<String> BattleRaport { get; set; }
     public int Attack(int totalAP, int totalHP)
     {
         int result;
@@ -71,34 +72,46 @@ public class Battle : IBattle
         return totalHP;
     }
 
-    public void StartBattle(List<Ship> playerShips, List<Resource> playerResources, Enemy enemy)
+    public List<string> StartBattle(List<Ship> playerShips, List<Resource> playerResources, Enemy enemy)
     {
+        BattleRaport = new();
+
         bool continiueFight = true;
 
         var playerTotalAP = GetTotalAP(playerShips);
+        AddToRaport($"Player's attack power is {playerTotalAP}.");
         var playerTotalHP = GetTotalHP(playerShips);
+        AddToRaport($"Player's health point's are {playerTotalAP}.");
         var enemyTotalAP = GetTotalAP(enemy.Ships);
+        AddToRaport($"Enemy's attack power is {enemyTotalAP}.");
         var enemyTotalHP = GetTotalHP(enemy.Ships);
+        AddToRaport($"Enemy's health point's are {enemyTotalHP}.");
 
         while (continiueFight)
         {
             enemyTotalHP = Attack(playerTotalAP, enemyTotalHP);
+            AddToRaport($"Player's fleet attacked.");
             CalculateDestroyedShips(enemy.Ships, playerTotalAP, out int remainingDamage);
             enemyTotalAP = GetTotalAP(enemy.Ships);
+            AddToRaport($"Enemy's attack power is now equal to: {enemyTotalAP}.");
             if (enemyTotalHP <= 0)
             {
                 var enemyRewards = CollectRewards(enemy);
                 AssignRewards(playerResources, enemyRewards);
                 enemy.Defeat();
+                AddToRaport("Player defeated enemy.");
                 continiueFight = false;
-                break;
+                return BattleRaport;
             }
+            AddToRaport($"Enemy's health point's are now equal to: {enemyTotalHP}.");
             playerTotalHP = Attack(enemyTotalAP, playerTotalHP);
+            AddToRaport("Enemy's fleet attacked.");
             if (playerTotalHP <= 0)
             {
                 CalculateDestroyedShips(playerShips, enemyTotalAP, out remainingDamage);
-                continiueFight = false;                
-                break;
+                AddToRaport("Player was defeated.");
+                continiueFight = false;
+                return BattleRaport;
             }
             else if (playerTotalHP > 0)
             {
@@ -106,6 +119,7 @@ public class Battle : IBattle
                 playerTotalAP = GetTotalAP(playerShips);
             }
         }
+        return BattleRaport;
     }
 
     public void AssignRewards(List<Resource> playerResources, List<Resource> rewards)
@@ -120,4 +134,15 @@ public class Battle : IBattle
 
         playerResources.Where(r => r.Name == "QuantumGlassResource").ToList().ForEach(r => r.Value += quantumReward.Value);
     }
+
+    public List<string> GetRaport()
+    {
+        return BattleRaport;
+    }
+
+    private void AddToRaport(string message)
+    {
+        BattleRaport.Add(message);
+    }
 }
+

@@ -15,5 +15,6 @@ namespace QuantumWorld.Infrastructure.DTO
         public int UsedSpace { get; set; }
         public int EnemiesDefeated { get; set; }
         public int Points { get; set; }
+        public List<Message> Messages { get; set; }
     }
 }

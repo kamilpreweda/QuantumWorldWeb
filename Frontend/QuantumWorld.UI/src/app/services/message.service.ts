@@ -1,23 +1,22 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { BuildingType } from '../models/user';
+import { Message } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BuildingService {
-  private url = "Buildings";
+export class MessageService {
+  private url = "Messages";
 
   constructor(private http: HttpClient) { }
 
-  public upgradeBuilding(type: BuildingType, email: string) {
+  public deleteMessage(id:number, email: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
     let body = {
-      type: type,
+      id: id,
       email: email,
     }
-    return this.http.post(`${environment.apiUrl}/${this.url}`, JSON.stringify(body), { headers })
-  };
+    return this.http.delete(`${environment.apiUrl}/${this.url}/${body.id}/${body.email}`)
+  }
 }
-

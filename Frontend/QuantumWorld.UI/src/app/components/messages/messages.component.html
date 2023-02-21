@@ -1,0 +1,11 @@
+<div class=messagesContainer>  
+    <div *ngFor = "let message of user?.messages">
+        <div class="messageContainer">
+            <div class="messageDetails">
+                <span class="date">{{message.date}}</span>
+                <div class="content">{{displayHelper.replaceComasWithNewLine(message.content)}}</div>
+                <button class="messageButton" (click)="delete(message.id)">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
