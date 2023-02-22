@@ -32,10 +32,17 @@ namespace QuantumWorld.Core.Domain
         {
             return Level;
         }
+        public void CutTimeToBuildByHalf()
+        {
+            TimeToBuild /= 2;
+            TimeToBuild = new TimeSpan(TimeToBuild.Hours, TimeToBuild.Minutes, (TimeToBuild.Seconds));
+
+        }
         private void IncreaseLevel()
         {
             Level++;
         }
+
         private void SetNewCost()
         {
             foreach (var cost in Cost)

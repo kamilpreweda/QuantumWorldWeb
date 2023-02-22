@@ -15,13 +15,16 @@ namespace QuantumWorld.Core.Domain
         protected abstract float TimeMultiplier { get; }
         protected abstract float CostMultiplier { get; }
         protected abstract List<Resource> BaseCost { get; }
+
         public List<Resource> Cost { get; protected set; } = new();
         public bool IsUnderConstruction { get; protected set; }
         public DateTime FinishDate { get; protected set; }
         protected abstract int BaseHealthPoints { get; }
         protected abstract int BaseAttackPower { get; }
+        protected abstract int BaseSpaceshipFactoryLevelRequirement { get; }
         public int HealthPoints { get; protected set; }
         public int AttackPower { get; protected set; }
+        public int SpaceshipFactoryLevelRequirement { get; protected set; }
 
         public Ship()
         {
@@ -58,6 +61,15 @@ namespace QuantumWorld.Core.Domain
         {
             Count += count;
         }
+        public void CutTimeToBuildByHalf()
+        {
+            TimeToBuild /= 2;
+            TimeToBuild = new TimeSpan(TimeToBuild.Hours, TimeToBuild.Minutes, (TimeToBuild.Seconds));
+        }
+        public int GetSpaceshipLevelRequirement()
+        {
+            return SpaceshipFactoryLevelRequirement;
+        }
         private void SetTime()
         {
             TimeToBuild = BaseTimeToBuild;
@@ -74,6 +86,7 @@ namespace QuantumWorld.Core.Domain
             SetCost();
             SetTime();
             SetDescription();
+            SetLevelRequirement();
         }
         private void SetName()
         {
@@ -82,6 +95,10 @@ namespace QuantumWorld.Core.Domain
         private void SetDescription()
         {
             Description = BaseDescription;
+        }
+        private void SetLevelRequirement()
+        {
+            SpaceshipFactoryLevelRequirement = BaseSpaceshipFactoryLevelRequirement;
         }
         private void SetType()
         {

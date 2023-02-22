@@ -1,5 +1,5 @@
 <div class="menuContainer">
-    <button class="menuButton" id="messageButton" (click)="changePage('Messages'); changeAppearance('messageButton')">Messages</button>
+    <button class="menuButton" id="messageButton" (click)="changePage('Messages'); changeAppearance('messageButton')"><i class="fa fa-envelope"> /</i> {{user.messages.length}}</button>
     <button class="menuButton" id="overviewButton" (click)="changePage('Overview'); changeAppearance('overviewButton')">Overview</button>
     <button class="menuButton" id="buildingsButton" (click)="changePage('Buildings'); changeAppearance('buildingsButton')">Buildings</button>
     <button class="menuButton" id="researchButton" (click)="changePage('Research'); changeAppearance('researchButton')">Research</button>

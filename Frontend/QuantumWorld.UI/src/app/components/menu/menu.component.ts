@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,7 +9,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
-  constructor(private router: Router) { }
+  user: User;
+  users: User[] = [];
+  constructor(private router: Router, private userService: UserService) { }
+
+  ngOnInit(): void {
+    this.userService.getUsers().subscribe((result: User[]) => { this.users = result; this.user = this.users[0] });
+  }
 
   changePage(path: string): void {
     const navigationDetails: string[] = []

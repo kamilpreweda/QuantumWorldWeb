@@ -48,6 +48,7 @@ export interface Ship {
     cost: Resource[];
     healthPoints: number;
     attackPower: number;
+    spaceshipFactoryLevelRequirement: number;
 }
 
 export interface Enemy {
@@ -63,6 +64,7 @@ export interface Enemy {
 
 export interface Message {
     date: string;
+    title: string;
     content: string[];
     id: number;
 }

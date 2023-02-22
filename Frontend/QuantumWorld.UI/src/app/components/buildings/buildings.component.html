@@ -15,11 +15,12 @@
                         <span *ngIf= 'cost.name === "CarbonFiberResource"' style="color:#00E676">{{displayHelper.displayShortName(cost.name)}}</span>
                         <span *ngIf= 'cost.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayHelper.displayShortName(cost.name)}}</span>
                         {{displayHelper.numberWithDots(cost.value)}}
-                    </div> 
+                    </div>
+                    <div class="timeContainer"><i class="fa-regular fa-clock"></i> 
+                        Time to Build: {{building.timeToBuild}}
+                        </div> 
                 </div>
-                <div>
-                Time to Build: {{building.timeToBuild}}
-                </div>
+                
                 <div class="descriptionContainer">
             <div class="description">
             {{building.description}}

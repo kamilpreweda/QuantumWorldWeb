@@ -144,7 +144,7 @@ namespace QuantumWorld.Core.Domain
                 CalculatePoints(building.Cost);
                 building.UpgradeBuilding();
                 IncreaseUsedSpace();
-
+                ReduceTimes(type);
             }
         }
         public void UpgradeResearch(ResearchType type)
@@ -173,7 +173,7 @@ namespace QuantumWorld.Core.Domain
                 throw new Exception("There is no such ship.");
             }
 
-            if (CanAfford(ship.Cost))
+            if ((CanAfford(ship.Cost) && CheckSpaceshipFactoryLevel(ship)))
             {
                 SpendResources(Resources, ship.Cost);
                 CalculatePoints(ship.Cost);
@@ -199,10 +199,10 @@ namespace QuantumWorld.Core.Domain
             }
 
             BattleRaport = _battle.GetRaport();
-            Messages.Add(new Message(BattleRaport));
+            Messages.Add(new Message("Battle Raport", BattleRaport));
         }
-
-        public void DeleteMessage(int id){
+        public void DeleteMessage(int id)
+        {
             var message = Messages.FirstOrDefault(m => m.Id == id);
             Messages.Remove(message);
         }
@@ -271,6 +271,35 @@ namespace QuantumWorld.Core.Domain
                 }
             }
             return true;
+        }
+
+        private bool CheckSpaceshipFactoryLevel(Ship ship)
+        {
+            if (ship.GetSpaceshipLevelRequirement() > Buildings.Where(b => b.Type == BuildingType.SpaceshipFactory).FirstOrDefault().Level)
+            {
+                return false;
+                throw new Exception("Spaceship Factory level is too low!");
+            }
+            return true;
+        }
+
+        private void ReduceTimes(BuildingType type)
+        {
+            if (type == BuildingType.Labolatory)
+            {
+                foreach (var research in Research)
+                {
+                    research.CutTimeToBuildByHalf();
+                }
+            }
+
+            if (type == BuildingType.SpaceshipFactory)
+            {
+                foreach (var ship in Ships)
+                {
+                    ship.CutTimeToBuildByHalf();
+                }
+            }
         }
     }
 }

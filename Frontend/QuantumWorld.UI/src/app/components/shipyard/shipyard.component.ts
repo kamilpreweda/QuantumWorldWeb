@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ShipType, User } from 'src/app/models/user';
+import { BuildingType, ShipType, User } from 'src/app/models/user';
 import { DisplayHelperService } from 'src/app/services/display-helper.service';
 import { ShipService } from 'src/app/services/ship.service';
 import { UserService } from 'src/app/services/user.service'
@@ -31,7 +31,9 @@ export class ShipyardComponent {
   }
   canBuild(type: ShipType): boolean {
     var ship = this.user.ships.find(s => (s.type === type));
-    return this.validation.checkResourceRequirements(ship!.cost, this.user!.resources)
+    var spaceshipFactoryLevel = this.user.buildings.find(b => (b.type === BuildingType.SpaceshipFactory))!.level;
+
+    return (this.validation.checkResourceRequirements(ship!.cost, this.user!.resources) && (this.validation.checkSpaceshipFactoryLevel(spaceshipFactoryLevel, ship!.spaceshipFactoryLevelRequirement)));
   }
 }
 

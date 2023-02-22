@@ -14,11 +14,13 @@
                         <span *ngIf= 'cost.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayHelper.displayShortName(cost.name)}}</span>
                         <span *ngIf= 'cost.name === "HiggsBosonResource"' style="color:#FFD700">{{displayHelper.displayShortName(cost.name)}}</span>
                         {{displayHelper.numberWithDots(cost.value)}}
-                    </div> 
-                    </div>                    
-                    <div>
-                        Time to Build: {{research.timeToBuild}}
+                    </div>
+                    <div class="timeContainer"><i class="fa-regular fa-clock"></i> Time to Discover: {{research.timeToBuild}}
                         </div>
+                    </div>
+                    
+                    <div class="researchRequirements">Requirements: <span id="red" >Labolatory lvl coś tam</span></div>  
+                    
                         <div class="descriptionContainer">
                     <div class="description">
                     {{research.description}}

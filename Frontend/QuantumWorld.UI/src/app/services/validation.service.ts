@@ -1,5 +1,6 @@
+import { Time } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { Research, Resource } from '../models/user';
+import { Research, Resource, Ship } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +43,24 @@ export class ValidationService {
       return true;
     });
     return canBuild && requirementsMet;
+  }
+
+  checkIfPlayerHasAnyShips(playerShips: Array<Ship>): boolean {
+    var hasShips: boolean = false;
+
+    playerShips.forEach(ship => {
+      if (ship.count > 0) {
+        hasShips = true;
+      }
+    });
+    return hasShips;
+  }
+
+  checkSpaceshipFactoryLevel(actualLevel: number, requiredLevel: number): boolean{
+    if(requiredLevel > actualLevel)
+    {
+      return false;
+    }
+    return true;
   }
 }

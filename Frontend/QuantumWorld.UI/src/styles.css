@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Goldman&display=swap');
 
-html, body, div, button, span {
+html, body, button {
     font-family: "Goldman", sans-serif;
     margin: 0;
     font-size: 24px;
@@ -74,12 +74,20 @@ img {
     max-width: 1100px;
     display: flex;
     padding: 1em;
-    min-width: 50vw;    
-    border: 1px solid #E5E4E2;   
+    min-width: 50vw;     
+    border: 1px solid #E5E4E2;    
+}
+
+.costContainer, .shipRequirements, .researchRequirements{
+    font-size: 0.7em;
+    margin-top: 1%;
 }
 
 .descriptionContainer{
     display: flex;
+    font-family:'Trebuchet MS';
+    margin-top: 1%;
+    font-size: 1.05em;    
 }
 
 .resourcesContainer {
@@ -131,10 +139,20 @@ img {
     position: absolute;
     right: 0em;
     bottom: 0em;
+    font-size: inherit;
 }
 
 .content{
     white-space:pre-wrap;
+}
+.messageHeader{
+    text-decoration: underline;
+    display: flex;
+    margin-bottom: 1%;
+}
+
+.date{
+    margin-left: 1%;
 }
 
 .attackButton{
@@ -318,6 +336,11 @@ input[type=number]{
     grid-row-start: 2;
     grid-row-end: 2;
 }
+
+#margin{
+    margin-left: 1%;
+}
+
 #red {
     color: red;
 }

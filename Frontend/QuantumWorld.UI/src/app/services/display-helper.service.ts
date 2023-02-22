@@ -1,4 +1,6 @@
+import { Time } from '@angular/common';
 import { Injectable } from '@angular/core';
+import { Moment } from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +21,11 @@ export class DisplayHelperService {
       return changedName;
     }
     else if (name.includes("Ship")) {
-      changedName = name.replace("Ship", "");
+      changedName = name.replaceAll("Ship", "");
       return changedName;
     }
     else if (name.includes("Enemy")) {
-      changedName = name.replace("Enemy", "");
+      changedName = name.replaceAll("Enemy", "");
       return changedName;
     }
     return changedName = name;
@@ -57,14 +59,15 @@ export class DisplayHelperService {
     menuButton.classList.toggle("active");
   }
 
-  replaceComasWithNewLine(message: string[]): string { 
+  replaceComasWithNewLine(message: string[]): string {
     return message.join(',').replaceAll(',', '\n');
   }
 
-  formatDate(date: Date): string{
-    var stringDate = date.toString();
-    stringDate.replaceAll('T', '\n');
-    return stringDate;
+  replaceColors() {
+    var word: string = "defeated";
+    var element = document.getElementById("content");
+    var originalHtml = element!.innerHTML;
+    var newHtml = originalHtml!.replace(word, word.fontcolor("red"));
   }
 }
 

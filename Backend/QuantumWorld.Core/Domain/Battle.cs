@@ -77,15 +77,32 @@ public class Battle : IBattle
         BattleRaport = new();
 
         bool continiueFight = true;
+        AddToRaport($"Player has gathered forces around {enemy.Name.Replace("Enemy", "")} planet.");
+        AddToRaport("Player's fleet:");
+
+        foreach (var ship in playerShips)
+        {
+            if (ship.Count > 0)
+            {
+                AddToRaport($"{ship.Type}: {ship.Count}");
+            }
+        }
+
+        AddToRaport($"{enemy.Name.Replace("Enemy", "")} fleet:");
+
+        foreach (var ship in enemy.Ships)
+        {
+            AddToRaport($"{ship.Type}: {ship.Count}");
+        }
 
         var playerTotalAP = GetTotalAP(playerShips);
-        AddToRaport($"Player's attack power is {playerTotalAP}.");
+        AddToRaport($"Player's attack power is {playerTotalAP} AP.");
         var playerTotalHP = GetTotalHP(playerShips);
-        AddToRaport($"Player's health point's are {playerTotalAP}.");
+        AddToRaport($"Player's health point's are {playerTotalHP} HP.");
         var enemyTotalAP = GetTotalAP(enemy.Ships);
-        AddToRaport($"Enemy's attack power is {enemyTotalAP}.");
+        AddToRaport($"Enemy's attack power is {enemyTotalAP} AP.");
         var enemyTotalHP = GetTotalHP(enemy.Ships);
-        AddToRaport($"Enemy's health point's are {enemyTotalHP}.");
+        AddToRaport($"Enemy's health point's are {enemyTotalHP} HP.");
 
         while (continiueFight)
         {
@@ -93,7 +110,7 @@ public class Battle : IBattle
             AddToRaport($"Player's fleet attacked.");
             CalculateDestroyedShips(enemy.Ships, playerTotalAP, out int remainingDamage);
             enemyTotalAP = GetTotalAP(enemy.Ships);
-            AddToRaport($"Enemy's attack power is now equal to: {enemyTotalAP}.");
+            AddToRaport($"Enemy's attack power is now equal to: {enemyTotalAP} AP.");
             if (enemyTotalHP <= 0)
             {
                 var enemyRewards = CollectRewards(enemy);
@@ -103,7 +120,7 @@ public class Battle : IBattle
                 continiueFight = false;
                 return BattleRaport;
             }
-            AddToRaport($"Enemy's health point's are now equal to: {enemyTotalHP}.");
+            AddToRaport($"Enemy's health point's are now equal to: {enemyTotalHP} HP.");
             playerTotalHP = Attack(enemyTotalAP, playerTotalHP);
             AddToRaport("Enemy's fleet attacked.");
             if (playerTotalHP <= 0)
