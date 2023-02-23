@@ -16,7 +16,7 @@ namespace QuantumWorld.Infrastructure.Handlers.Users
 
         public async Task<Unit> Handle(CreateUser request, CancellationToken cancellationToken)
         {
-            await _userService.RegisterAsync(request.Id, request.Email, request.Password, request.Username);
+            await _userService.RegisterAsync(request.Password, request.Username);
             return Unit.Value;
         }
     }

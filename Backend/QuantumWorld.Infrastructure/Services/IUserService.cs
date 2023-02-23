@@ -7,11 +7,11 @@ namespace QuantumWorld.Infrastructure.Services
 {
     public interface IUserService
     {
-        Task<UserDto> GetAsync(string email);
+        Task<UserDto> GetAsync(string username);
         Task<IEnumerable<UserDto>> BrowseAsync();
-        Task RegisterAsync(Guid id, string email, string password, string username);
-        Task LoginAsync(string email, string password);
-        Task DeleteAsync(string email, string password);
+        Task RegisterAsync(string password, string username);
+        Task LoginAsync(string username, string password);
+        Task DeleteAsync(string username, string password);
 
 
 

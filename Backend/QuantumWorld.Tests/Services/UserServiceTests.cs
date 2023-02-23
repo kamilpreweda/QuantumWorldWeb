@@ -4,6 +4,7 @@ using QuantumWorld.Core.Domain;
 using QuantumWorld.Core.Repositories;
 using QuantumWorld.Infrastructure.Services;
 using MongoDB.Bson;
+using Microsoft.Extensions.Configuration;
 
 namespace QuantumWorld.Tests.Services
 {
@@ -15,10 +16,11 @@ namespace QuantumWorld.Tests.Services
             var userRepositoryMock = new Mock<IUserRepository>();
             var mapperMock = new Mock<IMapper>();
             var encrypterMock = new Mock<IEncrypter>();
+            var configurationMock = new Mock<IConfiguration>();
             var battle = new Battle();
 
-            var userService = new UserService(userRepositoryMock.Object, mapperMock.Object, encrypterMock.Object);
-            await userService.RegisterAsync(Guid.NewGuid(), "user@email.com", "secret", "user");
+            var userService = new UserService(userRepositoryMock.Object, mapperMock.Object, encrypterMock.Object, configurationMock.Object);
+            await userService.RegisterAsync("secret", "user");
 
             userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);
         }

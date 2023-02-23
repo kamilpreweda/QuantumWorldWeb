@@ -10,12 +10,12 @@ namespace QuantumWorld.Infrastructure.Services
         {
             _userRepository = userRepository;
         }
-        public async Task UpgradeResearch(ResearchType type, string email)
+        public async Task UpgradeResearch(ResearchType type, string username)
         {
-            var user = _userRepository.Get(email);
+            var user = _userRepository.GetByUsername(username);
             if (user is null)
             {
-                throw new Exception($"User with {email} doesn't exist!");
+                throw new Exception($"User with {username} name doesn't exist!");
             }
             user.UpgradeResearch(type);
             _userRepository.UpdateAsync(user);

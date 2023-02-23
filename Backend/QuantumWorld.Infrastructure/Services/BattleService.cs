@@ -10,12 +10,12 @@ namespace QuantumWorld.Infrastructure.Services
         {
             _userRepository = userRepository;
         }
-        public async Task StartBattle(EnemyType type, string email)
+        public async Task StartBattle(EnemyType type, string username)
         {
-            var user = _userRepository.Get(email);
+            var user = _userRepository.GetByUsername(username);
             if (user is null)
             {
-                throw new Exception($"User with {email} doesn't exist!");
+                throw new Exception($"User with {username} name doesn't exist!");
             }
             user.StartBattle(type);
             await _userRepository.UpdateAsync(user);

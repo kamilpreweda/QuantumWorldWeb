@@ -16,11 +16,17 @@ namespace QuantumWorld.Infrastructure.Repositories
             => _users.AsQueryable().FirstOrDefault(x => x.Id == id);
 
 
-        public User Get(string email)
+        public User GetByEmail(string email)
         {
             var user = _users.AsQueryable().FirstOrDefault(x => x.Email == email);
             return user;
         }
+
+        public User GetByUsername(string username){
+            var user = _users.AsQueryable().FirstOrDefault(x => x.Username == username);
+            return user;
+        }
+
 
         public async Task<IEnumerable<User>> BrowseAsync()
             => await _users.AsQueryable().ToListAsync();

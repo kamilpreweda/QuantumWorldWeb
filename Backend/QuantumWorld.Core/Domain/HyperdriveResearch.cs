@@ -10,6 +10,7 @@ namespace QuantumWorld.Core.Domain
 
         protected override TimeSpan BaseTimeToBuild => TimeSpan.FromSeconds(30);
 
+        protected override int BaseLabolatoryLevelRequirement => 3;
         protected override List<Resource> BaseCost => new List<Resource>()
         {
             new CarbonFiberResource(300),

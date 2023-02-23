@@ -11,14 +11,14 @@ namespace QuantumWorld.Infrastructure.Services
         {
             _userRepository = userRepository;
         }
-        public async Task BuildShip(ShipType type, string email)
+        public async Task BuildShip(ShipType type, int count, string username)
         {
-            var user = _userRepository.Get(email);
+            var user = _userRepository.GetByUsername(username);
            if (user is null)
             {
-                throw new Exception($"User with {email} doesn't exist!");
+                throw new Exception($"User with {username} name doesn't exist!");
             }
-            user.BuildShip(type);
+            user.BuildShip(type, count);
             _userRepository.UpdateAsync(user);
             await Task.CompletedTask;
         }

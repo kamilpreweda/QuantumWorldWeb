@@ -71,11 +71,15 @@ public abstract class Building
     private void SetDescription()
     {
         Description = BaseDescription;
-    }
+    }    
     public void UpgradeBuilding()
     {
         SetNewTime();
         SetNewCost();
         IncreaseLevel();
+    }
+
+    public void SetLevelForTests(int level){
+        Level = level;
     }
 }

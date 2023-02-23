@@ -13,43 +13,41 @@ namespace QuantumWorld.TestsEndToEnd.Controllers
     public class UsersControllerTests : ControllerTestsBase
     {
         [Fact]
-        public async Task given_valid_email_user_should_exist()
+        public async Task given_valid_username_user_should_exist()
         {
-            var email = "string";
-            var user = await GetUserAsync(email);
-            user.Email.Should().BeEquivalentTo(email);
+            var username = "string";
+            var user = await GetUserAsync(username);
+            user.Username.Should().BeEquivalentTo(username);
         }
 
         [Fact]
-        public async Task given_invalid_email_user_should_not_exist()
+        public async Task given_invalid_username_user_should_not_exist()
         {
-            var email = "email1000@email";
-            var response = await Client.GetAsync($"users/{email}");
+            var username = "wrongUsername";
+            var response = await Client.GetAsync($"users/{username}");
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
         }
 
         [Fact]
-        public async Task given_unique_email_user_should_be_created()
+        public async Task given_unique_username_user_should_be_created()
         {
             var request = new CreateUser
             {
-                Id = Guid.NewGuid(),
-                Email = "test@email.com",
                 Password = "secret",
                 Username = "test",
 
             };
             var payload = GetPayload(request);
             var response = await Client.PostAsync("users", payload);
-            response.Headers.Location.ToString().Should().BeEquivalentTo($"users/{request.Email}");
+            response.Headers.Location.ToString().Should().BeEquivalentTo($"users/{request.Username}");
 
-            var user = await GetUserAsync(request.Email);
-            user.Email.Should().BeEquivalentTo(request.Email);
+            var user = await GetUserAsync(request.Username);
+            user.Username.Should().BeEquivalentTo(request.Username);
         }
 
-        private async Task<UserDto> GetUserAsync(string email)
+        private async Task<UserDto> GetUserAsync(string username)
         {
-            var response = await Client.GetAsync($"users/{email}");
+            var response = await Client.GetAsync($"users/{username}");
             var responseString = await response.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<UserDto>(responseString);

@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuantumWorld.Infrastructure.Commands.Users;
 using QuantumWorld.Infrastructure.DTO;
@@ -32,16 +33,17 @@ public class UsersController : ApiControllerBase
     }
 
     [HttpGet]
+    // [HttpGet, Authorize(Roles = "Admin")]
     public async Task<IActionResult> BrowseAsync()
     {
         var users = await _userService.BrowseAsync();
         return Json(users);
     }
-    [HttpPost]
+    [HttpPost("register")]
     public async Task<IActionResult> Post([FromBody] CreateUser request)
     {
         await _mediator.Send(request);
-        return Created($"users/{request.Email}", new object());
+        return Created($"users/{request.Username}", new object());
     }
 
     [HttpDelete]

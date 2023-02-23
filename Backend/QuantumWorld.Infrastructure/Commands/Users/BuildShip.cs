@@ -6,6 +6,7 @@ namespace QuantumWorld.Infrastructure.Commands.Users
     public class BuildShip : IRequest
     {
         public ShipType type { get; set; }
+        public int count {get; set;}
         public string email { get; set; } = string.Empty;
     }
 }

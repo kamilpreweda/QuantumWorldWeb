@@ -32,7 +32,12 @@ export class BuildingsComponent {
 
   canBuild(type: BuildingType): boolean {
     var building = this.user.buildings.find(b => (b.type === type));
-    return this.validation.checkResourceRequirements(building!.cost, this.user!.resources)
+
+    console.log(this.user.usedSpace);
+    console.log(this.user.availibleSpace);
+    console.log(this.validation.checkIfPlayerHasSpaceForBuilding(this.user.usedSpace, this.user.availibleSpace))
+
+    return (this.validation.checkResourceRequirements(building!.cost, this.user!.resources)&&(this.validation.checkIfPlayerHasSpaceForBuilding(this.user.usedSpace, this.user.availibleSpace)));
   }
 }
 

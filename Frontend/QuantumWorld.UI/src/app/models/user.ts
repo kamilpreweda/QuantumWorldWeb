@@ -37,6 +37,7 @@ export interface Research {
     level: number;
     timeToBuild: Time;
     cost: Resource[];
+    labolatoryLevelRequirement: number;
 }
 
 export interface Ship {

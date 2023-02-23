@@ -56,9 +56,16 @@ export class ValidationService {
     return hasShips;
   }
 
-  checkSpaceshipFactoryLevel(actualLevel: number, requiredLevel: number): boolean{
+  checkRequiredBuildingLevel(actualLevel: number, requiredLevel: number): boolean{
     if(requiredLevel > actualLevel)
     {
+      return false;
+    }
+    return true;
+  }
+
+  checkIfPlayerHasSpaceForBuilding(usedSpace: number, availibleSpace: number): boolean{
+    if(usedSpace >= availibleSpace){
       return false;
     }
     return true;

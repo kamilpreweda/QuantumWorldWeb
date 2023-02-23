@@ -18,6 +18,8 @@ namespace QuantumWorld.Core.Domain
         public List<Resource> Cost { get; protected set; } = new();
         public bool IsUnderConstruction { get; protected set; }
         public DateTime FinishDate { get; protected set; }
+        protected abstract int BaseLabolatoryLevelRequirement {get;}
+        public int LabolatoryLevelRequirement {get; protected set;}
 
         public Research()
         {
@@ -37,6 +39,10 @@ namespace QuantumWorld.Core.Domain
             TimeToBuild /= 2;
             TimeToBuild = new TimeSpan(TimeToBuild.Hours, TimeToBuild.Minutes, (TimeToBuild.Seconds));
 
+        }
+
+        public int GetLablolatoryLevelRequirement(){
+            return LabolatoryLevelRequirement;
         }
         private void IncreaseLevel()
         {
@@ -69,10 +75,15 @@ namespace QuantumWorld.Core.Domain
             SetCost();
             SetTime();
             SetDescription();
+            SetLevelRequirement();
         }
         private void SetName()
         {
             Name = this.GetType().Name;
+        }
+
+        private void SetLevelRequirement(){
+            LabolatoryLevelRequirement = BaseLabolatoryLevelRequirement;
         }
         private void SetType()
         {

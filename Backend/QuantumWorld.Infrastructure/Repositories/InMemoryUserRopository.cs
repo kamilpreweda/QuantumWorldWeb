@@ -10,7 +10,7 @@ namespace QuantumWorld.Infrastructure.Repositories
     {
         private static readonly IBattle _battle;
         private static ISet<User> _users = new HashSet<User>{
-              new User(Guid.NewGuid(), "email@email", "password123", Encoding.ASCII.GetBytes("12345"), Encoding.ASCII.GetBytes("12345"), "Kamil")
+              new User(Guid.NewGuid(), Encoding.ASCII.GetBytes("12345"), Encoding.ASCII.GetBytes("12345"), "Kamil")
         };
         async Task IUserRepository.AddAsync(User user)
         {
@@ -24,9 +24,15 @@ namespace QuantumWorld.Infrastructure.Repositories
 
         }
 
-        public User Get(string email)
+        public User GetByEmail(string email)
         {
             return _users.SingleOrDefault(x => x.Email == email.ToLowerInvariant());
+
+        }
+
+         public User GetByUsername(string username)
+        {
+            return _users.SingleOrDefault(x => x.Username == username.ToLowerInvariant());
 
         }
 

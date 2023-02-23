@@ -12,12 +12,12 @@ namespace QuantumWorld.Infrastructure.Services
             _userRepository = userRepository;
         }
 
-        public async Task DeleteAsync(int id, string email)
+        public async Task DeleteAsync(int id, string username)
         {
-            var user = _userRepository.Get(email);
+            var user = _userRepository.GetByUsername(username);
             if (user is null)
             {
-                throw new Exception($"User with {email} doesn't exist!");
+                throw new Exception($"User with {username} name doesn't exist!");
             }            
             user.DeleteMessage(id);
             await _userRepository.UpdateAsync(user);

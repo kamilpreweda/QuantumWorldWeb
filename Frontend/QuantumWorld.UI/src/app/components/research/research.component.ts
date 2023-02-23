@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ResearchType, User } from 'src/app/models/user';
+import { BuildingType, ResearchType, User } from 'src/app/models/user';
 import { DisplayHelperService } from 'src/app/services/display-helper.service';
 import { ResearchService } from 'src/app/services/research.service';
 import { UserService } from 'src/app/services/user.service'
@@ -24,15 +24,16 @@ export class ResearchComponent {
   }
 
   discover(type: ResearchType): void {
-    if(this.canBuild(type)){
-    this.researchService.upgradeResearch(type, this.email).subscribe(() => {
-      window.location.reload();
-    });
-  }
-  }
-
-    canBuild(type: ResearchType): boolean {
-      var research = this.user.research.find(r => (r.type === type));
-      return this.validation.checkResourceRequirements(research!.cost, this.user!.resources)
+    if (this.canBuild(type)) {
+      this.researchService.upgradeResearch(type, this.email).subscribe(() => {
+        window.location.reload();
+      });
     }
   }
+
+  canBuild(type: ResearchType): boolean {
+    var research = this.user.research.find(r => (r.type === type));
+    var labolatoryLevel = this.user.buildings.find(b => (b.type === BuildingType.Labolatory))!.level;
+    return (this.validation.checkResourceRequirements(research!.cost, this.user!.resources) && (this.validation.checkRequiredBuildingLevel(labolatoryLevel, research!.labolatoryLevelRequirement)))
+  }
+}

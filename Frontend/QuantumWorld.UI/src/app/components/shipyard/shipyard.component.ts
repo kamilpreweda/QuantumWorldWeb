@@ -22,9 +22,9 @@ export class ShipyardComponent {
     this.userService.getUsers().subscribe((result: User[]) => { this.users = result; this.user = this.users[0] });
   }
 
-  build(type: ShipType): void {
+  build(type: ShipType, count:number): void {
     if (this.canBuild(type)) {
-      this.shipService.buildShip(type, this.email).subscribe(() => {
+      this.shipService.buildShip(type, count, this.email).subscribe(() => {
         window.location.reload();
       });
     }
@@ -33,7 +33,12 @@ export class ShipyardComponent {
     var ship = this.user.ships.find(s => (s.type === type));
     var spaceshipFactoryLevel = this.user.buildings.find(b => (b.type === BuildingType.SpaceshipFactory))!.level;
 
-    return (this.validation.checkResourceRequirements(ship!.cost, this.user!.resources) && (this.validation.checkSpaceshipFactoryLevel(spaceshipFactoryLevel, ship!.spaceshipFactoryLevelRequirement)));
+    return (this.validation.checkResourceRequirements(ship!.cost, this.user!.resources) && (this.validation.checkRequiredBuildingLevel(spaceshipFactoryLevel, ship!.spaceshipFactoryLevelRequirement)));
+  }
+
+  getInputValue(): number{
+    var inputValue = document.querySelector("input")!.value
+    return +inputValue;
   }
 }
 

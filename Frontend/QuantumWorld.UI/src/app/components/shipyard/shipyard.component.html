@@ -31,8 +31,8 @@
                 {{ship.description}}
                 </div>
                 </div>                
-            <input class="shipCountInput" type="number" maxlength="4" placeholder="0" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-            <button class="shipButton" [disabled]="!canBuild(ship.type)" (click)="build(ship.type)">Build</button>           
+            <input id="input" class="shipCountInput" type="number" maxlength="4" placeholder="0" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+            <button class="shipButton" [disabled]="!canBuild(ship.type)" (click)="build(ship.type, getInputValue())">Build</button>           
         </div>
         <div>
     </div>   

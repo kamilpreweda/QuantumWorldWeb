@@ -15,7 +15,7 @@ namespace QuantumWorld.Core.Domain
         private IBattle _battle;
         public Guid Id { get; protected set; }
         public string Email { get; protected set; } = string.Empty;
-        public string Password { get; protected set; } = string.Empty;
+        // public string Password { get; protected set; } = string.Empty;
         public byte[] PasswordHash { get; protected set; }
         public byte[] PasswordSalt { get; protected set; }
         public string Username { get; protected set; } = string.Empty;
@@ -38,11 +38,9 @@ namespace QuantumWorld.Core.Domain
 
         }
 
-        public User(Guid id, string email, string password, byte[] salt, byte[] hash, string username)
+        public User(Guid id, byte[] salt, byte[] hash, string username)
         {
             Id = Guid.NewGuid();
-            Email = email.ToLowerInvariant();
-            Password = password;
             PasswordSalt = salt;
             PasswordHash = hash;
             Username = username;
@@ -111,23 +109,23 @@ namespace QuantumWorld.Core.Domain
             Username = username.ToLowerInvariant();
             LastUpdated = DateTime.UtcNow;
         }
-        public void SetPassword(string password)
-        {
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                throw new Exception("Password can not be empty.");
-            }
-            if (password.Length < 4)
-            {
-                throw new Exception("Password must contain at least 4 characters.");
-            }
-            if (password.Length > 100)
-            {
-                throw new Exception("Password can not contain more than 100 characters.");
-            }
-            Password = password;
-            LastUpdated = DateTime.UtcNow;
-        }
+        // public void SetPassword(string password)
+        // {
+        //     if (string.IsNullOrWhiteSpace(password))
+        //     {
+        //         throw new Exception("Password can not be empty.");
+        //     }
+        //     if (password.Length < 4)
+        //     {
+        //         throw new Exception("Password must contain at least 4 characters.");
+        //     }
+        //     if (password.Length > 100)
+        //     {
+        //         throw new Exception("Password can not contain more than 100 characters.");
+        //     }
+        //     Password = password;
+        //     LastUpdated = DateTime.UtcNow;
+        // }
         public void UpgradeBuilding(BuildingType type)
 
         {
@@ -156,7 +154,7 @@ namespace QuantumWorld.Core.Domain
                 throw new Exception("There is no such research.");
             }
 
-            if (CanAfford(research.Cost))
+            if ((CanAfford(research.Cost)) && (CheckLabolatoryLevel(research)))
             {
                 SpendResources(Resources, research.Cost);
                 CalculatePoints(research.Cost);
@@ -164,7 +162,7 @@ namespace QuantumWorld.Core.Domain
                 IncreaseAvailibleSpace(research);
             }
         }
-        public void BuildShip(ShipType type)
+        public void BuildShip(ShipType type, int count)
         {
             var ship = Ships.SingleOrDefault(s => s.Type == type);
 
@@ -173,11 +171,15 @@ namespace QuantumWorld.Core.Domain
                 throw new Exception("There is no such ship.");
             }
 
-            if ((CanAfford(ship.Cost) && CheckSpaceshipFactoryLevel(ship)))
+            for (int i = 0; i < count; i++)
             {
-                SpendResources(Resources, ship.Cost);
-                CalculatePoints(ship.Cost);
-                ship.BuildShip();
+
+                if ((CanAfford(ship.Cost) && CheckSpaceshipFactoryLevel(ship)))
+                {
+                    SpendResources(Resources, ship.Cost);
+                    CalculatePoints(ship.Cost);
+                    ship.BuildShip();
+                }
             }
         }
         public void StartBattle(EnemyType type)
@@ -279,6 +281,16 @@ namespace QuantumWorld.Core.Domain
             {
                 return false;
                 throw new Exception("Spaceship Factory level is too low!");
+            }
+            return true;
+        }
+
+        private bool CheckLabolatoryLevel(Research research)
+        {
+            if (research.GetLablolatoryLevelRequirement() > Buildings.Where(b => b.Type == BuildingType.Labolatory).FirstOrDefault().Level)
+            {
+                return false;
+                throw new Exception("Labolatory level is too low!");
             }
             return true;
         }

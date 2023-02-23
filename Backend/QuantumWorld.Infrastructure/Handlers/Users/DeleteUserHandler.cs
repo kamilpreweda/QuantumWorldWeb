@@ -13,7 +13,7 @@ namespace QuantumWorld.Infrastructure.Handlers.Users
         }
         public async Task<Unit> Handle(DeleteUser request, CancellationToken cancellationToken)
         {
-            await _userService.DeleteAsync(request.Email, request.Password);
+            await _userService.DeleteAsync(request.Username, request.Password);
             return Unit.Value;
         }
     }
