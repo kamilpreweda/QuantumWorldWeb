@@ -5,6 +5,7 @@ using QuantumWorld.Core.Repositories;
 using QuantumWorld.Infrastructure.Services;
 using MongoDB.Bson;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 
 namespace QuantumWorld.Tests.Services
 {
@@ -17,9 +18,10 @@ namespace QuantumWorld.Tests.Services
             var mapperMock = new Mock<IMapper>();
             var encrypterMock = new Mock<IEncrypter>();
             var configurationMock = new Mock<IConfiguration>();
+            var httpContextMock = new Mock<IHttpContextAccessor>();
             var battle = new Battle();
 
-            var userService = new UserService(userRepositoryMock.Object, mapperMock.Object, encrypterMock.Object, configurationMock.Object);
+            var userService = new UserService(userRepositoryMock.Object, mapperMock.Object, encrypterMock.Object, configurationMock.Object, httpContextMock.Object);
             await userService.RegisterAsync("secret", "user");
 
             userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);

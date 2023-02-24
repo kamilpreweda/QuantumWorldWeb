@@ -32,6 +32,9 @@ namespace QuantumWorld.Core.Domain
         public double Points { get; set; }
         public List<string> BattleRaport { get; set; }
         public List<Message> Messages { get; set; }
+        public string RefreshToken { get; set; } = string.Empty;
+        public DateTime TokenCreated { get; set; }
+        public DateTime TokenExpires { get; set; }
 
         protected User()
         {

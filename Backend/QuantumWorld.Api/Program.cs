@@ -31,12 +31,13 @@ builder.Services.AddSwaggerGen(options => {
 });
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
+    
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
         ValidateIssuer = false,
-        ValidateAudience = false
+        ValidateAudience = false        
     };
 });
 builder.Services.AddCors(options => options.AddPolicy(name: "UserOrigins",
@@ -47,11 +48,14 @@ builder.Services.AddCors(options => options.AddPolicy(name: "UserOrigins",
 // builder.Services.AddScoped<IUserRepository, InMemoryUserRopository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSingleton<IEncrypter, Encrypter>();
+builder.Services.AddMemoryCache();
+builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IBuildingService, BuildingService>();
 builder.Services.AddScoped<IResearchService, ResearchService>();
 builder.Services.AddScoped<IShipService, ShipService>();
 builder.Services.AddScoped<IBattleService, BattleService>();
 builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.Configure<MongoSettings>(builder.Configuration.GetSection("mongo"));

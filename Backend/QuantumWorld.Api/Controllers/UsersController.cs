@@ -20,16 +20,24 @@ public class UsersController : ApiControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("{email}")]
-    public async Task<IActionResult> Get(string email)
+    [HttpGet("{username}")]
+    public async Task<IActionResult> Get(string username)
     {
-        var user = await _userService.GetAsync(email);
+        var user = await _userService.GetAsync(username);
         if (user == null)
         {
             return NotFound();
         }
 
         return Json(user);
+    }
+
+    [HttpGet]
+    [Route("myself")]
+    public ActionResult<string> GetMe()
+    {
+        var userId = _userService.GetMyId();
+        return Ok(userId);
     }
 
     [HttpGet]

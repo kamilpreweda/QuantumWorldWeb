@@ -13,6 +13,8 @@ namespace QuantumWorld.Infrastructure.Services
         Task LoginAsync(string username, string password);
         Task DeleteAsync(string username, string password);
 
+        string GetMyId();
+
 
 
 
