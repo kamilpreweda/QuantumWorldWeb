@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using QuantumWorld.Core.Domain;
 using QuantumWorld.Infrastructure.Commands.Users;
 using QuantumWorld.Infrastructure.Extensions;
 using QuantumWorld.Infrastructure.Services;
@@ -11,20 +12,27 @@ namespace QuantumWorld.Api.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IMemoryCache _cache;
+        private readonly IJwtService _jwtService;
+        private readonly IUserService _userService;
 
-        public LoginController(IMediator mediator, IMemoryCache cache)
+        public LoginController(IMediator mediator, IMemoryCache cache, IJwtService jwtService, IUserService userService)
         {
             _mediator = mediator;
             _cache = cache;
+            _jwtService = jwtService;
+            _userService = userService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Login command)
+        public async Task<IActionResult> Post([FromBody] Login request)
         {
-            command.TokenId = Guid.NewGuid();
-            await _mediator.Send(command);
-            var jwt = _cache.GetJwt(command.TokenId);
+            request.TokenId = Guid.NewGuid();
+            await _mediator.Send(request);
+            var jwt = _cache.GetJwt(request.TokenId);
+
             return Json(jwt);
+            // return Ok(jwt); MAYBE USE THIS IF ANGULAR CRASHES
         }
+
     }
 }

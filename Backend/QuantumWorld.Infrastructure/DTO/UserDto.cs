@@ -18,5 +18,8 @@ namespace QuantumWorld.Infrastructure.DTO
         public int EnemiesDefeated { get; set; }
         public int Points { get; set; }
         public List<Message> Messages { get; set; }
+        public string RefreshToken { get; set; }
+        public DateTime TokenCreated { get; set; }
+        public DateTime TokenExpires { get; set; }
     }
 }

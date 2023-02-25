@@ -34,6 +34,7 @@ public class UsersController : ApiControllerBase
 
     [HttpGet]
     [Route("myself")]
+    // [HttpGet, Authorize(Roles = "Admin")]
     public ActionResult<string> GetMe()
     {
         var userId = _userService.GetMyId();
@@ -41,7 +42,6 @@ public class UsersController : ApiControllerBase
     }
 
     [HttpGet]
-    // [HttpGet, Authorize(Roles = "Admin")]
     public async Task<IActionResult> BrowseAsync()
     {
         var users = await _userService.BrowseAsync();
@@ -51,7 +51,9 @@ public class UsersController : ApiControllerBase
     public async Task<IActionResult> Post([FromBody] CreateUser request)
     {
         await _mediator.Send(request);
-        return Created($"users/{request.Username}", new object());
+        var user = await _userService.GetAsync(request.Username);
+        return Ok(user);
+        // return Created($"users/{request.Username}", new object());
     }
 
     [HttpDelete]
@@ -59,6 +61,24 @@ public class UsersController : ApiControllerBase
     {
         await _mediator.Send(request);
         return NoContent();
+    }
+
+    [HttpPost("refresh-token")]
+    public async Task<IActionResult> RefreshToken([FromBody] GenerateRefreshToken request)
+    {
+        var refreshToken = Request.Cookies["refreshToken"];
+        var user = await _userService.GetAsync(request.Username);
+
+        if (!refreshToken.Equals(user.RefreshToken))
+        {
+            return Unauthorized("Invalid Refresh Token.");
+        }
+        else if (user.TokenExpires < DateTime.Now)
+        {
+            return Unauthorized("Token expired");
+        }
+        await _mediator.Send(request);
+        return Ok();
     }
 
 

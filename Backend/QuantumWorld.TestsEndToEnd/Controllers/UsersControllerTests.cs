@@ -33,12 +33,12 @@ namespace QuantumWorld.TestsEndToEnd.Controllers
         {
             var request = new CreateUser
             {
-                Password = "secret",
-                Username = "test",
+                Password = "string",
+                Username = "string",
 
             };
             var payload = GetPayload(request);
-            var response = await Client.PostAsync("users", payload);
+            var response = await Client.PostAsync("users/register", payload);
             response.Headers.Location.ToString().Should().BeEquivalentTo($"users/{request.Username}");
 
             var user = await GetUserAsync(request.Username);
@@ -50,7 +50,11 @@ namespace QuantumWorld.TestsEndToEnd.Controllers
             var response = await Client.GetAsync($"users/{username}");
             var responseString = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<UserDto>(responseString);
+            return JsonConvert.DeserializeObject<UserDto>(responseString, new Newtonsoft.Json.JsonSerializerSettings
+            {
+                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+            });
         }
     }
 }

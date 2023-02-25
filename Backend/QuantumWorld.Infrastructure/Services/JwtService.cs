@@ -1,8 +1,12 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
+using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using QuantumWorld.Core.Domain;
 using QuantumWorld.Core.Repositories;
 using QuantumWorld.Infrastructure.DTO;
 
@@ -12,11 +16,15 @@ namespace QuantumWorld.Infrastructure.Services
     {
         private readonly IConfiguration _configuration;
         private readonly IUserRepository _userRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IMapper _mapper;
 
-        public JwtService(IConfiguration configuration, IUserRepository userRepository)
+        public JwtService(IConfiguration configuration, IUserRepository userRepository, IHttpContextAccessor httpContextAccessor, IMapper mapper)
         {
             _configuration = configuration;
             _userRepository = userRepository;
+            _httpContextAccessor = httpContextAccessor;
+            _mapper = mapper;
         }
         public JwtDto CreateToken(string username)
         {
@@ -45,5 +53,32 @@ namespace QuantumWorld.Infrastructure.Services
                 Token = jwt
             };
         }
+
+        public RefreshToken GenerateRefreshToken()
+        {
+            var refreshToken = new RefreshToken
+            {
+                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
+                Expires = DateTime.Now.AddDays(1),
+                Created = DateTime.Now
+            };
+            return refreshToken;
+        }
+
+        public void SetRefreshToken(RefreshToken newRefreshToken, User user)
+        {
+            user.RefreshToken = newRefreshToken.Token;
+            user.TokenCreated = newRefreshToken.Created;
+            user.TokenExpires = newRefreshToken.Expires;
+
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = newRefreshToken.Expires,
+            };
+
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);         
+        }
     }
 }
+

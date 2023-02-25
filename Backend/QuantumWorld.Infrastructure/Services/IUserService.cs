@@ -14,6 +14,7 @@ namespace QuantumWorld.Infrastructure.Services
         Task DeleteAsync(string username, string password);
 
         string GetMyId();
+        string GetRefreshToken(string username);
 
 
 
