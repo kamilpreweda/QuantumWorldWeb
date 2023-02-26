@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,9 @@ import { MapComponent } from './components/map/map.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { EnemyPopupComponent } from './components/enemy-popup/enemy-popup.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { LoginComponent } from './components/login/login.component';
+import { FormsModule } from '@angular/forms';
+import { UserInterceptor } from './services/user.interceptor';
 
 const appRoute: Routes = [
   { path: '', component: OverviewComponent },
@@ -24,7 +27,8 @@ const appRoute: Routes = [
   { path: 'Shipyard', component: ShipyardComponent },
   { path: 'Map', component: MapComponent },
   { path: 'Logout', component: LogoutComponent },
-  { path: 'Messages', component: MessagesComponent}
+  { path: 'Messages', component: MessagesComponent },
+  { path: 'Login', component: LoginComponent }
 ]
 @NgModule({
   declarations: [
@@ -38,16 +42,22 @@ const appRoute: Routes = [
     MapComponent,
     LogoutComponent,
     EnemyPopupComponent,
-    MessagesComponent
+    MessagesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoute),    
+    RouterModule.forRoot(appRoute),
+    FormsModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: UserInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

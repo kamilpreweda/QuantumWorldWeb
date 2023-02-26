@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
@@ -19,11 +19,22 @@ export class UserService {
     return this.http.get<User[]>(`${environment.apiUrl}/${this.url}`);
   }
 
-  public register(user: User): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/${this.registerUrl}`, user);
+  public register(username: string, password: string): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
+    let body = {
+      username: username,
+      password: password,
+    }
+    return this.http.post(`${environment.apiUrl}/${this.registerUrl}`, JSON.stringify(body), { headers });
   }
 
-  public login(user: User): Observable<string> {
-    return this.http.post(`${environment.apiUrl}/${this.loginUrl}`, user, { responseType: 'text' });
+  public login(tokenId: string, username: string, password: string): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
+    let body = {
+      tokenId: tokenId,
+      username: username,
+      password: password,
+    }
+    return this.http.post(`${environment.apiUrl}/${this.loginUrl}`, JSON.stringify(body), { headers });
   }
 }

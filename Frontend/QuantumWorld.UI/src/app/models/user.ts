@@ -4,6 +4,7 @@ export interface User {
     id: string;
     email: string;
     username: string;
+    password: string;
     resources: Resource[];
     buildings: Building[];
     research: Research[];
