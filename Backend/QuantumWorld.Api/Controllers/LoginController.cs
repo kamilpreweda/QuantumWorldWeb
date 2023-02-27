@@ -30,7 +30,7 @@ namespace QuantumWorld.Api.Controllers
             await _mediator.Send(request);
             var jwt = _cache.GetJwt(request.TokenId);
 
-            return Json(jwt);
+            return Ok(jwt.Token);
             // return Ok(jwt); MAYBE USE THIS IF ANGULAR CRASHES
         }
 

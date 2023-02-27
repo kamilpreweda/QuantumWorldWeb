@@ -53,4 +53,7 @@ export class MapComponent {
       }
     });
   }
+  loggedIn() {
+    return localStorage.getItem("authToken");
+  }
 }

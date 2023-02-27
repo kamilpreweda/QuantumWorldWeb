@@ -1,5 +1,5 @@
 
-<div class=shipsContainer>
+<div class=shipsContainer *ngIf="loggedIn()">
     <div *ngFor = "let ship of user?.ships">
         <div class="shipContainer">
             <img src="assets/images/Light Fighter.jpg" *ngIf = 'ship.name === "LightFighterShip"'>            

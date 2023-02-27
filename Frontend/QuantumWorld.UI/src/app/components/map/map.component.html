@@ -1,4 +1,4 @@
-<div class="mapContainer">
+<div class="mapContainer" *ngIf="loggedIn()">
     <div class="enemyContainer" id="pirates">
         <img src="assets/images/pirates.png" class="planetImage">
         <button class="mapButton" id="piratesButton"(click)="displayHelper.changeAppearance('piratesButton'); hideAllPopups(); showPopup('piratesContainer');">Pirates</button>

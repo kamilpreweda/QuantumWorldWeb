@@ -6,6 +6,6 @@ namespace QuantumWorld.Infrastructure.Commands.Users
     public class UpgradeBuilding : IRequest
     {
         public BuildingType type { get; set; }
-        public string email { get; set; }
+        public string username { get; set; }
     }
 }

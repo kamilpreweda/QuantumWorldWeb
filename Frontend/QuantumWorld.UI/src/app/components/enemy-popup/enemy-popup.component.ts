@@ -28,4 +28,8 @@ export class EnemyPopupComponent {
   canAttack(): boolean {
     return (this.validation.checkResearchRequirements(this.enemy!.requirements, this.user!.research)&&(this.validation.checkIfPlayerHasAnyShips(this.user.ships)))
   }
+
+  loggedIn() {
+    return localStorage.getItem("authToken");
+  }
 }

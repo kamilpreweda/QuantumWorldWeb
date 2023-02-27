@@ -1,5 +1,5 @@
-<ng-container *ngIf="!enemy?.isDefeated">
-<div class="enemyShipsDetails">
+<ng-container *ngIf="!enemy?.isDefeated" >
+<div class="enemyShipsDetails" *ngIf="loggedIn()">
     <div *ngFor="let ship of enemy?.ships">
         {{displayHelper.addSpaces(displayHelper.changeDisplayedName(ship.name))}}: {{ship.count}}                        
     </div>                        

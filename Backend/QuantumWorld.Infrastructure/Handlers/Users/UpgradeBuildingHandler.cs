@@ -14,7 +14,7 @@ namespace QuantumWorld.Infrastructure.Handlers.Users
         }
         public async Task<Unit> Handle(UpgradeBuilding request, CancellationToken cancellationToken)
         {
-            await _buildingService.UpgradeBuilding(request.type, request.email);
+            await _buildingService.UpgradeBuilding(request.type, request.username);
             return Unit.Value;
         }
     }

@@ -12,11 +12,11 @@ export class ResearchService {
 
   constructor(private http: HttpClient) { }
 
-  public upgradeResearch(type: ResearchType, email: string) {
+  public upgradeResearch(type: ResearchType, username: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
     let body = {
       type: type,
-      email: email,
+      email: username,
     }
     return this.http.post(`${environment.apiUrl}/${this.url}`, JSON.stringify(body), { headers })
   }

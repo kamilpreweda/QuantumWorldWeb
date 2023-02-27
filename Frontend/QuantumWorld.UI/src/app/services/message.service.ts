@@ -11,12 +11,12 @@ export class MessageService {
 
   constructor(private http: HttpClient) { }
 
-  public deleteMessage(id:number, email: string) {
+  public deleteMessage(id:number, username: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
     let body = {
       id: id,
-      email: email,
+      username: username,
     }
-    return this.http.delete(`${environment.apiUrl}/${this.url}/${body.id}/${body.email}`)
+    return this.http.delete(`${environment.apiUrl}/${this.url}/${body.id}/${body.username}`)
   }
 }

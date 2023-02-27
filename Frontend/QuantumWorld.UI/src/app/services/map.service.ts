@@ -11,11 +11,11 @@ export class MapService {
   private url = "Battle";
   constructor(private http: HttpClient) { }
 
-  public startBattle(type: EnemyType, email: string) {
+  public startBattle(type: EnemyType, username: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
     let body = {
       type: type,
-      email: email,
+      username: username,
     }
     return this.http.post(`${environment.apiUrl}/${this.url}`, JSON.stringify(body), { headers })
   }

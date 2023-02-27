@@ -1,5 +1,5 @@
 
-  <div class="resourcesContainer">
+  <div class="resourcesContainer" *ngIf="loggedIn()">
     <div *ngFor = "let resource of user?.resources">      
         <span *ngIf= 'resource.name === "CarbonFiberResource"' style="color:#00E676">{{displayHelper.addSpaces(displayHelper.changeDisplayedName(resource.name))}}</span>
         <span *ngIf= 'resource.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayHelper.addSpaces(displayHelper.changeDisplayedName(resource.name))}}</span>

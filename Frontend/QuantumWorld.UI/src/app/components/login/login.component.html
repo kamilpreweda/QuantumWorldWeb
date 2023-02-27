@@ -1,16 +1,16 @@
-<div class="loginContainer">
+<div class="loginContainer" *ngIf="!loggedIn()">
     <div class="credentialsContainer">
         <div>
         Username:
-        <input class="loginInput" [(ngModel)]="user.username">
+        <input class="loginInput" [(ngModel)]="this.username">
         </div>
         <div>
         Password:
-        <input class="loginInput" [(ngModel)]="user.password" type="password">
+        <input class="loginInput" [(ngModel)]="this.password" type="password">
         </div>
     </div>
         <div class="loginButtonsContainer">
-        <button class="loginButton" (click)="login(user)">Login</button>
-        <button class="loginButton" (click)="register(user)">Register</button>
+        <button class="loginButton" (click)="login(); changePage('Overview')">Login</button>
+        <button class="loginButton" (click)="register()">Register</button>
     </div>
 </div>

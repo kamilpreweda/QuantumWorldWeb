@@ -14,7 +14,7 @@ namespace QuantumWorld.Infrastructure.Services
         public async Task BuildShip(ShipType type, int count, string username)
         {
             var user = _userRepository.GetByUsername(username);
-           if (user is null)
+            if (user is null)
             {
                 throw new Exception($"User with {username} name doesn't exist!");
             }

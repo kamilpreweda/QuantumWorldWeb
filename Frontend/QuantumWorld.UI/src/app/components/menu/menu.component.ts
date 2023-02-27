@@ -31,11 +31,19 @@ export class MenuComponent {
     const buttons = document.getElementsByClassName("menuButton");
     Array.prototype.filter.call(
       buttons,
-      (button) => { button.style.borderWidth = "0px", button.style.color = '#FFFFFF'}
+      (button) => { button.style.borderWidth = "0px", button.style.color = '#FFFFFF' }
 
     );
     menuButton.style.borderWidth = "1px";
     menuButton.style.borderColor = "#00FFFF";
     menuButton.style.color = '#FFD700';
+  }
+
+  loggedIn() {
+    return localStorage.getItem("authToken");
+  }
+
+  onLogout() {
+    localStorage.removeItem("authToken");
   }
 }

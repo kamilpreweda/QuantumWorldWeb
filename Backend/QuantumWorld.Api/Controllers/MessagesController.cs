@@ -13,7 +13,7 @@ public class MessagesController : ApiControllerBase
         _mediator = mediator;
     }
 
-    [HttpDelete("{id}/{email}")]
+    [HttpDelete("{id}/{username}")]
     public async Task<IActionResult> Delete(DeleteMessage request)
     {
         await _mediator.Send(request);

@@ -16,5 +16,9 @@ export class OverviewComponent {
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe((result: User[]) => { this.users = result; this.user = this.users[0] });
-  } 
+  }
+
+  loggedIn() {
+    return localStorage.getItem("authToken");
+  }
 }

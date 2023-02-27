@@ -15,7 +15,7 @@ namespace QuantumWorld.Infrastructure.Handlers.Users
 
         public async Task<Unit> Handle(DeleteMessage request, CancellationToken cancellationToken)
         {
-            await _messageService.DeleteAsync(request.id, request.email);
+            await _messageService.DeleteAsync(request.id, request.username);
             return Unit.Value;
         }
     }

@@ -40,5 +40,8 @@ export class ShipyardComponent {
     var inputValue = document.querySelector("input")!.value
     return +inputValue;
   }
+  loggedIn() {
+    return localStorage.getItem("authToken");
+  }
 }
 

@@ -20,6 +20,9 @@ export class BuildingsComponent {
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe((result: User[]) => { this.users = result; this.user = this.users[0] });
+    console.log(this.user.username);
+    // this.userService.getUser(this.user.username).subscribe((result: User) => { this.user = result; });
+    // console.log(this.user);
   }
 
   build(type: BuildingType): void {
@@ -38,6 +41,10 @@ export class BuildingsComponent {
     console.log(this.validation.checkIfPlayerHasSpaceForBuilding(this.user.usedSpace, this.user.availibleSpace))
 
     return (this.validation.checkResourceRequirements(building!.cost, this.user!.resources)&&(this.validation.checkIfPlayerHasSpaceForBuilding(this.user.usedSpace, this.user.availibleSpace)));
+  }
+
+  loggedIn() {
+    return localStorage.getItem("authToken");
   }
 }
 

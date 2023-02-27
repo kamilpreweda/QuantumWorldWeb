@@ -15,7 +15,7 @@ namespace QuantumWorld.Infrastructure.Handlers.Users
 
         public async Task<Unit> Handle(BuildShip request, CancellationToken cancellationToken)
         {
-            await _shipService.BuildShip(request.type, request.count, request.email);
+            await _shipService.BuildShip(request.type, request.count, request.username);
             return Unit.Value;
         }
     }

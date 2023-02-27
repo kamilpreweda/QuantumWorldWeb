@@ -1,4 +1,4 @@
-<div class="overviewContainer">
+<div class="overviewContainer" *ngIf="loggedIn()">
     <img src="assets/images/overview.png" class="overviewPlanet">
     <div class="overviewDetails">
         <span id="text">Used space: {{user.usedSpace}}/{{user.availibleSpace}}</span>

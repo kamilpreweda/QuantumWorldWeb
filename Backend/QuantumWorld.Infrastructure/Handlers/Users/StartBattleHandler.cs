@@ -14,7 +14,7 @@ namespace QuantumWorld.Infrastructure.Handlers.Users
         }
         public async Task<Unit> Handle(StartBattle request, CancellationToken cancellationToken)
         {
-            await _battleService.StartBattle(request.type, request.email);
+            await _battleService.StartBattle(request.type, request.username);
             return Unit.Value;
         }
     }

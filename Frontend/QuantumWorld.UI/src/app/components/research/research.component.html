@@ -1,4 +1,4 @@
-<div class=researchesContainer>
+<div class=researchesContainer *ngIf="loggedIn()">
     <div *ngFor = "let research of user?.research">
         <div class="researchContainer">
             <img src="assets/images/The Expanse Research.jpg" *ngIf = 'research.name === "TheExpanseResearch"'>

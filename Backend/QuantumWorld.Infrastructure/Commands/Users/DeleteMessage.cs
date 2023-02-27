@@ -6,6 +6,6 @@ namespace QuantumWorld.Infrastructure.Commands.Users
     public class DeleteMessage: IRequest
     {
         public int id { get; set; }
-        public string email { get; set; }
+        public string username { get; set; }
     }
 }

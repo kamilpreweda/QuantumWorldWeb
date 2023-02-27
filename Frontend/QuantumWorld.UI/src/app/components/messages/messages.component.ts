@@ -21,8 +21,11 @@ export class MessagesComponent {
   }
 
   delete(id: number): void {
-    this.messageService.deleteMessage(id, this.user.email).subscribe(() => {
+    this.messageService.deleteMessage(id, this.user.username).subscribe(() => {
       window.location.reload();
     })
+  }
+  loggedIn() {
+    return localStorage.getItem("authToken");
   }
 }

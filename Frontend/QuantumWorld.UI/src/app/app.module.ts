@@ -12,7 +12,6 @@ import { OverviewComponent } from './components/overview/overview.component';
 import { ResearchComponent } from './components/research/research.component';
 import { ShipyardComponent } from './components/shipyard/shipyard.component';
 import { MapComponent } from './components/map/map.component';
-import { LogoutComponent } from './components/logout/logout.component';
 import { EnemyPopupComponent } from './components/enemy-popup/enemy-popup.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { LoginComponent } from './components/login/login.component';
@@ -26,7 +25,6 @@ const appRoute: Routes = [
   { path: 'Research', component: ResearchComponent },
   { path: 'Shipyard', component: ShipyardComponent },
   { path: 'Map', component: MapComponent },
-  { path: 'Logout', component: LogoutComponent },
   { path: 'Messages', component: MessagesComponent },
   { path: 'Login', component: LoginComponent }
 ]
@@ -40,7 +38,6 @@ const appRoute: Routes = [
     ResearchComponent,
     ShipyardComponent,
     MapComponent,
-    LogoutComponent,
     EnemyPopupComponent,
     MessagesComponent,
     LoginComponent

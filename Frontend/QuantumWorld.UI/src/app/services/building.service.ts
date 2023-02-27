@@ -11,11 +11,11 @@ export class BuildingService {
 
   constructor(private http: HttpClient) { }
 
-  public upgradeBuilding(type: BuildingType, email: string) {
+  public upgradeBuilding(type: BuildingType, username: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
     let body = {
       type: type,
-      email: email,
+      username: username,
     }
     return this.http.post(`${environment.apiUrl}/${this.url}`, JSON.stringify(body), { headers })
   };

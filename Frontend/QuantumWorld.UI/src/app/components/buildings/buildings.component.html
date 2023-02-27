@@ -1,5 +1,5 @@
 
-<div class=buildingsContainer>
+<div class=buildingsContainer *ngIf="loggedIn()">
     <div *ngFor = "let building of user?.buildings">
         <div class="buildingContainer">
             <img src="assets/images/Carbon Fiber Factory.jpg" *ngIf = 'building.name === "CarbonFiberFactory"'>

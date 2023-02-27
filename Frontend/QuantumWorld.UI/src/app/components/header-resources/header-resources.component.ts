@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ResearchType, User } from 'src/app/models/user';
+import { Component, Input } from '@angular/core';
+import { User } from 'src/app/models/user';
 import { DisplayHelperService } from 'src/app/services/display-helper.service';
 import { UserService } from 'src/app/services/user.service'
 
@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service'
   styleUrls: ['./header-resources.component.css']
 })
 export class HeaderResourcesComponent {
-  user: User;
+  @Input() user!: User;
   users: User[] = [];
   carbonFiberResource: number;
 
@@ -17,6 +17,12 @@ export class HeaderResourcesComponent {
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe((result: User[]) => { this.users = result; this.user = this.users[0] });
+    // this.userService.getUser(this.user.username).subscribe((result: User) => {this.user = result;});
+    // console.log(this.user.username);
+  }
+
+  loggedIn() {
+    return localStorage.getItem("authToken");
   }
 }
 

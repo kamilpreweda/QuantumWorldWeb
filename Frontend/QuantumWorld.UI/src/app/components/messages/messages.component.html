@@ -1,4 +1,4 @@
-<div class=messagesContainer>  
+<div class=messagesContainer *ngIf="loggedIn()">  
     <div *ngFor = "let message of user?.messages">
         <div class="messageContainer">
             <div class="messageDetails">

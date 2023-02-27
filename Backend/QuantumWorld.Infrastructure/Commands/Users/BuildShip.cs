@@ -7,6 +7,6 @@ namespace QuantumWorld.Infrastructure.Commands.Users
     {
         public ShipType type { get; set; }
         public int count {get; set;}
-        public string email { get; set; } = string.Empty;
+        public string username { get; set; } = string.Empty;
     }
 }

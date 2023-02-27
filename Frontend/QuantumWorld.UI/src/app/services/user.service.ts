@@ -19,6 +19,10 @@ export class UserService {
     return this.http.get<User[]>(`${environment.apiUrl}/${this.url}`);
   }
 
+  public getUser(username: string): Observable<User> {
+    return this.http.get<User>(`${environment.apiUrl}/${this.url}/${username}`);
+  }
+
   public register(username: string, password: string): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
     let body = {
@@ -35,6 +39,11 @@ export class UserService {
       username: username,
       password: password,
     }
-    return this.http.post(`${environment.apiUrl}/${this.loginUrl}`, JSON.stringify(body), { headers });
+    // this.getUser(username);
+    return this.http.post(`${environment.apiUrl}/${this.loginUrl}`, JSON.stringify(body), { headers, responseType: 'text' });
+  }
+
+  public logout(isLoggedIn: boolean) {
+    isLoggedIn = false;
   }
 }
