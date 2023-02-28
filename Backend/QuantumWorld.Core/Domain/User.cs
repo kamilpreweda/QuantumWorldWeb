@@ -112,23 +112,6 @@ namespace QuantumWorld.Core.Domain
             Username = username.ToLowerInvariant();
             LastUpdated = DateTime.UtcNow;
         }
-        // public void SetPassword(string password)
-        // {
-        //     if (string.IsNullOrWhiteSpace(password))
-        //     {
-        //         throw new Exception("Password can not be empty.");
-        //     }
-        //     if (password.Length < 4)
-        //     {
-        //         throw new Exception("Password must contain at least 4 characters.");
-        //     }
-        //     if (password.Length > 100)
-        //     {
-        //         throw new Exception("Password can not contain more than 100 characters.");
-        //     }
-        //     Password = password;
-        //     LastUpdated = DateTime.UtcNow;
-        // }
         public void UpgradeBuilding(BuildingType type)
 
         {
@@ -146,6 +129,7 @@ namespace QuantumWorld.Core.Domain
                 building.UpgradeBuilding();
                 IncreaseUsedSpace();
                 ReduceTimes(type);
+                IncreaseResourcesIncome(type);
             }
         }
         public void UpgradeResearch(ResearchType type)
@@ -277,7 +261,6 @@ namespace QuantumWorld.Core.Domain
             }
             return true;
         }
-
         private bool CheckSpaceshipFactoryLevel(Ship ship)
         {
             if (ship.GetSpaceshipLevelRequirement() > Buildings.Where(b => b.Type == BuildingType.SpaceshipFactory).FirstOrDefault().Level)
@@ -287,7 +270,6 @@ namespace QuantumWorld.Core.Domain
             }
             return true;
         }
-
         private bool CheckLabolatoryLevel(Research research)
         {
             if (research.GetLablolatoryLevelRequirement() > Buildings.Where(b => b.Type == BuildingType.Labolatory).FirstOrDefault().Level)
@@ -297,7 +279,6 @@ namespace QuantumWorld.Core.Domain
             }
             return true;
         }
-
         private void ReduceTimes(BuildingType type)
         {
             if (type == BuildingType.Labolatory)
@@ -314,6 +295,33 @@ namespace QuantumWorld.Core.Domain
                 {
                     ship.CutTimeToBuildByHalf();
                 }
+            }
+        }
+        private void IncreaseResourcesIncome(BuildingType type)
+        {
+            var carbonFiber = Resources.SingleOrDefault(r => r.Type == ResourceType.CarbonFiberResource);
+            var quantumGlass = Resources.SingleOrDefault(r => r.Type == ResourceType.QuantumGlassResource);
+            var higgsBoson = Resources.SingleOrDefault(r => r.Type == ResourceType.HiggsBosonResource);
+
+            if (type == null)
+            {
+                throw new Exception("There is no such building.");
+            }
+            if (type == BuildingType.CarbonFiberFactory)
+            {
+                carbonFiber.IncreaseIncome(2);
+            }
+            if (type == BuildingType.QuantumGlassFactory)
+            {
+                quantumGlass.IncreaseIncome(1.75F);
+            }
+            if (type == BuildingType.HiggsBosonDetector)
+            {
+                higgsBoson.IncreaseIncome(1.5F);
+            }
+            else
+            {
+                return;
             }
         }
     }

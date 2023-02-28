@@ -16,7 +16,7 @@ export class ResearchService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
     let body = {
       type: type,
-      email: username,
+      username: username,
     }
     return this.http.post(`${environment.apiUrl}/${this.url}`, JSON.stringify(body), { headers })
   }

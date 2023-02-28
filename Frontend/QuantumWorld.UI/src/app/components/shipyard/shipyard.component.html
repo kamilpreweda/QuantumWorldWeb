@@ -1,6 +1,6 @@
 
 <div class=shipsContainer *ngIf="loggedIn()">
-    <div *ngFor = "let ship of user?.ships">
+    <div *ngFor = "let ship of user?.ships; let i = index">
         <div class="shipContainer">
             <img src="assets/images/Light Fighter.jpg" *ngIf = 'ship.name === "LightFighterShip"'>            
             <img src="assets/images/Heavy Fighter.jpg" *ngIf = 'ship.name === "HeavyFighterShip"'>
@@ -31,9 +31,9 @@
                 {{ship.description}}
                 </div>
                 </div>                
-            <input id="input" class="shipCountInput" type="number" maxlength="4" placeholder="0" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-            <button class="shipButton" [disabled]="!canBuild(ship.type)" (click)="build(ship.type, getInputValue())">Build</button>           
+            <input name="{{'name'+i}}" id="{{'input'+i}}" class="shipCountInput" type="number" maxlength="4" placeholder="0" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+            <button class="shipButton" [disabled]="!canBuild(ship.type)" (click)="build(ship.type, getInputValue(i))">Build</button>           
         </div>
-        <div>
+        </div>
     </div>   
 </div>

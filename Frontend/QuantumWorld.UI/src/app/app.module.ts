@@ -15,11 +15,11 @@ import { MapComponent } from './components/map/map.component';
 import { EnemyPopupComponent } from './components/enemy-popup/enemy-popup.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { LoginComponent } from './components/login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserInterceptor } from './services/user.interceptor';
 
 const appRoute: Routes = [
-  { path: '', component: OverviewComponent },
+  { path: '', component: LoginComponent },
   { path: 'Overview', component: OverviewComponent },
   { path: 'Buildings', component: BuildingsComponent },
   { path: 'Research', component: ResearchComponent },
@@ -49,6 +49,7 @@ const appRoute: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoute),
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

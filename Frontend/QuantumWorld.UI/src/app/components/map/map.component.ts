@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Enemy, EnemyType, User } from 'src/app/models/user';
 import { DisplayHelperService } from 'src/app/services/display-helper.service';
 import { UserService } from 'src/app/services/user.service'
+import { JwtTokenService } from 'src/app/services/jwt-token.service'
 
 @Component({
   selector: 'app-map',
@@ -11,7 +12,6 @@ import { UserService } from 'src/app/services/user.service'
 
 export class MapComponent {
   user: User;
-  users: User[] = [];
   piratesEnemy?: Enemy;
   outsidersEnemy?: Enemy;
   rebelsEnemy?: Enemy;
@@ -19,19 +19,19 @@ export class MapComponent {
   distantsEnemy?: Enemy;
   ancientsEnemy?: Enemy;
 
-  constructor(private userService: UserService, public displayHelper: DisplayHelperService) { }
+  constructor(private userService: UserService, private jwtTokenService: JwtTokenService, public displayHelper: DisplayHelperService) { }
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe((result: User[]) => {
-      this.users = result; this.user = this.users[0];
-      this.piratesEnemy = this.user.enemies.find(enemy => enemy.name === "PiratesEnemy")
-      this.outsidersEnemy = this.user.enemies?.find(enemy => enemy.name === "OutsidersEnemy")
-      this.rebelsEnemy = this.user.enemies?.find(enemy => enemy.name === "RebelsEnemy")
-      this.armamentsEnemy = this.user.enemies?.find(enemy => enemy.name === "ArmamentsEnemy")
-      this.distantsEnemy = this.user.enemies?.find(enemy => enemy.name === "DistantsEnemy")
-      this.ancientsEnemy = this.user.enemies?.find(enemy => enemy.name === "AncientsEnemy")
+    this.userService.getUser(this.getUsername()).subscribe((result: User) => {
+      this.user = result;
+      this.piratesEnemy = this.user.enemies?.find(enemy => enemy.name === "PiratesEnemy");
+      this.outsidersEnemy = this.user.enemies?.find(enemy => enemy.name === "OutsidersEnemy");
+      this.rebelsEnemy = this.user.enemies?.find(enemy => enemy.name === "RebelsEnemy");
+      this.armamentsEnemy = this.user.enemies?.find(enemy => enemy.name === "ArmamentsEnemy");
+      this.distantsEnemy = this.user.enemies?.find(enemy => enemy.name === "DistantsEnemy");
+      this.ancientsEnemy = this.user.enemies?.find(enemy => enemy.name === "AncientsEnemy");
     });
-  }
+  };
 
   showPopup(id: string) {
     var popup = document.getElementById(id);
@@ -53,7 +53,13 @@ export class MapComponent {
       }
     });
   }
+
   loggedIn() {
     return localStorage.getItem("authToken");
+  }
+
+  getUsername(): string {
+    const username = this.jwtTokenService.getUsernameFromToken();
+    return username;
   }
 }

@@ -7,6 +7,8 @@ namespace QuantumWorld.Core.Domain
         
         protected override float BaseValue => 100000;
 
+        protected override float BaseIncome => 10;
+
         public QuantumGlassResource() : base()
         {
 

@@ -1,16 +1,20 @@
 <div class="loginContainer" *ngIf="!loggedIn()">
     <div class="credentialsContainer">
-        <div>
+        <form [formGroup]="loginForm">
+        <div class="inputWithDescription">
         Username:
-        <input class="loginInput" [(ngModel)]="this.username">
+        <input class="loginInput" formControlName="username">
         </div>
-        <div>
+        <span style="color: red; font-size: 0.5em" *ngIf="username && username.invalid && username.touched">Username should contain at least 3 characters and must cointain only letters </span>
+        <div class="inputWithDescription">
         Password:
-        <input class="loginInput" [(ngModel)]="this.password" type="password">
+        <input class="loginInput" type="password" formControlName="password">
         </div>
+        <span style="color: red; font-size: 0.5em" *ngIf="password && password.invalid && password.touched">Password should contain at least 8 characters</span>
+    </form>
     </div>
         <div class="loginButtonsContainer">
-        <button class="loginButton" (click)="login(); changePage('Overview')">Login</button>
-        <button class="loginButton" (click)="register()">Register</button>
+        <button [disabled]="loginForm.invalid" class="loginButton" (click)="login(); changePage('Overview')">Login</button>
+        <button [disabled]="loginForm.invalid" class="loginButton" (click)="register()">Register</button>
     </div>
 </div>

@@ -20,6 +20,7 @@ export interface User {
 export interface Resource {
     name: string;
     value: number;
+    income: number;
 }
 
 export interface Building {

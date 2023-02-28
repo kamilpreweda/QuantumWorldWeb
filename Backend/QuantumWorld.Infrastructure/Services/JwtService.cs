@@ -31,8 +31,8 @@ namespace QuantumWorld.Infrastructure.Services
             var user = _userRepository.GetByUsername(username);
 
             List<Claim> claims = new List<Claim> {
-                new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim("name", user.Username),
+                new Claim("id", user.Id.ToString()),
                 new Claim(ClaimTypes.Role, "Admin"),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
@@ -77,7 +77,7 @@ namespace QuantumWorld.Infrastructure.Services
                 Expires = newRefreshToken.Expires,
             };
 
-            _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);         
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
         }
     }
 }

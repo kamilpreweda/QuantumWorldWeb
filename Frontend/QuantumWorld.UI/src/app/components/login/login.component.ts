@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,22 +10,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  username: string
-  password: string
-  display: boolean = true;
+  loginForm = new FormGroup({
+    username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z]+$')]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+  })
 
   constructor(private userService: UserService, private router: Router) { }
 
   register() {
-    this.userService.register(this.username, this.password).subscribe();
+    this.userService.register(this.username!.value!.toString(), this.password!.value!.toString()).subscribe();
+    console.log(this.loginForm.value);
   }
 
   login() {
     var tokenId = crypto.randomUUID();
-    this.userService.login(tokenId, this.username, this.password).subscribe((token: string) => {
+    this.userService.login(tokenId, this.username!.value!.toString(), this.password!.value!.toString()).subscribe((token: string) => {
       if (token) {
         localStorage.setItem("authToken", token);
-        // this.userService.getUser(this.username).subscribe()
         window.location.reload();
       }
       else {
@@ -41,5 +43,13 @@ export class LoginComponent {
 
   loggedIn() {
     return localStorage.getItem("authToken");
+  }
+
+  get username() {
+    return this.loginForm.get('username');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
   }
 }

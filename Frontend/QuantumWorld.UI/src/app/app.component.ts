@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Resource, User } from './models/user';
+import { JwtTokenService } from './services/jwt-token.service';
 import { UserService } from './services/user.service';
 
 
@@ -10,12 +11,16 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent {
   title = 'QuantumWorld.UI';
-  users: User[] = [];
-  user: User;    
+  user: User;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private jwtTokenService: JwtTokenService) { }
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe((result: User[]) => { this.users = result; this.user = this.users[0];});
-      }
+    this.userService.getUser(this.getUsername()).subscribe((result: User) => { this.user = result; });
+  }
+
+  getUsername(): string {
+    const username = this.jwtTokenService.getUsernameFromToken();
+    return username;
+  }
 }

@@ -13,13 +13,12 @@ export class EnemyPopupComponent {
   @Input() enemy?: Enemy;
   @Input() user!: User;
   type: EnemyType;
-  email: string = "string";
 
   constructor(public displayHelper: DisplayHelperService, private mapService: MapService, private validation: ValidationService) { }
 
   attack(type: EnemyType): void {
     if (this.canAttack()) {
-      this.mapService.startBattle(type, this.email).subscribe(() => {
+      this.mapService.startBattle(type, this.user.username).subscribe(() => {
         window.location.reload();
       })
     };

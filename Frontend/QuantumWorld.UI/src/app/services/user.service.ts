@@ -39,7 +39,6 @@ export class UserService {
       username: username,
       password: password,
     }
-    // this.getUser(username);
     return this.http.post(`${environment.apiUrl}/${this.loginUrl}`, JSON.stringify(body), { headers, responseType: 'text' });
   }
 

@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { DisplayHelperService } from 'src/app/services/display-helper.service';
 import { UserService } from 'src/app/services/user.service'
+import { JwtTokenService } from 'src/app/services/jwt-token.service';
+import { ResourceService } from 'src/app/services/resource.service';
 
 @Component({
   selector: 'app-header-resources',
@@ -9,20 +11,29 @@ import { UserService } from 'src/app/services/user.service'
   styleUrls: ['./header-resources.component.css']
 })
 export class HeaderResourcesComponent {
-  @Input() user!: User;
-  users: User[] = [];
-  carbonFiberResource: number;
+  user: User;
 
-  constructor(private userService: UserService, public displayHelper: DisplayHelperService) { }
+  constructor(private userService: UserService, private jwtTokenService: JwtTokenService, private resourceService: ResourceService, public displayHelper: DisplayHelperService) { }
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe((result: User[]) => { this.users = result; this.user = this.users[0] });
-    // this.userService.getUser(this.user.username).subscribe((result: User) => {this.user = result;});
-    // console.log(this.user.username);
+    this.userService.getUser(this.getUsername()).subscribe((result: User) => { this.user = result; this.increaseResource(); });
   }
 
   loggedIn() {
     return localStorage.getItem("authToken");
+  }
+
+  getUsername(): string {
+    const username = this.jwtTokenService.getUsernameFromToken();
+    return username;
+  }
+
+  increaseResource() {
+    let intervalId; {
+      intervalId = setInterval(() => {
+        this.resourceService.GenerateResources(this.user.resources);
+      }, 1000);
+    }
   }
 }
 

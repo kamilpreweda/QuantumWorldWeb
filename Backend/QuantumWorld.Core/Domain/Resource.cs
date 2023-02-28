@@ -13,6 +13,9 @@ namespace QuantumWorld.Core.Domain
         protected abstract float BaseValue { get; }
         public float Value { get; set; }
 
+        protected abstract float BaseIncome {get; }
+        public float Income {get; set;}
+
         public Resource()
         {
             AutoSetBasicAttributes();
@@ -21,6 +24,9 @@ namespace QuantumWorld.Core.Domain
         {
             AutoSetBasicAttributes();
             SetValue(value);
+        }
+        public void IncreaseIncome(float value){
+            Income *= value;
         }
         private void SetName()
         {
@@ -44,11 +50,15 @@ namespace QuantumWorld.Core.Domain
             }
 
         }
+        private void SetIncome(){
+            Income = BaseIncome;
+        }
         private void AutoSetBasicAttributes()
         {
             SetName();
             SetValue();
             SetType();
+            SetIncome();
         }
     }
 }

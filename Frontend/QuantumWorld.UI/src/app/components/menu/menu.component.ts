@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
+import { JwtTokenService } from 'src/app/services/jwt-token.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,11 +11,10 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MenuComponent {
   user: User;
-  users: User[] = [];
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService, private jwtTokenService: JwtTokenService) { }
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe((result: User[]) => { this.users = result; this.user = this.users[0] });
+    this.userService.getUser(this.getUsername()).subscribe((result: User) => { this.user = result; });
   }
 
   changePage(path: string): void {
@@ -45,5 +45,11 @@ export class MenuComponent {
 
   onLogout() {
     localStorage.removeItem("authToken");
+    window.location.reload;
+  }
+
+  getUsername(): string {
+    const username = this.jwtTokenService.getUsernameFromToken();
+    return username;
   }
 }
