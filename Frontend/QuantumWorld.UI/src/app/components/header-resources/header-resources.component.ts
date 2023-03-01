@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { DisplayHelperService } from 'src/app/services/display-helper.service';
 import { UserService } from 'src/app/services/user.service'
@@ -29,11 +29,9 @@ export class HeaderResourcesComponent {
   }
 
   increaseResource() {
-    let intervalId; {
-      intervalId = setInterval(() => {
+      let intervalId = setInterval(() => {
         this.resourceService.GenerateResources(this.user.resources);
       }, 1000);
-    }
   }
 }
 

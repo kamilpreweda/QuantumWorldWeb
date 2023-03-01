@@ -10,8 +10,8 @@ public abstract class Building
     public abstract string BaseDescription { get; }
     public string Description { get; set; }
     public int Level { get; protected set; } = 0;
-    public TimeSpan TimeToBuild { get; protected set; }
-    protected abstract TimeSpan BaseTimeToBuild { get; }
+    public float TimeToBuildInSeconds { get; protected set; }
+    protected abstract float BaseTimeToBuildInSeconds { get; }
     protected abstract float TimeMultiplier { get; }
     protected abstract float CostMultiplier { get; }
     protected abstract List<Resource> BaseCost { get; }
@@ -36,11 +36,11 @@ public abstract class Building
     }
     private void SetTime()
     {
-        TimeToBuild = BaseTimeToBuild;
+        TimeToBuildInSeconds = BaseTimeToBuildInSeconds;
     }
     private void SetNewTime()
     {
-        TimeToBuild = BaseTimeToBuild * TimeMultiplier * (Level + 1);
+        TimeToBuildInSeconds = BaseTimeToBuildInSeconds * TimeMultiplier * (Level + 1);
     }
     private void AutoSetBasicAttributes()
     {

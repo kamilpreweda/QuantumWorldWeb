@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Enemy, EnemyType, User } from 'src/app/models/user';
+import { Component } from '@angular/core';
+import { Enemy, User } from 'src/app/models/user';
 import { DisplayHelperService } from 'src/app/services/display-helper.service';
 import { UserService } from 'src/app/services/user.service'
 import { JwtTokenService } from 'src/app/services/jwt-token.service'

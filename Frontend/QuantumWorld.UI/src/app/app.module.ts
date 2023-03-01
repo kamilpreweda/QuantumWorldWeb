@@ -17,6 +17,7 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserInterceptor } from './services/user.interceptor';
+import { CountdownModule } from 'ngx-countdown';
 
 const appRoute: Routes = [
   { path: '', component: LoginComponent },
@@ -50,6 +51,7 @@ const appRoute: Routes = [
     RouterModule.forRoot(appRoute),
     FormsModule,
     ReactiveFormsModule,
+    CountdownModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

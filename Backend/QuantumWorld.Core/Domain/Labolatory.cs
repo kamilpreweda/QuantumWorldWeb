@@ -8,7 +8,7 @@ namespace QuantumWorld.Core.Domain
 
         protected override float TimeMultiplier => 2;
 
-        protected override TimeSpan BaseTimeToBuild => TimeSpan.FromSeconds(5);
+        protected override float BaseTimeToBuildInSeconds => 4;
 
         protected override List<Resource> BaseCost => new List<Resource>()
         {

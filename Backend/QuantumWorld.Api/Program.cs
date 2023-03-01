@@ -19,8 +19,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options => {
-    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme {
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
         Description = "Standard Authorization header using the Bearer scheme (\"bearer {token}\")",
         In = ParameterLocation.Header,
         Name = "Authorization",
@@ -31,13 +33,13 @@ builder.Services.AddSwaggerGen(options => {
 });
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
-    
+
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
         ValidateIssuer = false,
-        ValidateAudience = false        
+        ValidateAudience = false
     };
 });
 builder.Services.AddCors(options => options.AddPolicy(name: "UserOrigins",
@@ -55,6 +57,7 @@ builder.Services.AddScoped<IResearchService, ResearchService>();
 builder.Services.AddScoped<IShipService, ShipService>();
 builder.Services.AddScoped<IBattleService, BattleService>();
 builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddScoped<IResourceService, ResourceService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());

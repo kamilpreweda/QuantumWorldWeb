@@ -17,7 +17,7 @@
                         {{displayHelper.numberWithDots(cost.value)}}
                     </div>
                     <div class="timeContainer"><i class="fa-regular fa-clock"></i> 
-                        Time to Build: {{building.timeToBuild}}
+                        Time to Build: <countdown #countdown [config]="{leftTime: building.timeToBuildInSeconds, demand: true}" (event)="handleCountdown($event)"></countdown>
                         </div> 
                 </div>
                 
@@ -26,7 +26,7 @@
             {{building.description}}
             </div>            
         </div>
-        <button class="buildingButton" [disabled]="!canBuild(building.type)" (click)="build(building.type)">Build</button>
+        <button class="buildingButton" [disabled]="!canBuild(building.type)" (click)="build(building.type); countdown.resume()">Build</button>
     </div>
     </div>   
 </div>

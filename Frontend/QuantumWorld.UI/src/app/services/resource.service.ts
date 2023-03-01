@@ -11,8 +11,6 @@ export class ResourceService {
   GenerateResources(resources: Resource[]) {
     resources.forEach(resource => {
       resource.value += resource.income
-      console.log(resource.value);
-      console.log(resource.income);
     });
   }
 }

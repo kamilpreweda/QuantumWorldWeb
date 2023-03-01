@@ -28,8 +28,9 @@ export interface Building {
     type: BuildingType;
     description: string;
     level: number;
-    timeToBuild: Time;
+    timeToBuildInSeconds: number;
     cost: Resource[];
+    isUpgrading: boolean;
 }
 
 export interface Research {

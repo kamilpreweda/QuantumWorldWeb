@@ -23,13 +23,6 @@ namespace QuantumWorld.Infrastructure.Repositories
             return _users.SingleOrDefault(x => x.Id == id);
 
         }
-
-        public User GetByEmail(string email)
-        {
-            return _users.SingleOrDefault(x => x.Email == email.ToLowerInvariant());
-
-        }
-
          public User GetByUsername(string username)
         {
             return _users.SingleOrDefault(x => x.Username == username.ToLowerInvariant());

@@ -43,7 +43,7 @@ export class DisplayHelperService {
   }
 
   numberWithDots(number: number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return number.toFixed().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 
   changeAppearance(buttonId: string): void {

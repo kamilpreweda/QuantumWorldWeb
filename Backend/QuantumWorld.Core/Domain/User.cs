@@ -14,8 +14,6 @@ namespace QuantumWorld.Core.Domain
         private static readonly Regex NameRegex = new Regex(@"^\w+$");
         private IBattle _battle;
         public Guid Id { get; protected set; }
-        public string Email { get; protected set; } = string.Empty;
-        // public string Password { get; protected set; } = string.Empty;
         public byte[] PasswordHash { get; protected set; }
         public byte[] PasswordSalt { get; protected set; }
         public string Username { get; protected set; } = string.Empty;
@@ -47,7 +45,8 @@ namespace QuantumWorld.Core.Domain
             PasswordSalt = salt;
             PasswordHash = hash;
             Username = username;
-            CreateDate = DateTime.UtcNow;
+            CreateDate = DateTime.Now;
+            LastUpdated = DateTime.Now;
             Resources = new List<Resource>()
             {
                 new CarbonFiberResource(),
@@ -93,16 +92,6 @@ namespace QuantumWorld.Core.Domain
             Points = 0;
             Messages = new();
         }
-
-        public void SetEmail(string email)
-        {
-            if (string.IsNullOrWhiteSpace(email))
-            {
-                throw new Exception("Email can not be empty.");
-            }
-            Email = email.ToLowerInvariant();
-            LastUpdated = DateTime.UtcNow;
-        }
         public void SetUsername(string username)
         {
             if (!NameRegex.IsMatch(username))
@@ -110,7 +99,7 @@ namespace QuantumWorld.Core.Domain
                 throw new Exception("Username is invalid.");
             }
             Username = username.ToLowerInvariant();
-            LastUpdated = DateTime.UtcNow;
+            LastUpdated = DateTime.Now;
         }
         public void UpgradeBuilding(BuildingType type)
 
@@ -124,12 +113,14 @@ namespace QuantumWorld.Core.Domain
 
             if (CanAfford(building.Cost) && HasEnoughSpace())
             {
+                CalculateResourcesBasedOnTimeSpan();
                 SpendResources(Resources, building.Cost);
                 CalculatePoints(building.Cost);
                 building.UpgradeBuilding();
                 IncreaseUsedSpace();
                 ReduceTimes(type);
-                IncreaseResourcesIncome(type);
+                IncreaseResourcesIncome(type);   
+                LastUpdated = DateTime.Now;
             }
         }
         public void UpgradeResearch(ResearchType type)
@@ -143,10 +134,12 @@ namespace QuantumWorld.Core.Domain
 
             if ((CanAfford(research.Cost)) && (CheckLabolatoryLevel(research)))
             {
+                CalculateResourcesBasedOnTimeSpan();
                 SpendResources(Resources, research.Cost);
                 CalculatePoints(research.Cost);
                 research.UpgradeResearch();
                 IncreaseAvailibleSpace(research);
+                LastUpdated = DateTime.Now;
             }
         }
         public void BuildShip(ShipType type, int count)
@@ -163,9 +156,11 @@ namespace QuantumWorld.Core.Domain
 
                 if ((CanAfford(ship.Cost) && CheckSpaceshipFactoryLevel(ship)))
                 {
+                    CalculateResourcesBasedOnTimeSpan();
                     SpendResources(Resources, ship.Cost);
                     CalculatePoints(ship.Cost);
                     ship.BuildShip();
+                    LastUpdated = DateTime.Now;
                 }
             }
         }
@@ -180,6 +175,7 @@ namespace QuantumWorld.Core.Domain
             }
             if (CheckRequirements(enemy))
             {
+                CalculateResourcesBasedOnTimeSpan();
                 _battle.StartBattle(Ships, Resources, enemy);
             }
             if (enemy.IsDefeated)
@@ -189,11 +185,17 @@ namespace QuantumWorld.Core.Domain
 
             BattleRaport = _battle.GetRaport();
             Messages.Add(new Message("Battle Raport", BattleRaport));
+            LastUpdated = DateTime.Now;
         }
         public void DeleteMessage(int id)
         {
             var message = Messages.FirstOrDefault(m => m.Id == id);
             Messages.Remove(message);
+        }
+        public List<Resource> GetResources(){
+            CalculateResourcesBasedOnTimeSpan();
+            LastUpdated = DateTime.Now;
+            return Resources;
         }
         private bool CanAfford(List<Resource> cost)
         {
@@ -322,6 +324,16 @@ namespace QuantumWorld.Core.Domain
             else
             {
                 return;
+            }
+        }
+        private void CalculateResourcesBasedOnTimeSpan()
+        {
+            TimeSpan timeSpan = DateTime.Now - LastUpdated;
+            int seconds = timeSpan.Seconds;
+            for (int i = 0; i < seconds; i++){
+                foreach (var resource in Resources){
+                    resource.Value += resource.Income;
+                }
             }
         }
     }

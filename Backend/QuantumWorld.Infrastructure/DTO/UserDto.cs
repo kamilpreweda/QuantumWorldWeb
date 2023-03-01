@@ -4,7 +4,6 @@ namespace QuantumWorld.Infrastructure.DTO
 {
     public class UserDto
     {
-        public string Email { get; set; } = string.Empty;
         public required string Username { get; set; }
         public required string Password {get; set;}
         public Guid Id {get; set;}
