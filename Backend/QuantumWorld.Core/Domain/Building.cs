@@ -17,7 +17,7 @@ public abstract class Building
     protected abstract List<Resource> BaseCost { get; }
     public List<Resource> Cost { get; protected set; } = new();
     public bool IsUnderConstruction { get; protected set; }
-    public DateTime FinishDate { get; protected set; }
+    public DateTime? ConstructionStartDate { get; protected set; } = null;
 
     public Building()
     {
@@ -71,7 +71,7 @@ public abstract class Building
     private void SetDescription()
     {
         Description = BaseDescription;
-    }    
+    }
     public void UpgradeBuilding()
     {
         SetNewTime();
@@ -79,7 +79,27 @@ public abstract class Building
         IncreaseLevel();
     }
 
-    public void SetLevelForTests(int level){
+    public void SetLevelForTests(int level)
+    {
         Level = level;
+    }
+    public void SetConstructionStartDate(DateTime date)
+    {
+        ConstructionStartDate = date;
+    }
+
+    public void SetTimeToBuildInSeconds(float seconds)
+    {
+        TimeToBuildInSeconds = seconds;
+    }
+
+    public void ClearConstructionStartDate()
+    {
+        ConstructionStartDate = null;
+    }
+
+    public void IsBuildingUnderConstruction(bool value)
+    {
+        IsUnderConstruction = value;
     }
 }

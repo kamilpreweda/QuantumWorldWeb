@@ -38,8 +38,8 @@ namespace QuantumWorld.Tests.Domain
             var carbonFiberFactory = new CarbonFiberFactory();
             carbonFiberFactory.UpgradeBuilding();
 
-            var expectedTime = TimeSpan.FromSeconds(4);
-            var actualTime = carbonFiberFactory.TimeToBuild;
+            var expectedTime = 4;
+            var actualTime = carbonFiberFactory.TimeToBuildInSeconds;
 
             Assert.Equal(expectedTime, actualTime);
         }

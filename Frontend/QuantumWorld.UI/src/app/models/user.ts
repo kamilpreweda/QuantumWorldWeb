@@ -30,7 +30,7 @@ export interface Building {
     level: number;
     timeToBuildInSeconds: number;
     cost: Resource[];
-    isUpgrading: boolean;
+    isUnderConstruction: boolean;
 }
 
 export interface Research {

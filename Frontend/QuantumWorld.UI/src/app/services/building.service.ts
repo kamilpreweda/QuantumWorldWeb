@@ -8,6 +8,7 @@ import { BuildingType } from '../models/user';
 })
 export class BuildingService {
   private url = "Buildings";
+  private dateUrl = "Buildings/date";
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +18,20 @@ export class BuildingService {
       type: type,
       username: username,
     }
-    return this.http.post(`${environment.apiUrl}/${this.url}`, JSON.stringify(body), { headers })
+    return this.http.post(`${environment.apiUrl}/${this.url}`, JSON.stringify(body), { headers });
+  };
+
+  public setConstructionStartDate(type: BuildingType, username: string) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
+    let body = {
+      type: type,
+      username: username,
+      date: new Date().toJSON()
+    }
+    console.log(body);
+    return this.http.post(`${environment.apiUrl}/${this.dateUrl}`, JSON.stringify(body), { headers }).subscribe((res: any) => {
+      console.log(res);
+    });
   };
 }
 

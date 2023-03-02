@@ -67,7 +67,7 @@ namespace QuantumWorld.Tests.Domain
             var user = SetUser();
             user.UpgradeBuilding(BuildingType.CarbonFiberFactory);
 
-            TimeSpan expectedTime = TimeSpan.FromSeconds(4);
+            float expectedTime = 4;
             List<Resource> expectedCost = new List<Resource>()
             {
                 new CarbonFiberResource(300),
@@ -75,7 +75,7 @@ namespace QuantumWorld.Tests.Domain
             };
             int expectedLevel = 1;
 
-            TimeSpan actualTime = user.Buildings.SingleOrDefault(b => b.Name == "CarbonFiberFactory").TimeToBuild;
+            float actualTime = user.Buildings.SingleOrDefault(b => b.Name == "CarbonFiberFactory").TimeToBuildInSeconds;
             List<Resource> actualCost = user.Buildings.SingleOrDefault(b => b.Name == "CarbonFiberFactory").Cost;
             int actualLevel = user.Buildings.SingleOrDefault(b => b.Name == "CarbonFiberFactory").Level;
 
