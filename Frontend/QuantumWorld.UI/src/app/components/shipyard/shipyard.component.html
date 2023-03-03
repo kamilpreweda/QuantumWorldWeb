@@ -22,7 +22,7 @@
                         <span *ngIf= 'cost.name === "HiggsBosonResource"' style="color:#FFD700">{{displayHelper.displayShortName(cost.name)}}</span>
                         {{displayHelper.numberWithDots(cost.value)}}
                     </div>
-                    <div class="timeContainer"><i class="fa-regular fa-clock"></i> Time to Build: {{ship.timeToBuild}}</div>
+                    <div class="timeContainer"><i class="fa-regular fa-clock"></i> Time to Build: <countdown #countdown [config]="configs[ship.type]" (event)="handleCountdown($event, ship.type)"></countdown></div>
                 </div>
                 
             <div class="shipRequirements">Requirements: <span id="red" >Spaceship Factory lvl {{ship.spaceshipFactoryLevelRequirement}}</span></div>   
@@ -32,7 +32,7 @@
                 </div>
                 </div>                
             <input name="{{'name'+i}}" id="{{'input'+i}}" class="shipCountInput" type="number" maxlength="4" placeholder="0" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-            <button class="shipButton" [disabled]="!canBuild(ship.type)" (click)="build(ship.type, getInputValue(i))">Build</button>           
+            <button class="shipButton" [disabled]="(!canBuild(ship.type)||(this.isShipUpgrading))" (click)="countdown.resume(); onClick(ship.type, user.username, getInputValue(i))">Build</button>           
         </div>
         </div>
     </div>   

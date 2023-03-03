@@ -53,7 +53,7 @@ namespace QuantumWorld.Tests.Domain
             };
 
             Battle battle = new Battle();
-            var id = Guid.NewGuid();          
+            var id = Guid.NewGuid();
 
 
             User user = new User(id, Encoding.ASCII.GetBytes("12345"), Encoding.ASCII.GetBytes("12345"), "testUser");
@@ -131,7 +131,7 @@ namespace QuantumWorld.Tests.Domain
             user.Buildings.Where(b => b.Type == BuildingType.Labolatory).FirstOrDefault().SetLevelForTests(12);
             user.UpgradeResearch(ResearchType.ArtOfWarResearch);
 
-            TimeSpan expectedTime = TimeSpan.FromSeconds(80);
+            float expectedTime = 80;
             List<Resource> expectedCost = new List<Resource>()
             {
                 new CarbonFiberResource(800),
@@ -139,7 +139,7 @@ namespace QuantumWorld.Tests.Domain
             };
             int expectedLevel = 1;
 
-            TimeSpan actualTime = user.Research.SingleOrDefault(r => r.Name == "ArtOfWarResearch").TimeToBuild;
+            float actualTime = user.Research.SingleOrDefault(r => r.Name == "ArtOfWarResearch").TimeToBuildInSeconds;
             List<Resource> actualCost = user.Research.SingleOrDefault(r => r.Name == "ArtOfWarResearch").Cost;
             int actualLevel = user.Research.SingleOrDefault(r => r.Name == "ArtOfWarResearch").Level;
 
@@ -154,7 +154,7 @@ namespace QuantumWorld.Tests.Domain
             var user = SetUser();
             user.Buildings.Where(b => b.Type == BuildingType.SpaceshipFactory).FirstOrDefault().SetLevelForTests(12);
 
-            user.BuildShip(ShipType.LightFighterShip, 1);
+            user.BuildShip(ShipType.LightFighterShip);
 
             int expectedShipCount = 1;
             int actualShipCount = user.Ships.SingleOrDefault(s => s.Name == "LightFighterShip").Count;

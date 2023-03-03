@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { BuildingType, ShipType, User } from 'src/app/models/user';
 import { DisplayHelperService } from 'src/app/services/display-helper.service';
 import { JwtTokenService } from 'src/app/services/jwt-token.service';
 import { ShipService } from 'src/app/services/ship.service';
 import { UserService } from 'src/app/services/user.service'
 import { ValidationService } from 'src/app/services/validation.service';
+import { CountdownEvent, CountdownConfig } from 'ngx-countdown';
 
 @Component({
   selector: 'app-shipyard',
@@ -14,21 +15,35 @@ import { ValidationService } from 'src/app/services/validation.service';
 export class ShipyardComponent {
   user: User;
   type: ShipType;
+  isShipUpgrading = false;
+  configs: { [key in ShipType]: CountdownConfig } = {
+    [ShipType.LightFighterShip]: { leftTime: 0, demand: true },
+    [ShipType.HeavyFighterShip]: { leftTime: 0, demand: true },
+    [ShipType.Battleship]: { leftTime: 0, demand: true },
+    [ShipType.Destroyer]: { leftTime: 0, demand: true },
+    [ShipType.Dreadnought]: { leftTime: 0, demand: true },
+    [ShipType.Mothership]: { leftTime: 0, demand: true },
+  }
 
   constructor(private userService: UserService, private jwtTokenService: JwtTokenService, public displayHelper: DisplayHelperService, private shipService: ShipService, private validation: ValidationService) { }
 
   ngOnInit(): void {
-    this.userService.getUser(this.getUsername()).subscribe((result: User) => { this.user = result; });
-    console.log(this.getUsername());
-    console.log(this.user);
+    this.userService.getUser(this.getUsername()).subscribe((result: User) => {
+      this.user = result;
+      var ships = this.user.ships;
+      ships.forEach(ship => {
+        this.configs[ship.type] = { leftTime: ship.timeToBuildInSeconds, demand: true }
+      });
+      this.isShipUpgrading = this.user.ships.some(s => s.isUnderConstruction);
+      if (this.isShipUpgrading) {
+        var ship = this.user.ships.find(s => s.isUnderConstruction === true);
+        this.configs[ship!.type] = { leftTime: ship!.timeToBuildInSeconds, demand: false }
+      }
+    });
   }
 
-  build(type: ShipType, count: number): void {
-    if (this.canBuild(type)) {
-      this.shipService.buildShip(type, count, this.user.username).subscribe(() => {
-        window.location.reload();
-      });
-    }
+  build(type: ShipType) {
+    return this.shipService.buildShip(type, this.user.username);
   }
   canBuild(type: ShipType): boolean {
     var ship = this.user.ships.find(s => (s.type === type));
@@ -37,6 +52,7 @@ export class ShipyardComponent {
     return (this.validation.checkResourceRequirements(ship!.cost, this.user!.resources) && (this.validation.checkRequiredBuildingLevel(spaceshipFactoryLevel, ship!.spaceshipFactoryLevelRequirement)));
   }
 
+  // SEND THAT VALUE TO API (SHIP . SHIPS TO BUILD)
   getInputValue(index: number): number {
     var inputValue = (document.getElementById(`input${index}`) as HTMLInputElement).value;
     return +inputValue;
@@ -48,6 +64,25 @@ export class ShipyardComponent {
   getUsername(): string {
     const username = this.jwtTokenService.getUsernameFromToken();
     return username;
+  }
+  handleCountdown(e: CountdownEvent, type: ShipType) {
+    var ship = this.user.ships.find(s => (s.type === type));
+    this.isShipUpgrading = true;
+    ship!.isUnderConstruction = true;
+    if (e.action === 'done' && this.canBuild(type)) {
+      this.build(type)!.subscribe(() => {
+        this.isShipUpgrading = false;
+        ship!.isUnderConstruction = false;
+        this.configs[type] = { ...this.configs[type], demand: true }
+        window.location.reload();
+      });
+      this.isShipUpgrading = false;
+      ship!.isUnderConstruction = false;
+    }
+  }
+
+  onClick(type: ShipType, username: string, count: number) {
+    this.shipService.setConstructionStartDate(type, username, count);
   }
 }
 

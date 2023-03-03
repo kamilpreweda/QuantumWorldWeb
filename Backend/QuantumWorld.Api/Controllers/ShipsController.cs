@@ -22,5 +22,13 @@ namespace QuantumWorld.Api.Controllers
             await _mediator.Send(request);
             return Ok();
         }
+
+        [HttpPost]
+        [Route("date-and-count")]
+        public async Task<IActionResult> Post([FromBody] GetShipConstructionStartDateAndShipCount request)
+        {
+            await _mediator.Send(request);
+            return Ok(request.date);
+        }
     }
 }

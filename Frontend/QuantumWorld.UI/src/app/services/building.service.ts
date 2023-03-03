@@ -28,7 +28,6 @@ export class BuildingService {
       username: username,
       date: new Date().toJSON()
     }
-    console.log(body);
     return this.http.post(`${environment.apiUrl}/${this.dateUrl}`, JSON.stringify(body), { headers }).subscribe((res: any) => {
       console.log(res);
     });

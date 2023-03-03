@@ -8,7 +8,7 @@ namespace QuantumWorld.Core.Domain
 
         protected override float TimeMultiplier => 3;
 
-        protected override TimeSpan BaseTimeToBuild => TimeSpan.FromSeconds(10);
+        protected override float BaseTimeToBuildInSeconds => 10;
 
         protected override int BaseLabolatoryLevelRequirement => 1;
 

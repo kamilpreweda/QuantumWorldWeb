@@ -22,9 +22,11 @@ namespace QuantumWorld.Tests.Services
             var jwtServiceMock = new Mock<IJwtService>();
             var resourceServiceMock = new Mock<IResourceService>();
             var buildingServiceMock = new Mock<IBuildingService>();
+            var researchServiceMock = new Mock<IResearchService>();
+            var shipServiceMock = new Mock<IShipService>();
             var battle = new Battle();
 
-            var userService = new UserService(userRepositoryMock.Object, mapperMock.Object, encrypterMock.Object, configurationMock.Object, httpContextMock.Object, jwtServiceMock.Object, resourceServiceMock.Object, buildingServiceMock.Object);
+            var userService = new UserService(userRepositoryMock.Object, mapperMock.Object, encrypterMock.Object, configurationMock.Object, httpContextMock.Object, jwtServiceMock.Object, resourceServiceMock.Object, buildingServiceMock.Object, researchServiceMock.Object, shipServiceMock.Object);
             await userService.RegisterAsync("secret", "user");
 
             userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);

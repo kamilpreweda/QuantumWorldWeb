@@ -9,6 +9,7 @@ import { ResearchType } from '../models/user';
 })
 export class ResearchService {
   private url = "Research";
+  private dateUrl = "Research/date";
 
   constructor(private http: HttpClient) { }
 
@@ -20,4 +21,16 @@ export class ResearchService {
     }
     return this.http.post(`${environment.apiUrl}/${this.url}`, JSON.stringify(body), { headers })
   }
+
+  public setConstructionStartDate(type: ResearchType, username: string) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
+    let body = {
+      type: type,
+      username: username,
+      date: new Date().toJSON()
+    }
+    return this.http.post(`${environment.apiUrl}/${this.dateUrl}`, JSON.stringify(body), { headers }).subscribe((res: any) => {
+      console.log(res);
+    });
+  };
 }

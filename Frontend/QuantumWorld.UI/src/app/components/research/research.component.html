@@ -15,7 +15,7 @@
                         <span *ngIf= 'cost.name === "HiggsBosonResource"' style="color:#FFD700">{{displayHelper.displayShortName(cost.name)}}</span>
                         {{displayHelper.numberWithDots(cost.value)}}
                     </div>
-                    <div class="timeContainer"><i class="fa-regular fa-clock"></i> Time to Discover: {{research.timeToBuild}}
+                    <div class="timeContainer"><i class="fa-regular fa-clock"></i> Time to Discover: <countdown #countdown [config]="configs[research.type]" (event)="handleCountdown($event, research.type)"></countdown>
                         </div>
                     </div>
                     
@@ -26,7 +26,7 @@
                     {{research.description}}
                     </div>
         </div> 
-        <button class="researchButton" [disabled]="!canBuild(research.type)" (click)="discover(research.type)">Discover</button>              
+        <button class="researchButton" [disabled]="(!canBuild(research.type)||(this.isResearchUpgrading))" (click)="countdown.resume(); onClick(research.type, user.username)">Discover</button>              
     </div>   
 </div>
     </div>

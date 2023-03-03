@@ -25,7 +25,7 @@ public class BuildingsController : ApiControllerBase
 
     [HttpPost]
     [Route("date")]
-    public async Task<IActionResult> Post([FromBody] GetConstructionStartDate request)
+    public async Task<IActionResult> Post([FromBody] GetBuildingConstructionStartDate request)
     {
         await _mediator.Send(request);
         return Ok(request.date);

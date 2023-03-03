@@ -23,8 +23,11 @@ namespace QuantumWorld.Infrastructure.Services
         private readonly IJwtService _jwtService;
         private readonly IResourceService _resourceService;
         private readonly IBuildingService _buildingService;
+        private readonly IResearchService _researchService;
 
-        public UserService(IUserRepository userRepository, IMapper mapper, IEncrypter encrypter, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IJwtService jwtService, IResourceService resourceService, IBuildingService buildingService)
+        private readonly IShipService _shipService;
+
+        public UserService(IUserRepository userRepository, IMapper mapper, IEncrypter encrypter, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IJwtService jwtService, IResourceService resourceService, IBuildingService buildingService, IResearchService researchService, IShipService shipService)
         {
             _userRepository = userRepository;
             _mapper = mapper;
@@ -34,6 +37,8 @@ namespace QuantumWorld.Infrastructure.Services
             _jwtService = jwtService;
             _resourceService = resourceService;
             _buildingService = buildingService;
+            _researchService = researchService;
+            _shipService = shipService;
         }
 
         public async Task<UserDto> GetAsync(string username)
@@ -41,7 +46,9 @@ namespace QuantumWorld.Infrastructure.Services
             var user = _userRepository.GetByUsername(username);
             List<Resource> resources = _resourceService.GetUserResources(user);
             user.Resources = resources;
-            _buildingService.CheckConstructionDates(user);
+            await _buildingService.CheckConstructionDates(user);
+            await _researchService.CheckConstructionDates(user);
+            await _shipService.CheckConstructionDates(user);
             await _userRepository.UpdateAsync(user);
             await Task.CompletedTask;
             return _mapper.Map<User, UserDto>(user);

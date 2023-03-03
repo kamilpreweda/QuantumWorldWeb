@@ -10,18 +10,18 @@ namespace QuantumWorld.Core.Domain
         public abstract string BaseDescription { get; }
         public string Description { get; set; }
         public int Count { get; protected set; }
-        public TimeSpan TimeToBuild { get; protected set; }
-        protected abstract TimeSpan BaseTimeToBuild { get; }
+        public float TimeToBuildInSeconds { get; protected set; }
+        protected abstract float BaseTimeToBuildInSeconds { get; }
         protected abstract float TimeMultiplier { get; }
         protected abstract float CostMultiplier { get; }
         protected abstract List<Resource> BaseCost { get; }
-
         public List<Resource> Cost { get; protected set; } = new();
         public bool IsUnderConstruction { get; protected set; }
-        public DateTime FinishDate { get; protected set; }
+        public DateTime? ConstructionStartDate { get; protected set; } = null;
         protected abstract int BaseHealthPoints { get; }
         protected abstract int BaseAttackPower { get; }
         protected abstract int BaseSpaceshipFactoryLevelRequirement { get; }
+        public int ShipsToBuild { get; protected set; }
         public int HealthPoints { get; protected set; }
         public int AttackPower { get; protected set; }
         public int SpaceshipFactoryLevelRequirement { get; protected set; }
@@ -48,6 +48,7 @@ namespace QuantumWorld.Core.Domain
         public void BuildShip()
         {
             Count++;
+            DecreaseShipsToBuidByOne();
         }
         public void SetCount(int count)
         {
@@ -63,20 +64,31 @@ namespace QuantumWorld.Core.Domain
         }
         public void CutTimeToBuildByHalf()
         {
-            TimeToBuild /= 2;
-            TimeToBuild = new TimeSpan(TimeToBuild.Hours, TimeToBuild.Minutes, (TimeToBuild.Seconds));
+            TimeToBuildInSeconds /= 2;
+            if (TimeToBuildInSeconds < 1)
+            {
+                TimeToBuildInSeconds = 1;
+            }
         }
         public int GetSpaceshipLevelRequirement()
         {
             return SpaceshipFactoryLevelRequirement;
         }
+        public void SetShipsToBuild(int count)
+        {
+            ShipsToBuild = count;
+        }
+        private void DecreaseShipsToBuidByOne()
+        {
+            ShipsToBuild -= 1;
+        }
         private void SetTime()
         {
-            TimeToBuild = BaseTimeToBuild;
+            TimeToBuildInSeconds = BaseTimeToBuildInSeconds;
         }
         private void SetNewTime()
         {
-            TimeToBuild = BaseTimeToBuild * TimeMultiplier;
+            TimeToBuildInSeconds = BaseTimeToBuildInSeconds * TimeMultiplier;
         }
         private void AutoSetBasicAttributes()
         {
@@ -118,6 +130,24 @@ namespace QuantumWorld.Core.Domain
         {
             HealthPoints = BaseHealthPoints;
             AttackPower = BaseAttackPower;
+        }
+        public void SetConstructionStartDate(DateTime date)
+        {
+            ConstructionStartDate = date;
+        }
+        public void SetTimeToBuildInSeconds(float seconds)
+        {
+            TimeToBuildInSeconds = seconds;
+        }
+
+        public void ClearConstructionStartDate()
+        {
+            ConstructionStartDate = null;
+        }
+
+        public void IsShipUnderConstruction(bool value)
+        {
+            IsUnderConstruction = value;
         }
     }
 }

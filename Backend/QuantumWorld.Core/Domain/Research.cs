@@ -10,16 +10,16 @@ namespace QuantumWorld.Core.Domain
         public abstract string BaseDescription { get; }
         public string Description { get; set; }
         public int Level { get; protected set; } = 0;
-        public TimeSpan TimeToBuild { get; protected set; }
-        protected abstract TimeSpan BaseTimeToBuild { get; }
+        public float TimeToBuildInSeconds { get; protected set; }
+        protected abstract float BaseTimeToBuildInSeconds { get; }
         protected abstract float TimeMultiplier { get; }
         protected abstract float CostMultiplier { get; }
         protected abstract List<Resource> BaseCost { get; }
         public List<Resource> Cost { get; protected set; } = new();
         public bool IsUnderConstruction { get; protected set; }
-        public DateTime FinishDate { get; protected set; }
-        protected abstract int BaseLabolatoryLevelRequirement {get;}
-        public int LabolatoryLevelRequirement {get; protected set;}
+        public DateTime? ConstructionStartDate { get; protected set; } = null;
+        protected abstract int BaseLabolatoryLevelRequirement { get; }
+        public int LabolatoryLevelRequirement { get; protected set; }
 
         public Research()
         {
@@ -36,12 +36,11 @@ namespace QuantumWorld.Core.Domain
         }
         public void CutTimeToBuildByHalf()
         {
-            TimeToBuild /= 2;
-            TimeToBuild = new TimeSpan(TimeToBuild.Hours, TimeToBuild.Minutes, (TimeToBuild.Seconds));
-
+            TimeToBuildInSeconds /= 2;
         }
 
-        public int GetLablolatoryLevelRequirement(){
+        public int GetLablolatoryLevelRequirement()
+        {
             return LabolatoryLevelRequirement;
         }
         private void IncreaseLevel()
@@ -58,11 +57,11 @@ namespace QuantumWorld.Core.Domain
         }
         private void SetTime()
         {
-            TimeToBuild = BaseTimeToBuild;
+            TimeToBuildInSeconds = BaseTimeToBuildInSeconds;
         }
         private void SetNewTime()
         {
-            TimeToBuild = BaseTimeToBuild * TimeMultiplier * (Level + 1);
+            TimeToBuildInSeconds = BaseTimeToBuildInSeconds * TimeMultiplier * (Level + 1);
         }
         private void SetDescription()
         {
@@ -82,7 +81,8 @@ namespace QuantumWorld.Core.Domain
             Name = this.GetType().Name;
         }
 
-        private void SetLevelRequirement(){
+        private void SetLevelRequirement()
+        {
             LabolatoryLevelRequirement = BaseLabolatoryLevelRequirement;
         }
         private void SetType()
@@ -108,6 +108,24 @@ namespace QuantumWorld.Core.Domain
             SetNewTime();
             SetNewCost();
             IncreaseLevel();
+        }
+        public void SetConstructionStartDate(DateTime date)
+        {
+            ConstructionStartDate = date;
+        }
+        public void SetTimeToBuildInSeconds(float seconds)
+        {
+            TimeToBuildInSeconds = seconds;
+        }
+
+        public void ClearConstructionStartDate()
+        {
+            ConstructionStartDate = null;
+        }
+
+        public void IsResearchUnderConstruction(bool value)
+        {
+            IsUnderConstruction = value;
         }
     }
 }

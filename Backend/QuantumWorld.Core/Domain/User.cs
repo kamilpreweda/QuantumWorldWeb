@@ -119,7 +119,7 @@ namespace QuantumWorld.Core.Domain
                 building.UpgradeBuilding();
                 IncreaseUsedSpace();
                 ReduceTimes(type);
-                IncreaseResourcesIncome(type);   
+                IncreaseResourcesIncome(type);
                 LastUpdated = DateTime.Now;
             }
         }
@@ -142,7 +142,7 @@ namespace QuantumWorld.Core.Domain
                 LastUpdated = DateTime.Now;
             }
         }
-        public void BuildShip(ShipType type, int count)
+        public void BuildShip(ShipType type)
         {
             var ship = Ships.SingleOrDefault(s => s.Type == type);
 
@@ -150,18 +150,13 @@ namespace QuantumWorld.Core.Domain
             {
                 throw new Exception("There is no such ship.");
             }
-
-            for (int i = 0; i < count; i++)
+            if ((CanAfford(ship.Cost) && CheckSpaceshipFactoryLevel(ship)))
             {
-
-                if ((CanAfford(ship.Cost) && CheckSpaceshipFactoryLevel(ship)))
-                {
-                    CalculateResourcesBasedOnTimeSpan();
-                    SpendResources(Resources, ship.Cost);
-                    CalculatePoints(ship.Cost);
-                    ship.BuildShip();
-                    LastUpdated = DateTime.Now;
-                }
+                CalculateResourcesBasedOnTimeSpan();
+                SpendResources(Resources, ship.Cost);
+                CalculatePoints(ship.Cost);
+                ship.BuildShip();
+                LastUpdated = DateTime.Now;
             }
         }
         public void StartBattle(EnemyType type)
@@ -192,7 +187,8 @@ namespace QuantumWorld.Core.Domain
             var message = Messages.FirstOrDefault(m => m.Id == id);
             Messages.Remove(message);
         }
-        public List<Resource> GetResources(){
+        public List<Resource> GetResources()
+        {
             CalculateResourcesBasedOnTimeSpan();
             LastUpdated = DateTime.Now;
             return Resources;
@@ -330,8 +326,10 @@ namespace QuantumWorld.Core.Domain
         {
             TimeSpan timeSpan = DateTime.Now - LastUpdated;
             int seconds = timeSpan.Seconds;
-            for (int i = 0; i < seconds; i++){
-                foreach (var resource in Resources){
+            for (int i = 0; i < seconds; i++)
+            {
+                foreach (var resource in Resources)
+                {
                     resource.Value += resource.Income;
                 }
             }

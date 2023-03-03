@@ -38,9 +38,10 @@ export interface Research {
     type: ResearchType;
     description: string;
     level: number;
-    timeToBuild: Time;
+    timeToBuildInSeconds: number;
     cost: Resource[];
     labolatoryLevelRequirement: number;
+    isUnderConstruction: boolean;
 }
 
 export interface Ship {
@@ -48,11 +49,13 @@ export interface Ship {
     type: ShipType;
     description: string;
     count: number;
-    timeToBuild: Time;
+    shipsToBuild: number;
+    timeToBuildInSeconds: number;
     cost: Resource[];
     healthPoints: number;
     attackPower: number;
     spaceshipFactoryLevelRequirement: number;
+    isUnderConstruction: boolean;
 }
 
 export interface Enemy {
@@ -64,6 +67,7 @@ export interface Enemy {
     ships: Ship[];
     requirements: Research[];
     isDefeated: boolean;
+    isUnderAttack: boolean;
 }
 
 export interface Message {

@@ -39,9 +39,9 @@ namespace QuantumWorld.Tests.Domain
             var theExpanseResearch = new TheExpanseResearch();
             theExpanseResearch.UpgradeResearch();
 
-            TimeSpan expectedTime = TimeSpan.FromSeconds(30);
+            float expectedTime = 30;
 
-            TimeSpan actualTime = theExpanseResearch.TimeToBuild;
+            float actualTime = theExpanseResearch.TimeToBuildInSeconds;
 
             Assert.Equal(expectedTime, actualTime);
         }

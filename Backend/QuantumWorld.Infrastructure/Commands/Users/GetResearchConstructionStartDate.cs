@@ -3,9 +3,9 @@ using QuantumWorld.Core.Domain;
 
 namespace QuantumWorld.Infrastructure.Commands.Users
 {
-    public class GetConstructionStartDate: IRequest
+    public class GetResearchConstructionStartDate : IRequest
     {
-        public BuildingType type { get; set; }
+        public ResearchType type { get; set; }
         public string username { get; set; }
         public DateTime date { get; set; }
     }

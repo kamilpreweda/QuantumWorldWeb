@@ -5,6 +5,7 @@ import { JwtTokenService } from 'src/app/services/jwt-token.service';
 import { ResearchService } from 'src/app/services/research.service';
 import { UserService } from 'src/app/services/user.service'
 import { ValidationService } from 'src/app/services/validation.service';
+import { CountdownEvent, CountdownConfig } from 'ngx-countdown';
 
 @Component({
   selector: 'app-research',
@@ -14,19 +15,33 @@ import { ValidationService } from 'src/app/services/validation.service';
 export class ResearchComponent {
   user: User;
   type: ResearchType;
-  
+  isResearchUpgrading = false;
+  configs: { [key in ResearchType]: CountdownConfig } = {
+    [ResearchType.TheExpanseResearch]: { leftTime: 0, demand: true },
+    [ResearchType.ArtOfWarResearch]: { leftTime: 0, demand: true },
+    [ResearchType.HyperdriveResearch]: { leftTime: 0, demand: true },
+    [ResearchType.TerraformingResearch]: { leftTime: 0, demand: true },
+  }
+
   constructor(private userService: UserService, private jwtTokenService: JwtTokenService, public displayHelper: DisplayHelperService, private researchService: ResearchService, private validation: ValidationService) { }
 
   ngOnInit(): void {
-    this.userService.getUser(this.getUsername()).subscribe((result: User) => { this.user = result; });
+    this.userService.getUser(this.getUsername()).subscribe((result: User) => {
+      this.user = result;
+      var researches = this.user.research;
+      researches.forEach(research => {
+        this.configs[research.type] = { leftTime: research.timeToBuildInSeconds, demand: true }
+      });
+      this.isResearchUpgrading = this.user.research.some(r => r.isUnderConstruction);
+      if (this.isResearchUpgrading) {
+        var research = this.user.research.find(r => r.isUnderConstruction === true);
+        this.configs[research!.type] = { leftTime: research!.timeToBuildInSeconds, demand: false }
+      }
+    });
   }
 
-  discover(type: ResearchType): void {
-    if (this.canBuild(type)) {
-      this.researchService.upgradeResearch(type, this.user.username).subscribe(() => {
-        window.location.reload();
-      });
-    }
+  discover(type: ResearchType) {
+    return this.researchService.upgradeResearch(type, this.user.username);
   }
 
   canBuild(type: ResearchType): boolean {
@@ -41,5 +56,25 @@ export class ResearchComponent {
   getUsername(): string {
     const username = this.jwtTokenService.getUsernameFromToken();
     return username;
+  }
+
+  handleCountdown(e: CountdownEvent, type: ResearchType) {
+    var research = this.user.research.find(r => (r.type === type));
+    this.isResearchUpgrading = true;
+    research!.isUnderConstruction = true;
+    if (e.action === 'done' && this.canBuild(type)) {
+      this.discover(type)!.subscribe(() => {
+        this.isResearchUpgrading = false;
+        research!.isUnderConstruction = false;
+        this.configs[type] = { ...this.configs[type], demand: true }
+        window.location.reload();
+      });
+      this.isResearchUpgrading = false;
+      research!.isUnderConstruction = false;
+    }
+  }
+
+  onClick(type: ResearchType, username: string) {
+    this.researchService.setConstructionStartDate(type, username);
   }
 }
