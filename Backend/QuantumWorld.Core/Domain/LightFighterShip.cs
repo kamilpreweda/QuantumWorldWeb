@@ -8,18 +8,18 @@ namespace QuantumWorld.Core.Domain
 
         protected override float TimeMultiplier => 1;
 
-        protected override float BaseTimeToBuildInSeconds => 3;
+        protected override float BaseTimeToBuildInSeconds => 5;
 
         protected override int BaseHealthPoints => 20;
         protected override int BaseAttackPower => 10;
 
-        protected override int BaseSpaceshipFactoryLevelRequirement => 2;
+        protected override int BaseSpaceshipFactoryLevelRequirement => 0;
 
         protected override List<Resource> BaseCost => new List<Resource>()
         {
             new CarbonFiberResource(100),
             new QuantumGlassResource(50),
-        };               
+        };
 
         public LightFighterShip() : base()
         {

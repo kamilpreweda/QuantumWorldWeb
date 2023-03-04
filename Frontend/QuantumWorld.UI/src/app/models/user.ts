@@ -50,6 +50,7 @@ export interface Ship {
     description: string;
     count: number;
     shipsToBuild: number;
+    shipsAlreadyBuilt: number;
     timeToBuildInSeconds: number;
     cost: Resource[];
     healthPoints: number;

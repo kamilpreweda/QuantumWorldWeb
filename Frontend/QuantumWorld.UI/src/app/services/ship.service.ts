@@ -28,8 +28,6 @@ export class ShipService {
       count: count,
       date: new Date().toJSON()
     }
-    return this.http.post(`${environment.apiUrl}/${this.dateAndCountUrl}`, JSON.stringify(body), { headers }).subscribe((res: any) => {
-      console.log(res);
-    });
+    return this.http.post(`${environment.apiUrl}/${this.dateAndCountUrl}`, JSON.stringify(body), { headers });
   }
 }

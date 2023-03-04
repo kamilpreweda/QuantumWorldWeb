@@ -10,7 +10,7 @@
             <img src="assets/images/Mothership.jpg" *ngIf = 'ship.name === "Mothership"'>            
             <div class="shipDetails">                
                 <span>{{displayHelper.addSpaces(displayHelper.changeDisplayedName(ship.name))}}</span>                
-                <span id="margin">(Count:  {{ship.count}})</span>
+                <span id="margin" [id]="'ship-count-' + ship.type"> (Count:  {{ship.count}})</span>
                 <span id="margin">
                 HP: {{displayHelper.numberWithDots(ship.healthPoints)}}
                 AP: {{displayHelper.numberWithDots(ship.attackPower)}}
@@ -32,7 +32,7 @@
                 </div>
                 </div>                
             <input name="{{'name'+i}}" id="{{'input'+i}}" class="shipCountInput" type="number" maxlength="4" placeholder="0" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-            <button class="shipButton" [disabled]="(!canBuild(ship.type)||(this.isShipUpgrading))" (click)="countdown.resume(); onClick(ship.type, user.username, getInputValue(i))">Build</button>           
+            <button class="shipButton" [disabled]="(!canBuild(ship.type)||(this.isShipUpgrading))" (click)="onClick(ship.type, user.username, getInputValue(i)); countdown.resume()">Build</button>           
         </div>
         </div>
     </div>   

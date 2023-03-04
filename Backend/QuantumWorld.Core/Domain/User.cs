@@ -156,6 +156,7 @@ namespace QuantumWorld.Core.Domain
                 SpendResources(Resources, ship.Cost);
                 CalculatePoints(ship.Cost);
                 ship.BuildShip();
+                ship.SetNewTime(GetSpaceshipFactoryLevel());
                 LastUpdated = DateTime.Now;
             }
         }
@@ -333,6 +334,11 @@ namespace QuantumWorld.Core.Domain
                     resource.Value += resource.Income;
                 }
             }
+        }
+        private int GetSpaceshipFactoryLevel()
+        {
+            var factoryLevel = Buildings.Where(b => b.Type == BuildingType.SpaceshipFactory).FirstOrDefault().Level;
+            return factoryLevel;
         }
     }
 }

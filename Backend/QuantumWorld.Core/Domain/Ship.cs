@@ -8,7 +8,7 @@ namespace QuantumWorld.Core.Domain
         public string Name { get; protected set; } = string.Empty;
         public ShipType Type { get; protected set; }
         public abstract string BaseDescription { get; }
-        public string Description { get; set; }
+        public string Description { get; protected set; }
         public int Count { get; protected set; }
         public float TimeToBuildInSeconds { get; protected set; }
         protected abstract float BaseTimeToBuildInSeconds { get; }
@@ -22,6 +22,7 @@ namespace QuantumWorld.Core.Domain
         protected abstract int BaseAttackPower { get; }
         protected abstract int BaseSpaceshipFactoryLevelRequirement { get; }
         public int ShipsToBuild { get; protected set; }
+        public int ShipsAlreadyBuilt { get; protected set; }
         public int HealthPoints { get; protected set; }
         public int AttackPower { get; protected set; }
         public int SpaceshipFactoryLevelRequirement { get; protected set; }
@@ -48,7 +49,6 @@ namespace QuantumWorld.Core.Domain
         public void BuildShip()
         {
             Count++;
-            DecreaseShipsToBuidByOne();
         }
         public void SetCount(int count)
         {
@@ -70,6 +70,14 @@ namespace QuantumWorld.Core.Domain
                 TimeToBuildInSeconds = 1;
             }
         }
+        public void SetNewTime(int SpaceshipFactoryLevel)
+        {
+            TimeToBuildInSeconds = BaseTimeToBuildInSeconds / (SpaceshipFactoryLevel + 1);
+            if (TimeToBuildInSeconds < 1)
+            {
+                TimeToBuildInSeconds = 1;
+            }
+        }
         public int GetSpaceshipLevelRequirement()
         {
             return SpaceshipFactoryLevelRequirement;
@@ -78,6 +86,14 @@ namespace QuantumWorld.Core.Domain
         {
             ShipsToBuild = count;
         }
+        public void IncreaseShipsAlreadyBuiltByOne()
+        {
+            ShipsAlreadyBuilt += 1;
+        }
+        public void ClearShipsAlreadyBuilt()
+        {
+            ShipsAlreadyBuilt = 0;
+        }
         private void DecreaseShipsToBuidByOne()
         {
             ShipsToBuild -= 1;
@@ -85,10 +101,6 @@ namespace QuantumWorld.Core.Domain
         private void SetTime()
         {
             TimeToBuildInSeconds = BaseTimeToBuildInSeconds;
-        }
-        private void SetNewTime()
-        {
-            TimeToBuildInSeconds = BaseTimeToBuildInSeconds * TimeMultiplier;
         }
         private void AutoSetBasicAttributes()
         {
