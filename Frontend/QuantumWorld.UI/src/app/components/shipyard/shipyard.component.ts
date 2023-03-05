@@ -68,15 +68,21 @@ export class ShipyardComponent {
   }
 
   handleCountdown(e: CountdownEvent, type: ShipType) {
+    console.log('handleCountdown started');
     var ship = this.user.ships.find(s => (s.type === type));
-
-    if (e.action === 'done') {
-      this.isShipUpgrading = true;
-      ship!.isUnderConstruction = true;
+    this.isShipUpgrading = true;
+    console.log(`isShipUpgrading is ${this.isShipUpgrading}`);
+    ship!.isUnderConstruction = true;
+    console.log(`isUnderConstruction is ${ship!.isUnderConstruction}`);
+    console.log(`shipsAlreadyBuilt is ${ship!.shipsAlreadyBuilt}`)
+    if (e.action === 'done' && this.canBuild(type)) {
       this.build(type)!.subscribe(() => {
         ship!.shipsAlreadyBuilt++;
+        // debugger
         if (ship!.shipsAlreadyBuilt < ship!.shipsToBuild) {
+          ship!.shipsToBuild--;
           this.countdownComponent.restart();
+          // window.location.reload();
         } else {
           this.isShipUpgrading = false;
           ship!.isUnderConstruction = false;
@@ -84,17 +90,11 @@ export class ShipyardComponent {
         }
         const countElement = document.getElementById(`ship-count-${ship!.type}`);
         if (countElement) {
-          countElement.innerHTML = ` (Count: ${ship!.count + ship!.shipsAlreadyBuilt})`;
+          countElement.innerHTML = ` (Count: ${ship!.count + 1})`;
         }
       });
     }
   }
-
-  // onClick(type: ShipType, username: string, count: number) {
-  //   this.shipService.setConstructionStartDate(type, username, count).subscribe(() => setTimeout(() => {
-  //     window.location.reload();
-  //   }, 500));
-  // }
 
   onClick(type: ShipType, username: string, count: number) {
     this.shipService.setConstructionStartDate(type, username, count).subscribe(() => {

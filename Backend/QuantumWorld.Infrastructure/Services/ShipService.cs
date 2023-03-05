@@ -26,29 +26,35 @@ namespace QuantumWorld.Infrastructure.Services
         public async Task CheckConstructionDates(User user)
         {
             DateTime now = DateTime.UtcNow;
-            // int shipsAlreadyBuilt = 0;
             foreach (var ship in user.Ships)
             {
                 if (ship.ConstructionStartDate != null)
                 {
                     TimeSpan timeSpan = (TimeSpan)(now - ship.ConstructionStartDate);
-                    float timeSpanInSeconds = timeSpan.Seconds;
+                    int timeSpanInSeconds = (int)timeSpan.TotalSeconds;
+                    int totalTimeSpan = 0;
+                    totalTimeSpan += timeSpanInSeconds;
 
-                    while (timeSpanInSeconds >= ship.TimeToBuildInSeconds && ship.ShipsAlreadyBuilt < ship.ShipsToBuild)
+                    while (totalTimeSpan >= ship.TimeToBuildInSeconds && ship.ShipsAlreadyBuilt < ship.ShipsToBuild)
                     {
                         ship.IncreaseShipsAlreadyBuiltByOne();
-                        timeSpanInSeconds -= ship.TimeToBuildInSeconds;
+                        totalTimeSpan -= ship.TimeToBuildInSeconds;
                     }
-                    if (ship.ShipsAlreadyBuilt > 0)
+                    if (ship.ShipsAlreadyBuilt >= ship.ShipsToBuild)
                     {
-                        for (var i = 0; i < ship.ShipsAlreadyBuilt; i++)
+                        int totalShips = ship.ShipsAlreadyBuilt + ship.Count;
+                        if (totalShips < ship.ShipsToBuild)
                         {
-                            user.BuildShip(ship.Type);
+                            for (var i = 0; i < ship.ShipsAlreadyBuilt; i++)
+                            {
+                                user.BuildShip(ship.Type);
+                                ship.DecreaseShipsToBuidByOne();
+                            }
                         }
                     }
                     if (ship.ShipsAlreadyBuilt < ship.ShipsToBuild)
                     {
-                        ship.SetTimeToBuildInSeconds(ship.TimeToBuildInSeconds - timeSpanInSeconds);
+                        ship.SetTimeToBuildInSeconds(ship.TimeToBuildInSeconds - totalTimeSpan);
                         ship.SetConstructionStartDate(DateTime.UtcNow);
                         ship.IsShipUnderConstruction(true);
                         break;

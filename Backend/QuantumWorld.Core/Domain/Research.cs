@@ -37,6 +37,18 @@ namespace QuantumWorld.Core.Domain
         public void CutTimeToBuildByHalf()
         {
             TimeToBuildInSeconds /= 2;
+            if (TimeToBuildInSeconds < 1)
+            {
+                TimeToBuildInSeconds = 1;
+            }
+        }
+        public void SetNewTime(int LabolatoryLevel)
+        {
+            TimeToBuildInSeconds = (BaseTimeToBuildInSeconds * TimeMultiplier * (Level)) / (LabolatoryLevel + 1);
+            if (TimeToBuildInSeconds < 1)
+            {
+                TimeToBuildInSeconds = 1;
+            }
         }
 
         public int GetLablolatoryLevelRequirement()

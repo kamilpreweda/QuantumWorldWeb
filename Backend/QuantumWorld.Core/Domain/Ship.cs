@@ -10,8 +10,8 @@ namespace QuantumWorld.Core.Domain
         public abstract string BaseDescription { get; }
         public string Description { get; protected set; }
         public int Count { get; protected set; }
-        public float TimeToBuildInSeconds { get; protected set; }
-        protected abstract float BaseTimeToBuildInSeconds { get; }
+        public int TimeToBuildInSeconds { get; protected set; }
+        protected abstract int BaseTimeToBuildInSeconds { get; }
         protected abstract float TimeMultiplier { get; }
         protected abstract float CostMultiplier { get; }
         protected abstract List<Resource> BaseCost { get; }
@@ -94,9 +94,13 @@ namespace QuantumWorld.Core.Domain
         {
             ShipsAlreadyBuilt = 0;
         }
-        private void DecreaseShipsToBuidByOne()
+        public void DecreaseShipsToBuidByOne()
         {
             ShipsToBuild -= 1;
+        }
+        public void SetShipsAlreadyBuilt(int value)
+        {
+            ShipsAlreadyBuilt = value;
         }
         private void SetTime()
         {
@@ -147,7 +151,7 @@ namespace QuantumWorld.Core.Domain
         {
             ConstructionStartDate = date;
         }
-        public void SetTimeToBuildInSeconds(float seconds)
+        public void SetTimeToBuildInSeconds(int seconds)
         {
             TimeToBuildInSeconds = seconds;
         }

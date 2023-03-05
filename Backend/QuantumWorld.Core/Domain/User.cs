@@ -138,6 +138,7 @@ namespace QuantumWorld.Core.Domain
                 SpendResources(Resources, research.Cost);
                 CalculatePoints(research.Cost);
                 research.UpgradeResearch();
+                research.SetNewTime(GetLabolatoryLevel());
                 IncreaseAvailibleSpace(research);
                 LastUpdated = DateTime.Now;
             }
@@ -242,9 +243,8 @@ namespace QuantumWorld.Core.Domain
         {
             foreach (var resource in spentResources)
             {
-                Points += resource.Value;
+                Points += (resource.Value / 1000);
             }
-            Points /= 1000;
             Points = Math.Round(Points, 2);
         }
         private bool CheckRequirements(Enemy enemy)
@@ -339,6 +339,11 @@ namespace QuantumWorld.Core.Domain
         {
             var factoryLevel = Buildings.Where(b => b.Type == BuildingType.SpaceshipFactory).FirstOrDefault().Level;
             return factoryLevel;
+        }
+        private int GetLabolatoryLevel()
+        {
+            var labolatoryLevel = Buildings.Where(b => b.Type == BuildingType.Labolatory).FirstOrDefault().Level;
+            return labolatoryLevel;
         }
     }
 }
