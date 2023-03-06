@@ -38,8 +38,8 @@ export class ShipyardComponent {
       this.isShipUpgrading = this.user.ships.some(s => s.isUnderConstruction);
       if (this.isShipUpgrading) {
         var ship = this.user.ships.find(s => s.isUnderConstruction === true);
-        this.configs[ship!.type] = { leftTime: (ship!.timeToBuildInSeconds), demand: false };
-        console.log(ship!.shipsAlreadyBuilt);
+        this.configs[ship!.type] = { leftTime: ship!.timeForAllShips, demand: false };
+        console.log(ship!.timeForAllShips);
       }
     });
   }
@@ -68,31 +68,13 @@ export class ShipyardComponent {
   }
 
   handleCountdown(e: CountdownEvent, type: ShipType) {
-    console.log('handleCountdown started');
     var ship = this.user.ships.find(s => (s.type === type));
     this.isShipUpgrading = true;
-    console.log(`isShipUpgrading is ${this.isShipUpgrading}`);
     ship!.isUnderConstruction = true;
-    console.log(`isUnderConstruction is ${ship!.isUnderConstruction}`);
-    console.log(`shipsAlreadyBuilt is ${ship!.shipsAlreadyBuilt}`)
     if (e.action === 'done' && this.canBuild(type)) {
-      this.build(type)!.subscribe(() => {
-        ship!.shipsAlreadyBuilt++;
-        // debugger
-        if (ship!.shipsAlreadyBuilt < ship!.shipsToBuild) {
-          ship!.shipsToBuild--;
-          this.countdownComponent.restart();
-          // window.location.reload();
-        } else {
-          this.isShipUpgrading = false;
-          ship!.isUnderConstruction = false;
-          window.location.reload();
-        }
-        const countElement = document.getElementById(`ship-count-${ship!.type}`);
-        if (countElement) {
-          countElement.innerHTML = ` (Count: ${ship!.count + 1})`;
-        }
-      });
+      this.isShipUpgrading = false;
+      ship!.isUnderConstruction = false;
+      window.location.reload();
     }
   }
 

@@ -31,44 +31,29 @@ namespace QuantumWorld.Infrastructure.Services
                 if (ship.ConstructionStartDate != null)
                 {
                     TimeSpan timeSpan = (TimeSpan)(now - ship.ConstructionStartDate);
-                    int timeSpanInSeconds = (int)timeSpan.TotalSeconds;
-                    int totalTimeSpan = 0;
-                    totalTimeSpan += timeSpanInSeconds;
-
-                    while (totalTimeSpan >= ship.TimeToBuildInSeconds && ship.ShipsAlreadyBuilt < ship.ShipsToBuild)
+                    float timeSpanInSeconds = (float)Math.Round(timeSpan.TotalSeconds);
+                    if (timeSpanInSeconds >= ship.TimeForAllShips)
                     {
-                        ship.IncreaseShipsAlreadyBuiltByOne();
-                        totalTimeSpan -= ship.TimeToBuildInSeconds;
-                    }
-                    if (ship.ShipsAlreadyBuilt >= ship.ShipsToBuild)
-                    {
-                        int totalShips = ship.ShipsAlreadyBuilt + ship.Count;
-                        if (totalShips < ship.ShipsToBuild)
+                        ship.ClearConstructionStartDate();
+                        for (var i = 0; i < ship.ShipsToBuild; i++)
                         {
-                            for (var i = 0; i < ship.ShipsAlreadyBuilt; i++)
-                            {
-                                user.BuildShip(ship.Type);
-                                ship.DecreaseShipsToBuidByOne();
-                            }
+                            user.BuildShip(ship.Type);
                         }
+                        ship.IsShipUnderConstruction(false);
+                        break;
                     }
-                    if (ship.ShipsAlreadyBuilt < ship.ShipsToBuild)
+                    else if (timeSpanInSeconds < ship.TimeForAllShips)
                     {
-                        ship.SetTimeToBuildInSeconds(ship.TimeToBuildInSeconds - totalTimeSpan);
+                        ship.SetTimeForAllShips(ship.TimeForAllShips - timeSpanInSeconds);
                         ship.SetConstructionStartDate(DateTime.UtcNow);
                         ship.IsShipUnderConstruction(true);
                         break;
-                    }
-                    else
-                    {
-                        ship.ClearShipsAlreadyBuilt();
-                        ship.ClearConstructionStartDate();
-                        ship.IsShipUnderConstruction(false);
                     }
                 }
             }
             await Task.CompletedTask;
         }
+
 
         public async Task SetConstructionStartDateAndShipCount(ShipType type, string username, DateTime date, int count)
         {
@@ -81,6 +66,7 @@ namespace QuantumWorld.Infrastructure.Services
             ship.SetConstructionStartDate(date);
             ship.IsShipUnderConstruction(true);
             ship.SetShipsToBuild(count);
+            ship.SetTimeForAllShips(ship.TimeToBuildInSeconds * ship.ShipsToBuild);
             _userRepository.UpdateAsync(user);
             await Task.CompletedTask;
         }

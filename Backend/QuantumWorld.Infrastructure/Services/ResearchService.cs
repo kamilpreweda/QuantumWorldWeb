@@ -19,7 +19,7 @@ namespace QuantumWorld.Infrastructure.Services
                 if (research.ConstructionStartDate != null)
                 {
                     TimeSpan timeSpan = (TimeSpan)(now - research.ConstructionStartDate);
-                    float timeSpanInSeconds = timeSpan.Seconds;
+                    float timeSpanInSeconds = (float)Math.Round(timeSpan.TotalSeconds);
                     if (timeSpanInSeconds >= research.TimeToBuildInSeconds)
                     {
                         research.ClearConstructionStartDate();

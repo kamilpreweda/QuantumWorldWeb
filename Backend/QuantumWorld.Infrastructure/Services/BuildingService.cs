@@ -41,13 +41,14 @@ namespace QuantumWorld.Infrastructure.Services
 
         public async Task CheckConstructionDates(User user)
         {
+
             DateTime now = DateTime.UtcNow;
             foreach (var building in user.Buildings)
             {
                 if (building.ConstructionStartDate != null)
                 {
                     TimeSpan timeSpan = (TimeSpan)(now - building.ConstructionStartDate);
-                    float timeSpanInSeconds = timeSpan.Seconds;
+                    float timeSpanInSeconds = (float)Math.Round(timeSpan.TotalSeconds);
                     if (timeSpanInSeconds >= building.TimeToBuildInSeconds)
                     {
                         building.ClearConstructionStartDate();
@@ -56,13 +57,21 @@ namespace QuantumWorld.Infrastructure.Services
                     }
                     else if (timeSpanInSeconds < building.TimeToBuildInSeconds)
                     {
-                        building.SetTimeToBuildInSeconds(building.TimeToBuildInSeconds - timeSpanInSeconds);
-                        building.SetConstructionStartDate(DateTime.UtcNow);
-                        building.IsBuildingUnderConstruction(true);
+                        bool executedOnce = false;
+                        if (!executedOnce)
+                        {
+                            {
+                                building.SetTimeToBuildInSeconds(building.TimeToBuildInSeconds - timeSpanInSeconds);
+                                building.SetConstructionStartDate(DateTime.UtcNow);
+                                building.IsBuildingUnderConstruction(true);
+                            }
+                            executedOnce = true;
+                        }
                     }
                 }
+                await Task.CompletedTask;
             }
-            await Task.CompletedTask;
+
         }
     }
 }

@@ -8,7 +8,7 @@ namespace QuantumWorld.Core.Domain
 
         protected override float TimeMultiplier => 1;
 
-        protected override int BaseTimeToBuildInSeconds => 6;
+        protected override float BaseTimeToBuildInSeconds => 6;
 
         protected override int BaseHealthPoints => 50;
         protected override int BaseAttackPower => 30;
