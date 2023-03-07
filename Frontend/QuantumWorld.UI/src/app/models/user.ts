@@ -63,7 +63,7 @@ export interface Enemy {
     name: string;
     type: EnemyType;
     description: string;
-    timeToAttack: Time;
+    timeToAttackInSeconds: number;
     rewards: Resource[];
     ships: Ship[];
     requirements: Research[];

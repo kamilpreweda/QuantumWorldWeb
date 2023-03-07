@@ -301,6 +301,10 @@ input[type=number]{
     transform: translateY(20vh);
 }
 
+.green{
+    color:#00E676;
+}
+
 #pirates {
     display: grid;
     grid-column-start: 1;

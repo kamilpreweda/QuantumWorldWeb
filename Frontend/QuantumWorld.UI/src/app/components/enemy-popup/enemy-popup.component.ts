@@ -3,6 +3,8 @@ import { Enemy, EnemyType, User } from 'src/app/models/user';
 import { DisplayHelperService } from 'src/app/services/display-helper.service';
 import { MapService } from 'src/app/services/map.service';
 import { ValidationService } from 'src/app/services/validation.service';
+import { CountdownEvent, CountdownConfig } from 'ngx-countdown';
+import { JwtTokenService } from 'src/app/services/jwt-token.service';
 
 @Component({
   selector: 'app-enemy-popup',
@@ -12,23 +14,47 @@ import { ValidationService } from 'src/app/services/validation.service';
 export class EnemyPopupComponent {
   @Input() enemy?: Enemy;
   @Input() user!: User;
+  @Input() configs!: { [key in EnemyType]: CountdownConfig };
   type: EnemyType;
+  isEnemyUnderAttack: boolean = false;
 
-  constructor(public displayHelper: DisplayHelperService, private mapService: MapService, private validation: ValidationService) { }
+  constructor(public displayHelper: DisplayHelperService, private mapService: MapService, private validation: ValidationService, private jwtTokenService: JwtTokenService) { }
 
-  attack(type: EnemyType): void {
-    if (this.canAttack()) {
-      this.mapService.startBattle(type, this.user.username).subscribe(() => {
-        window.location.reload();
-      })
-    };
+  attack(type: EnemyType) {
+    return this.mapService.startBattle(type, this.user.username);
   }
 
   canAttack(): boolean {
-    return (this.validation.checkResearchRequirements(this.enemy!.requirements, this.user!.research)&&(this.validation.checkIfPlayerHasAnyShips(this.user.ships)))
+    return (this.validation.checkResearchRequirements(this.enemy!.requirements, this.user!.research) && (this.validation.checkIfPlayerHasAnyShips(this.user.ships)))
   }
 
   loggedIn() {
     return localStorage.getItem("authToken");
+  }
+
+  getUsername(): string {
+    const username = this.jwtTokenService.getUsernameFromToken();
+    return username;
+  }
+
+  handleCountdown(e: CountdownEvent, type: EnemyType) {
+    // var enemy = this.user.enemies.find(e => (e.type === type));
+    this.isEnemyUnderAttack = true;
+    this.enemy!.isUnderAttack = true;
+    if (e.action === 'done' && this.canAttack()) {
+      this.isEnemyUnderAttack = false;
+      this.enemy!.isUnderAttack = false;
+      this.configs[type] = { ...this.configs[type], demand: true }
+      window.location.reload();
+      this.isEnemyUnderAttack = false;
+      this.enemy!.isUnderAttack = false;
+    }
+  }
+
+  onClick(type: EnemyType, username: string) {
+    console.log(type, console.log(username));
+    this.mapService.setAttackStartDate(type, username).subscribe(() => {
+      window.location.reload();
+    });
   }
 }

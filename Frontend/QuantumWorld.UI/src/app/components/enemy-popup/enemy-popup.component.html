@@ -1,10 +1,10 @@
 <ng-container *ngIf="!enemy?.isDefeated" >
-<div class="enemyShipsDetails" *ngIf="loggedIn()">
+<div class="enemyShipsDetails" *ngIf="loggedIn()&&enemy">
     <div *ngFor="let ship of enemy?.ships">
         {{displayHelper.addSpaces(displayHelper.changeDisplayedName(ship.name))}}: {{ship.count}}                        
     </div>                        
 </div>
-Time To Travel: {{enemy?.timeToAttack}}
+Time To Travel: <countdown #countdown [config]="configs[enemy!.type]" (event)="handleCountdown($event, enemy!.type)"></countdown>
 <div>
     Requirements: 
     <div class="enemyRequirements" *ngFor="let requirement of enemy?.requirements">        
@@ -20,7 +20,7 @@ Time To Travel: {{enemy?.timeToAttack}}
             : {{displayHelper.numberWithDots(reward.value)}}                                          
         </div>                    
     </div>                
- <button class="attackButton" [disabled]="!canAttack()" (click)="attack(enemy!.type)">Attack</button>
+ <button class="attackButton" [disabled]="(!canAttack()||(this.isEnemyUnderAttack))" (click)="countdown.resume(); onClick(enemy!.type, this.user.username)">Attack</button>
 </ng-container>
 <ng-container *ngIf="enemy?.isDefeated">
 <div>{{displayHelper.changeDisplayedName(enemy!.name)}} are already defeated.</div>

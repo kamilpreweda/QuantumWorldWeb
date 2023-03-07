@@ -22,5 +22,13 @@ namespace QuantumWorld.Api.Controllers
             await _mediator.Send(request);
             return Ok();
         }
+
+        [HttpPost]
+        [Route("date")]
+        public async Task<IActionResult> Post([FromBody] GetEnemyAttackStartDate request)
+        {
+            await _mediator.Send(request);
+            return Ok(request.date);
+        }
     }
 }

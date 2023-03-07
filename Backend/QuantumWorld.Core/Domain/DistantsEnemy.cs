@@ -4,7 +4,7 @@ namespace QuantumWorld.Core.Domain
     {
         public override string BaseDescription => "The Distants are a mysterious and enigmatic race that dwell in the far reaches of space, beyond the borders of known human civilization. Little is known about them, as few have ever ventured so far into the void, and those who have returned speak of strange and unsettling encounters. Traveling that far into space requires advanced technology and research, as well as the ability to navigate through the hazards of deep space.";
 
-        protected override TimeSpan BaseTimeToAttack => TimeSpan.FromSeconds(120);
+        protected override float BaseTimeToAttackInSeconds => 120;
 
         protected override float TimeMultiplier => 1;
 

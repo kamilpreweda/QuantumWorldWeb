@@ -10,13 +10,13 @@ namespace QuantumWorld.Core.Domain
         public abstract string BaseDescription { get; }
         public string Description { get; set; }
         public bool IsDefeated { get; protected set; } = false;
-        public TimeSpan TimeToAttack { get; protected set; }
-        protected abstract TimeSpan BaseTimeToAttack { get; }
+        public float TimeToAttackInSeconds { get; protected set; }
+        protected abstract float BaseTimeToAttackInSeconds { get; }
         protected abstract float TimeMultiplier { get; }
         public abstract List<Resource> BaseRewards { get; }
         public List<Resource> Rewards { get; set; }
         public bool IsUnderAttack { get; protected set; }
-        public DateTime FinishDate { get; protected set; }
+        public DateTime? AttackStartDate { get; protected set; } = null;
         public abstract List<Ship> BaseShips { get; }
         public List<Ship> Ships { get; protected set; }
         public abstract List<Research> BaseRequirements { get; }
@@ -77,13 +77,31 @@ namespace QuantumWorld.Core.Domain
             return IsDefeated;
 
         }
+        public void SetAttackStartDate(DateTime date)
+        {
+            AttackStartDate = date;
+        }
+        public void SetTimeToAttackInSeconds(float seconds)
+        {
+            TimeToAttackInSeconds = seconds;
+        }
+
+        public void ClearAttackStartDate()
+        {
+            AttackStartDate = null;
+        }
+
+        public void IsEnemyUnderAttack(bool value)
+        {
+            IsUnderAttack = value;
+        }
         private void SetTime()
         {
-            TimeToAttack = BaseTimeToAttack;
+            TimeToAttackInSeconds = BaseTimeToAttackInSeconds;
         }
         private void SetNewTime()
         {
-            TimeToAttack = BaseTimeToAttack * TimeMultiplier;
+            TimeToAttackInSeconds = BaseTimeToAttackInSeconds * TimeMultiplier;
         }
         private void AutoSetBasicAttributes()
         {

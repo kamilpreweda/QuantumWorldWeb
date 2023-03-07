@@ -1,6 +1,5 @@
-import { Time } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { Research, Resource, Ship } from '../models/user';
+import {Research, Resource, Ship } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -69,5 +68,5 @@ export class ValidationService {
       return false;
     }
     return true;
-  }
+  }  
 }

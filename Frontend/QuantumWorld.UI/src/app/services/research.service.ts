@@ -29,8 +29,6 @@ export class ResearchService {
       username: username,
       date: new Date().toJSON()
     }
-    return this.http.post(`${environment.apiUrl}/${this.dateUrl}`, JSON.stringify(body), { headers }).subscribe((res: any) => {
-      console.log(res);
-    });
+    return this.http.post(`${environment.apiUrl}/${this.dateUrl}`, JSON.stringify(body), { headers });
   };
 }

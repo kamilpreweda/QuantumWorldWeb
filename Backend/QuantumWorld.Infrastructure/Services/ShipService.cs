@@ -65,10 +65,44 @@ namespace QuantumWorld.Infrastructure.Services
             var ship = user.Ships.Find(s => s.Type == type);
             ship.SetConstructionStartDate(date);
             ship.IsShipUnderConstruction(true);
-            ship.SetShipsToBuild(count);
+            ship.SetShipsToBuild(CheckMaxShipCountThatPlayerCanAfford(user.Resources, ship.Cost, count));
             ship.SetTimeForAllShips(ship.TimeToBuildInSeconds * ship.ShipsToBuild);
+            user.SpendResources(user.Resources, SetCostForManyShips(ship.Cost, ship.ShipsToBuild));
+            ResetCost(ship.Cost, ship.ShipsToBuild);
             _userRepository.UpdateAsync(user);
             await Task.CompletedTask;
+        }
+
+        private List<Resource> SetCostForManyShips(List<Resource> shipCost, int shipCount)
+        {
+            foreach (var costResource in shipCost)
+            {
+                costResource.Value *= shipCount;
+            }
+            return shipCost;
+        }
+
+        private List<Resource> ResetCost(List<Resource> shipCost, int shipCount)
+        {
+            foreach (var costResource in shipCost)
+            {
+                costResource.Value /= shipCount;
+            }
+            return shipCost;
+        }
+
+        private int CheckMaxShipCountThatPlayerCanAfford(List<Resource> playerResources, List<Resource> shipCost, int shipCount)
+        {
+            foreach (var resource in shipCost)
+            {
+                var currentPlayerResource = playerResources.Where(c => c.Type == resource.Type).FirstOrDefault().Value;
+
+                if (currentPlayerResource < resource.Value * shipCount)
+                {
+                    shipCount = (int)(currentPlayerResource / resource.Value);
+                }
+            }
+            return shipCount;
         }
     }
 }

@@ -3,38 +3,38 @@
         <img src="assets/images/pirates.png" class="planetImage">
         <button class="mapButton" id="piratesButton"(click)="displayHelper.changeAppearance('piratesButton'); hideAllPopups(); showPopup('piratesContainer');">Pirates</button>
         </div>
-        <app-enemy-popup id='piratesContainer' [enemy]="piratesEnemy" [user]="user"></app-enemy-popup>   
+        <app-enemy-popup id='piratesContainer' [enemy]="piratesEnemy" [user]="user" [configs]="configs" *ngIf="piratesEnemy"></app-enemy-popup>   
 
     <div class="enemyContainer" id="outsiders">
         <img src="assets/images/outsiders.png" class="planetImage">
         <button class="mapButton" id="outsidersButton"(click)="displayHelper.changeAppearance('outsidersButton'); hideAllPopups(); showPopup('outsidersContainer');">Outsiders</button>        
     </div>
-    <app-enemy-popup id='outsidersContainer' [enemy]="outsidersEnemy" [user]="user"></app-enemy-popup>
+    <app-enemy-popup id='outsidersContainer' [enemy]="outsidersEnemy" [user]="user" [configs]="configs" *ngIf="outsidersEnemy"></app-enemy-popup>
 
     <div class="enemyContainer" id="rebels">
         <img src="assets/images/Rebels.png" class="planetImage">
         <button class="mapButton" id="rebelsButton"(click)="displayHelper.changeAppearance('rebelsButton'); hideAllPopups(); showPopup('rebelsContainer')">Rebels</button>
     </div>
-    <app-enemy-popup id='rebelsContainer' [enemy]="rebelsEnemy" [user]="user"></app-enemy-popup>
+    <app-enemy-popup id='rebelsContainer' [enemy]="rebelsEnemy" [user]="user" [configs]="configs" *ngIf="rebelsEnemy"></app-enemy-popup>
 
     <div class="enemyContainer" id="armaments">
         <img src="assets/images/Armaments.png" class="planetImage">
         <button class="mapButton" id="armamentsButton"(click)="displayHelper.changeAppearance('armamentsButton'); hideAllPopups(); showPopup('armamentsContainer')">Armaments</button>
     </div>
-    <app-enemy-popup id='armamentsContainer' [enemy]="armamentsEnemy" [user]="user"></app-enemy-popup>
+    <app-enemy-popup id='armamentsContainer' [enemy]="armamentsEnemy" [user]="user" [configs]="configs" *ngIf="armamentsEnemy"></app-enemy-popup>
     
 
     <div class="enemyContainer" id="distants">
         <img src="assets/images/Distants.png" class="planetImage">
         <button class="mapButton" id="distantsButton"(click)="displayHelper.changeAppearance('distantsButton'); hideAllPopups(); showPopup('distantsContainer')">Distants</button>
     </div>
-    <app-enemy-popup id='distantsContainer' [enemy]="distantsEnemy" [user]="user"></app-enemy-popup>
+    <app-enemy-popup id='distantsContainer' [enemy]="distantsEnemy" [user]="user" [configs]="configs" *ngIf="distantsEnemy"></app-enemy-popup>
     
 
     <div class="enemyContainer" id="ancients">
         <img src="assets/images/Ancients.png" class="planetImage">
         <button class="mapButton" id="ancientsButton"(click)="displayHelper.changeAppearance('ancientsButton'); hideAllPopups(); showPopup('ancientsContainer')">Ancients</button>
     </div>
-    <app-enemy-popup id='ancientsContainer' [enemy]="ancientsEnemy" [user]="user"></app-enemy-popup>
+    <app-enemy-popup id='ancientsContainer' [enemy]="ancientsEnemy" [user]="user" [configs]="configs" *ngIf="ancientsEnemy"></app-enemy-popup>
 
 </div>

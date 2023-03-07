@@ -26,8 +26,9 @@ namespace QuantumWorld.Infrastructure.Services
         private readonly IResearchService _researchService;
 
         private readonly IShipService _shipService;
+        private readonly IBattleService _battleService;
 
-        public UserService(IUserRepository userRepository, IMapper mapper, IEncrypter encrypter, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IJwtService jwtService, IResourceService resourceService, IBuildingService buildingService, IResearchService researchService, IShipService shipService)
+        public UserService(IUserRepository userRepository, IMapper mapper, IEncrypter encrypter, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IJwtService jwtService, IResourceService resourceService, IBuildingService buildingService, IResearchService researchService, IShipService shipService, IBattleService battleService)
         {
             _userRepository = userRepository;
             _mapper = mapper;
@@ -39,6 +40,7 @@ namespace QuantumWorld.Infrastructure.Services
             _buildingService = buildingService;
             _researchService = researchService;
             _shipService = shipService;
+            _battleService = battleService;
         }
 
         public async Task<UserDto> GetAsync(string username)
@@ -49,6 +51,7 @@ namespace QuantumWorld.Infrastructure.Services
             await _buildingService.CheckConstructionDates(user);
             await _researchService.CheckConstructionDates(user);
             await _shipService.CheckConstructionDates(user);
+            await _battleService.CheckAttackDates(user);
             await _userRepository.UpdateAsync(user);
             await Task.CompletedTask;
             return _mapper.Map<User, UserDto>(user);

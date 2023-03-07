@@ -47,6 +47,7 @@ namespace QuantumWorld.Infrastructure.Services
             var research = user.Research.Find(r => r.Type == type);
             research.SetConstructionStartDate(date);
             research.IsResearchUnderConstruction(true);
+            user.SpendResources(user.Resources, research.Cost);
             _userRepository.UpdateAsync(user);
             await Task.CompletedTask;
         }

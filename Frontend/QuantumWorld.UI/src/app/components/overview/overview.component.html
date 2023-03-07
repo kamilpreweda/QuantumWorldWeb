@@ -1,12 +1,15 @@
 <div class="overviewContainer" *ngIf="loggedIn()">
     <img src="assets/images/overview.png" class="overviewPlanet">
     <div class="overviewDetails">
-        <span id="text">Used space: {{user.usedSpace}}/{{user.availibleSpace}}</span>
-        <span id="text">Building in progress: none</span>
-        <span id="text">Research in progress: none</span>
-        <span id="text">Ship in progress: none</span>
-        <span id="text">Enemies defeated: {{user.enemiesDefeated}}/6</span>
-        <span id="text">Points: {{user.points}}</span>
+        <span id="text" *ngIf="user">Used space: <span [ngClass]="{'green': true}">{{user.usedSpace}}</span>/{{user.availibleSpace}}</span>
+        <span id="text" *ngIf="!buildingInProgress">Building in progress: none</span>
+        <span id="text" *ngIf="buildingInProgress">Building in progress: <span [ngClass]="{'green': true}">{{displayHelper.addSpaces(displayHelper.changeDisplayedName(buildingInProgress.name))}}</span></span>
+        <span id="text" *ngIf="!researchInProgress">Research in progress: none</span>
+        <span id="text" *ngIf="researchInProgress">Research in progress: <span [ngClass]="{'green': true}">{{displayHelper.addSpaces(displayHelper.changeDisplayedName(researchInProgress.name))}}</span></span>
+        <span id="text" *ngIf="!shipInProgress">Ship in progress: none</span>
+        <span id="text" *ngIf="shipInProgress">Ship in progress: <span [ngClass]="{'green': true}">{{displayHelper.addSpaces(displayHelper.changeDisplayedName(shipInProgress.name))}}</span></span>
+        <span id="text" *ngIf="user">Enemies defeated: <span [ngClass]="{'green': true}">{{user.enemiesDefeated}}</span>/6</span>
+        <span id="text" *ngIf="user">Points: <span [ngClass]="{'green': true}">{{user.points}}</span></span>
     </div>
         
 </div>

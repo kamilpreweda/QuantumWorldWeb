@@ -31,8 +31,10 @@ export class BuildingsComponent {
     this.userService.getUser(this.getUsername()).subscribe((result: User) => {
       this.user = result;
       var buildings = this.user.buildings;
+      console.log(this.isResearchInProgress());
       buildings.forEach(building => {
-        this.configs[building.type] = { leftTime: building.timeToBuildInSeconds, demand: true }
+        this.configs[building.type] = { leftTime: building.timeToBuildInSeconds, demand: true };
+        console.log(`Can I build ${building.type}? Answer: ${this.canBuild(building.type)}`);
       });
       this.isBuildingUpgrading = this.user.buildings.some(b => b.isUnderConstruction);
       if (this.isBuildingUpgrading) {
@@ -48,6 +50,12 @@ export class BuildingsComponent {
 
   canBuild(type: BuildingType): boolean {
     var building = this.user.buildings.find(b => (b.type === type));
+    if (building?.type === BuildingType.Labolatory && this.isResearchInProgress()) {
+      return false;
+    }
+    if (building?.type === BuildingType.SpaceshipFactory && this.isShipUnderConstruction()) {
+      return false;
+    }
     return (this.validation.checkResourceRequirements(building!.cost, this.user!.resources) && (this.validation.checkIfPlayerHasSpaceForBuilding(this.user.usedSpace, this.user.availibleSpace)));
   }
 
@@ -77,7 +85,23 @@ export class BuildingsComponent {
   }
 
   onClick(type: BuildingType, username: string) {
-    this.buildingService.setConstructionStartDate(type, username);
+    this.buildingService.setConstructionStartDate(type, username).subscribe(() => {
+      window.location.reload();
+    });
+  }
+
+  isResearchInProgress(): boolean {
+    if (this.user.research.some(r => (r.isUnderConstruction === true))) {
+      return true;
+    }
+    else return false;
+  }
+
+  isShipUnderConstruction(): boolean {
+    if (this.user.ships.some(s => (s.isUnderConstruction === true))) {
+      return true;
+    }
+    else return false;
   }
 }
 

@@ -50,12 +50,16 @@ export class ShipyardComponent {
   canBuild(type: ShipType): boolean {
     var ship = this.user.ships.find(s => (s.type === type));
     var spaceshipFactoryLevel = this.user.buildings.find(b => (b.type === BuildingType.SpaceshipFactory))!.level;
+    var isSpaceshipFactoryUpgrading = this.user.buildings.find(b => (b.type === BuildingType.SpaceshipFactory))!.isUnderConstruction;
 
-    return (this.validation.checkResourceRequirements(ship!.cost, this.user!.resources) && (this.validation.checkRequiredBuildingLevel(spaceshipFactoryLevel, ship!.spaceshipFactoryLevelRequirement)));
+    return (this.validation.checkResourceRequirements(ship!.cost, this.user!.resources) && (this.validation.checkRequiredBuildingLevel(spaceshipFactoryLevel, ship!.spaceshipFactoryLevelRequirement)) && (!isSpaceshipFactoryUpgrading));
   }
 
   getInputValue(index: number): number {
     var inputValue = (document.getElementById(`input${index}`) as HTMLInputElement).value;
+    if (inputValue === null || inputValue === '0' || inputValue === undefined) {
+      return 1;
+    }
     return +inputValue;
   }
   loggedIn() {
@@ -79,6 +83,9 @@ export class ShipyardComponent {
   }
 
   onClick(type: ShipType, username: string, count: number) {
+    if (count === null || count === 0 || count === undefined) {
+      count = 1
+    }
     this.shipService.setConstructionStartDate(type, username, count).subscribe(() => {
       window.location.reload();
     })

@@ -114,7 +114,7 @@ namespace QuantumWorld.Core.Domain
             if (CanAfford(building.Cost) && HasEnoughSpace())
             {
                 CalculateResourcesBasedOnTimeSpan();
-                SpendResources(Resources, building.Cost);
+                // SpendResources(Resources, building.Cost);
                 CalculatePoints(building.Cost);
                 building.UpgradeBuilding();
                 IncreaseUsedSpace();
@@ -135,7 +135,7 @@ namespace QuantumWorld.Core.Domain
             if ((CanAfford(research.Cost)) && (CheckLabolatoryLevel(research)))
             {
                 CalculateResourcesBasedOnTimeSpan();
-                SpendResources(Resources, research.Cost);
+                // SpendResources(Resources, research.Cost);
                 CalculatePoints(research.Cost);
                 research.UpgradeResearch();
                 research.SetNewTime(GetLabolatoryLevel());
@@ -154,7 +154,7 @@ namespace QuantumWorld.Core.Domain
             if ((CanAfford(ship.Cost) && CheckSpaceshipFactoryLevel(ship)))
             {
                 CalculateResourcesBasedOnTimeSpan();
-                SpendResources(Resources, ship.Cost);
+                // SpendResources(Resources, ship.Cost);
                 CalculatePoints(ship.Cost);
                 ship.BuildShip();
                 ship.SetNewTime(GetSpaceshipFactoryLevel());
@@ -195,6 +195,17 @@ namespace QuantumWorld.Core.Domain
             LastUpdated = DateTime.Now;
             return Resources;
         }
+        public void SpendResources(List<Resource> resources, List<Resource> cost)
+        {
+            if (CanAfford(cost))
+            {
+                foreach (var costResource in cost)
+                {
+                    var currentPlayerResource = resources.Where(r => r.Type == costResource.Type).FirstOrDefault();
+                    currentPlayerResource.Value -= costResource.Value;
+                }
+            }
+        }
         private bool CanAfford(List<Resource> cost)
         {
             foreach (var costResource in cost)
@@ -219,14 +230,6 @@ namespace QuantumWorld.Core.Domain
             }
             else
                 throw new Exception("Not enough space!");
-        }
-        private void SpendResources(List<Resource> resources, List<Resource> cost)
-        {
-            foreach (var costResource in cost)
-            {
-                var currentPlayerResource = resources.Where(r => r.Type == costResource.Type).FirstOrDefault();
-                currentPlayerResource.Value -= costResource.Value;
-            }
         }
         private void IncreaseUsedSpace()
         {

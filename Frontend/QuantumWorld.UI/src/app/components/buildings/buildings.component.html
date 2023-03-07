@@ -27,6 +27,7 @@
             </div>            
         </div>
         <button class="buildingButton" [disabled]="(!canBuild(building.type)||(this.isBuildingUpgrading))" (click)="countdown.resume(); onClick(building.type, user.username)">Build</button>
+        
     </div>
     </div>   
 </div>

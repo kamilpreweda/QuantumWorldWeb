@@ -47,7 +47,8 @@ export class ResearchComponent {
   canBuild(type: ResearchType): boolean {
     var research = this.user.research.find(r => (r.type === type));
     var labolatoryLevel = this.user.buildings.find(b => (b.type === BuildingType.Labolatory))!.level;
-    return (this.validation.checkResourceRequirements(research!.cost, this.user!.resources) && (this.validation.checkRequiredBuildingLevel(labolatoryLevel, research!.labolatoryLevelRequirement)))
+    var isLabolatoryUpgrading = this.user.buildings.find(b => (b.type === BuildingType.Labolatory))!.isUnderConstruction;
+    return (this.validation.checkResourceRequirements(research!.cost, this.user!.resources) && (this.validation.checkRequiredBuildingLevel(labolatoryLevel, research!.labolatoryLevelRequirement)) && (!isLabolatoryUpgrading));
   }
   loggedIn() {
     return localStorage.getItem("authToken");
@@ -75,6 +76,10 @@ export class ResearchComponent {
   }
 
   onClick(type: ResearchType, username: string) {
-    this.researchService.setConstructionStartDate(type, username);
+    this.researchService.setConstructionStartDate(type, username).subscribe(() => {
+      window.location.reload();
+    });
   }
 }
+
+
