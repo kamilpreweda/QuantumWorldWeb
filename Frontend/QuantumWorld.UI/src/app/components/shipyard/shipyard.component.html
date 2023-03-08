@@ -1,7 +1,7 @@
 
 <div class=shipsContainer *ngIf="loggedIn()">
     <div *ngFor = "let ship of user?.ships; let i = index">
-        <div class="shipContainer">
+        <div class="shipContainer" [ngClass]="{'underConstruction': ship.isUnderConstruction}">
             <img src="assets/images/Light Fighter.jpg" *ngIf = 'ship.name === "LightFighterShip"'>            
             <img src="assets/images/Heavy Fighter.jpg" *ngIf = 'ship.name === "HeavyFighterShip"'>
             <img src="assets/images/Battleship.jpg" *ngIf = 'ship.name === "Battleship"'>
@@ -25,7 +25,7 @@
                     <div class="timeContainer"><i class="fa-regular fa-clock"></i> Time to Build: <countdown #countdown [config]="configs[ship.type]" (event)="handleCountdown($event, ship.type)"></countdown></div>
                 </div>
                 
-            <div class="shipRequirements">Requirements: <span id="red" >Spaceship Factory lvl {{ship.spaceshipFactoryLevelRequirement}}</span></div>   
+            <div class="shipRequirements">Requirements: <span [class]="isSpaceshipFactoryRequirementMet(ship.type)" >Spaceship Factory lvl {{ship.spaceshipFactoryLevelRequirement}}</span></div>   
             <div class="descriptionContainer">
                 <div class="description">
                 {{ship.description}}

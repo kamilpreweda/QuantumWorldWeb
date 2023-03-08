@@ -10,6 +10,7 @@ using MongoDB.Bson;
 using QuantumWorld.Core.Domain;
 using QuantumWorld.Core.Repositories;
 using QuantumWorld.Infrastructure.DTO;
+using QuantumWorld.Infrastructure.Exceptions;
 
 namespace QuantumWorld.Infrastructure.Services
 {
@@ -46,6 +47,10 @@ namespace QuantumWorld.Infrastructure.Services
         public async Task<UserDto> GetAsync(string username)
         {
             var user = _userRepository.GetByUsername(username);
+            if (user == null)
+            {
+                return null;
+            }
             List<Resource> resources = _resourceService.GetUserResources(user);
             user.Resources = resources;
             await _buildingService.CheckConstructionDates(user);
@@ -81,13 +86,9 @@ namespace QuantumWorld.Infrastructure.Services
         {
             var user = _userRepository.GetByUsername(username);
 
-            if (user == null)
+            if (user == null || !_encrypter.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
             {
-                throw new Exception($"Invalid credentials");
-            }
-            else if (!_encrypter.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-            {
-                throw new Exception($"Invalid credentials");
+                throw new InvalidCredentialsException(username, password);
             }
 
             JwtDto token = _jwtService.CreateToken(username);

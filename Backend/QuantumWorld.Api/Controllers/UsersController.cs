@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuantumWorld.Infrastructure.Commands.Users;
 using QuantumWorld.Infrastructure.DTO;
+using QuantumWorld.Infrastructure.Exceptions;
 using QuantumWorld.Infrastructure.Services;
 
 namespace QuantumWorld.Api.Controllers;
@@ -50,10 +51,16 @@ public class UsersController : ApiControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Post([FromBody] CreateUser request)
     {
-        await _mediator.Send(request);
-        var user = await _userService.GetAsync(request.Username);
-        return Ok(user);
-        // return Created($"users/{request.Username}", new object());
+        try
+        {
+            await _mediator.Send(request);
+            var user = await _userService.GetAsync(request.Username);
+            return Ok(user);
+        }
+        catch (UserAlreadyExistsException ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpDelete]

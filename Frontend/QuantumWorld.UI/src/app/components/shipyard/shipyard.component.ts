@@ -90,5 +90,16 @@ export class ShipyardComponent {
       window.location.reload();
     })
   }
+
+  isSpaceshipFactoryRequirementMet(type: ShipType): string {
+
+    var spaceshipFactoryLevel = this.user.buildings.find(b => b.type === BuildingType.SpaceshipFactory)!.level;
+    var shipRequirement = this.user.ships.find(s => s.type === type)!.spaceshipFactoryLevelRequirement;
+    if (spaceshipFactoryLevel >= shipRequirement) {
+      return 'green';
+    }
+    return 'red';
+  }
 }
+
 

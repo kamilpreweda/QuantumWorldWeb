@@ -57,4 +57,13 @@ export class EnemyPopupComponent {
       window.location.reload();
     });
   }
+
+  isEnemyRequirementMet(requirementLevel: number, requirementName: string): string {
+
+    var userResearchLevel = this.user.research.find(r => r.name === requirementName)!.level;
+    if (userResearchLevel >= requirementLevel) {
+      return 'green';
+    }
+    return 'red';
+  }
 }

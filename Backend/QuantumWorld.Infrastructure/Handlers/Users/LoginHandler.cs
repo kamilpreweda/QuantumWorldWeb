@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.Extensions.Caching.Memory;
 using QuantumWorld.Infrastructure.Commands.Users;
+using QuantumWorld.Infrastructure.Exceptions;
 using QuantumWorld.Infrastructure.Extensions;
 using QuantumWorld.Infrastructure.Services;
 
@@ -22,6 +23,10 @@ namespace QuantumWorld.Infrastructure.Handlers.Users
         {
             await _userService.LoginAsync(request.Username, request.Password);
             var user = await _userService.GetAsync(request.Username);
+            if (user == null)
+            {
+                throw new InvalidCredentialsException(request.Username, request.Password);
+            }
             var jwt = _jwtService.CreateToken(request.Username);
             _cache.SetJwt(request.TokenId, jwt);
             return Unit.Value;

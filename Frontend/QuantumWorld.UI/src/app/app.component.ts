@@ -23,4 +23,8 @@ export class AppComponent {
     const username = this.jwtTokenService.getUsernameFromToken();
     return username;
   }
+
+  loggedIn() {
+    return localStorage.getItem("authToken");
+  }
 }

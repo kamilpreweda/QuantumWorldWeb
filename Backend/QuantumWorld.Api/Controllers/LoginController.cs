@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using QuantumWorld.Core.Domain;
 using QuantumWorld.Infrastructure.Commands.Users;
+using QuantumWorld.Infrastructure.Exceptions;
 using QuantumWorld.Infrastructure.Extensions;
 using QuantumWorld.Infrastructure.Services;
 
@@ -26,12 +27,18 @@ namespace QuantumWorld.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Login request)
         {
-            request.TokenId = Guid.NewGuid();
-            await _mediator.Send(request);
-            var jwt = _cache.GetJwt(request.TokenId);
+            try
+            {
+                request.TokenId = Guid.NewGuid();
+                await _mediator.Send(request);
+                var jwt = _cache.GetJwt(request.TokenId);
 
-            return Ok(jwt.Token);
-            // return Ok(jwt); MAYBE USE THIS IF ANGULAR CRASHES
+                return Ok(jwt.Token);
+            }
+            catch (InvalidCredentialsException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
     }

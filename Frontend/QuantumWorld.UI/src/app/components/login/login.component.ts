@@ -9,6 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  errorMessage: string | null = null;
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z]+$')]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -16,9 +17,17 @@ export class LoginComponent {
 
   constructor(private userService: UserService, private router: Router) { }
 
+  ngOnInit() {
+    this.changePage('Overview');
+  }
+
   register() {
-    this.userService.register(this.username!.value!.toString(), this.password!.value!.toString()).subscribe();
-    console.log(this.loginForm.value);
+    this.userService.register(this.username!.value!.toString(), this.password!.value!.toString()).subscribe(() => {
+      alert("Registration succesful.");
+    },
+      (error) => {
+        alert(error.error);
+      });
   }
 
   login() {
@@ -28,16 +37,17 @@ export class LoginComponent {
         localStorage.setItem("authToken", token);
         window.location.reload();
       }
-      else {
-        console.log("Invalid credentials");
-      }
+    }, (error) => {
+      alert(error.error);
     });
   }
 
   changePage(path: string): void {
-    const navigationDetails: string[] = []
-    navigationDetails.push(path);
-    this.router.navigate(navigationDetails);
+    if (this.loggedIn()) {
+      const navigationDetails: string[] = []
+      navigationDetails.push(path);
+      this.router.navigate(navigationDetails);
+    }
   }
 
   loggedIn() {

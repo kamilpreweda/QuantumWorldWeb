@@ -10,11 +10,11 @@
         Password:
         <input class="loginInput" type="password" formControlName="password">
         </div>
-        <span style="color: red; font-size: 0.5em" *ngIf="password && password.invalid && password.touched">Password should contain at least 8 characters</span>
+        <span style="color: red; font-size: 0.5em;" *ngIf="password && password.invalid && password.touched">Password should contain at least 8 characters</span>
     </form>
     </div>
         <div class="loginButtonsContainer">
-        <button [disabled]="loginForm.invalid" class="loginButton" (click)="login(); changePage('Overview')">Login</button>
+        <button [disabled]="loginForm.invalid" class="loginButton" (click)="login()">Login</button>
         <button [disabled]="loginForm.invalid" class="loginButton" (click)="register()">Register</button>
     </div>
 </div>

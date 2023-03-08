@@ -9,7 +9,7 @@ html, body, button {
 body {
     background-image: url("assets/images/2020-02-09-kosmos_zvezdy_nebo_159567_3840x2160.jpg")
 }
-tbody {
+tbody.logged-in {
     display: grid;
     grid-template-columns: 1fr 0fr 9fr;
     grid-template-rows: 1;
@@ -18,6 +18,13 @@ tbody {
     align-items: center;
     justify-items: center;   
 }
+tbody.not-logged-in {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+  }
+
 thead {
     display: flex;
     min-width: 80vw;
@@ -31,6 +38,12 @@ img {
     max-width: 100%;
     max-height: 270px;
     }
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
  .description{
     font-size: 0.6em;
@@ -79,21 +92,23 @@ img {
 }
 
 .loginContainer{
-    min-width: 30vw;
-    min-height: 20vh;
+    min-width: 35vw;
+    min-height: 15vh;
     display: flex;
     flex-direction: column;
     background-color: #151829;
     border: 1px solid #E5E4E2;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 3%;
-}
+ }
+
 
 .credentialsContainer{
     min-width: 100%;
     min-height: 100%;
     padding: 3%;
+    margin-bottom: 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -102,9 +117,11 @@ img {
 
 .inputWithDescription{
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
+    text-align: center;
     display: flex;
     margin-top: 3%;
+    margin-bottom: 3%;
 }
 
 .inputWithDescription > *{
@@ -157,6 +174,7 @@ img {
     min-width: 80vw;
     min-height: 80vh;
     justify-items: center;
+    align-items:center;
     position: relative;
     }
 
@@ -188,7 +206,7 @@ img {
 }
 
 .loginButton{
-    min-width: 200px;
+    min-width: 150px;
     min-height: 50px;
     color: black;
     cursor: pointer;
@@ -301,8 +319,16 @@ input[type=number]{
     transform: translateY(20vh);
 }
 
+.underConstruction, .underAttack{
+    border: 4px solid #00E676;
+}
+
 .green{
     color:#00E676;
+}
+
+.red{
+    color: red;
 }
 
 #pirates {
@@ -326,12 +352,18 @@ input[type=number]{
     position: absolute; 
     visibility: hidden;    
 }
+
+#piratesContainer{
+    transform: translateY(2vh);
+}
+
 #outsidersContainer{
     grid-column-start: 2;
     grid-column-end: span 3;
     grid-row-start: 2;
     grid-row-end: 2;
     z-index: 1;
+    transform: translateY(8vh);
 }
 #rebelsContainer{
     grid-column-start: 3;
@@ -339,6 +371,7 @@ input[type=number]{
     grid-row-start: 1;
     grid-row-end: 1;
     z-index: 1;
+    transform: translateY(4vh);
 }
 #armamentsContainer{
     grid-column-start: 4;
@@ -351,7 +384,6 @@ input[type=number]{
     grid-column-end: span 3;
     grid-row-start: 3;
     grid-row-end: 3;
-    transform: translateY(-8vh);
     z-index: 1;
 }
 #ancientsContainer{
@@ -400,8 +432,4 @@ input[type=number]{
 
 #margin{
     margin-left: 1%;
-}
-
-#red {
-    color: red;
 }

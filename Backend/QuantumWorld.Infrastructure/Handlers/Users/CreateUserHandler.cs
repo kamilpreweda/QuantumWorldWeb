@@ -1,5 +1,6 @@
 using MediatR;
 using QuantumWorld.Infrastructure.Commands.Users;
+using QuantumWorld.Infrastructure.Exceptions;
 using QuantumWorld.Infrastructure.Services;
 
 namespace QuantumWorld.Infrastructure.Handlers.Users
@@ -16,6 +17,11 @@ namespace QuantumWorld.Infrastructure.Handlers.Users
 
         public async Task<Unit> Handle(CreateUser request, CancellationToken cancellationToken)
         {
+            var existingUser = await _userService.GetAsync(request.Username);
+            if (existingUser != null)
+            {
+                throw new UserAlreadyExistsException(request.Username);
+            }
             await _userService.RegisterAsync(request.Password, request.Username);
             return Unit.Value;
         }

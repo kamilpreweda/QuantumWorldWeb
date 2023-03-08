@@ -1,7 +1,7 @@
 
 <div class=buildingsContainer *ngIf="loggedIn()">
     <div *ngFor = "let building of user?.buildings">
-        <div class="buildingContainer">
+        <div class="buildingContainer" [ngClass]="{'underConstruction': building.isUnderConstruction}">
             <img src="assets/images/Carbon Fiber Factory.jpg" *ngIf = 'building.name === "CarbonFiberFactory"'>
             <img src="assets/images/Quantum Glass Factory.jpg" *ngIf = 'building.name === "QuantumGlassFactory"'>
             <img src="assets/images/Higgs Boson Detector.jpg" *ngIf = 'building.name === "HiggsBosonDetector"'>

@@ -2,8 +2,8 @@
   <thead>      
     <app-header-resources></app-header-resources>
   </thead>
-  <tbody>    
+  <tbody [ngClass]="{ 'logged-in': loggedIn(), 'not-logged-in': !loggedIn() }">
     <app-menu></app-menu>
-    <router-outlet></router-outlet>       
+    <router-outlet></router-outlet>
   </tbody>
 </table>

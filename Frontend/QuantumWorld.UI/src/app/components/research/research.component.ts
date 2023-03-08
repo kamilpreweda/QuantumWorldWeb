@@ -80,6 +80,16 @@ export class ResearchComponent {
       window.location.reload();
     });
   }
+
+  isLabolatoryRequirementMet(type: ResearchType): string {
+
+    var labolatoryLevel = this.user.buildings.find(b => b.type === BuildingType.Labolatory)!.level;
+    var researchRequirement = this.user.research.find(r => r.type === type)!.labolatoryLevelRequirement;
+    if (labolatoryLevel >= researchRequirement) {
+      return 'green';
+    }
+    return 'red';
+  }
 }
 
 
