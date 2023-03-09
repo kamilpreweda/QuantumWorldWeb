@@ -91,6 +91,7 @@ namespace QuantumWorld.Core.Domain
             UsedSpace = 0;
             Points = 0;
             Messages = new();
+            SetWelcomingMessage();
         }
         public void SetUsername(string username)
         {
@@ -114,13 +115,16 @@ namespace QuantumWorld.Core.Domain
             if (CanAfford(building.Cost) && HasEnoughSpace())
             {
                 CalculateResourcesBasedOnTimeSpan();
-                // SpendResources(Resources, building.Cost);
                 CalculatePoints(building.Cost);
                 building.UpgradeBuilding();
                 IncreaseUsedSpace();
                 ReduceTimes(type);
                 IncreaseResourcesIncome(type);
                 LastUpdated = DateTime.Now;
+                if (CheckIfSpaceIsRunningOut())
+                {
+                    SendUsedSpaceWarningMessage();
+                }
             }
         }
         public void UpgradeResearch(ResearchType type)
@@ -135,7 +139,6 @@ namespace QuantumWorld.Core.Domain
             if ((CanAfford(research.Cost)) && (CheckLabolatoryLevel(research)))
             {
                 CalculateResourcesBasedOnTimeSpan();
-                // SpendResources(Resources, research.Cost);
                 CalculatePoints(research.Cost);
                 research.UpgradeResearch();
                 research.SetNewTime(GetLabolatoryLevel());
@@ -154,7 +157,6 @@ namespace QuantumWorld.Core.Domain
             if ((CanAfford(ship.Cost) && CheckSpaceshipFactoryLevel(ship)))
             {
                 CalculateResourcesBasedOnTimeSpan();
-                // SpendResources(Resources, ship.Cost);
                 CalculatePoints(ship.Cost);
                 ship.BuildShip();
                 ship.SetNewTime(GetSpaceshipFactoryLevel());
@@ -347,6 +349,34 @@ namespace QuantumWorld.Core.Domain
         {
             var labolatoryLevel = Buildings.Where(b => b.Type == BuildingType.Labolatory).FirstOrDefault().Level;
             return labolatoryLevel;
+        }
+
+        private bool CheckIfSpaceIsRunningOut()
+        {
+            if (AvailibleSpace - UsedSpace <= 5)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void SetWelcomingMessage()
+        {
+            List<string> welcomingMessage = new();
+            string messageContent = "Welcome to the Quantum World! You have just entered a universe full of wonders and possibilities, where technology has advanced beyond your wildest imagination. Carbon fiber, quantum glass, and the elusive Higgs Boson are the building blocks of this world, and with them, you can construct incredible spaceships, research advanced technologies, and explore new frontiers. Get ready to embark on an adventure that will take you to the far reaches of the cosmos and beyond. The future is now, and you're about to be a part of it. Enjoy your journey!";
+            welcomingMessage.Add(messageContent);
+            Messages.Add(new Message("Welcome", welcomingMessage));
+        }
+
+        private void SendUsedSpaceWarningMessage()
+        {
+            string messageContent = "Attention, Captain! Our civilization is expanding rapidly, and we're running out of space for our buildings. If we don't take action soon, we risk losing valuable resources and stunting our growth. It's recommended that you construct a laboratory and begin research on Terraforming to increase our available space. Don't wait too long, time is running out!";
+            if (!Messages.Any(m => m.Content.Any(c => c == messageContent)))
+            {
+                List<string> usedSpaceMessage = new();
+                usedSpaceMessage.Add(messageContent);
+                Messages.Add(new Message("Houston, We Have a Space Problem", usedSpaceMessage));
+            }
         }
     }
 }

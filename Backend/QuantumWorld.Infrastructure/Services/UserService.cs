@@ -1,4 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
+using System.Security;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -74,7 +76,8 @@ namespace QuantumWorld.Infrastructure.Services
             if (user is not null)
             {
                 throw new Exception($"User with {username} username already exists!");
-            }
+            }        
+
             _encrypter.CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
 
             user = new User(new Guid(), passwordSalt, passwordHash, username);

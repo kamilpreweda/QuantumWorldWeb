@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -30,9 +31,9 @@ export class LoginComponent {
       });
   }
 
-  login() {
+  async login() {
     var tokenId = crypto.randomUUID();
-    this.userService.login(tokenId, this.username!.value!.toString(), this.password!.value!.toString()).subscribe((token: string) => {
+    this.userService.login(tokenId, this.username!.value!.toString(), this.password!.value!).subscribe((token: string) => {
       if (token) {
         localStorage.setItem("authToken", token);
         window.location.reload();

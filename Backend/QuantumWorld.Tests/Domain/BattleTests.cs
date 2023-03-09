@@ -175,8 +175,8 @@ namespace QuantumWorld.Tests.Domain
 
             battle.AssignRewards(playerResources, rewards);
 
-            var expectedCarbonFiberValue = 8000;
-            var expectedQuantumGlassValue = 8000;
+            var expectedCarbonFiberValue = 11000;
+            var expectedQuantumGlassValue = 11000;
 
             var actualCarbonFiberValue = playerResources.SingleOrDefault(r => r.Type == ResourceType.CarbonFiberResource).Value;
             var actualQuantumGlassValue = playerResources.SingleOrDefault(r => r.Type == ResourceType.QuantumGlassResource).Value;

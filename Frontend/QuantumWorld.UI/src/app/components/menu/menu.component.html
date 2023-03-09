@@ -1,5 +1,5 @@
 <div class="menuContainer"  *ngIf="loggedIn()">
-    <button class="menuButton" id="messageButton" *ngIf="user" (click)="changePage('Messages'); changeAppearance('messageButton')"><i class="fa fa-envelope"> /</i> {{user.messages.length}}</button>
+    <button class="menuButton" id="messageButton" *ngIf="user" (click)="changePage('Messages'); changeAppearance('messageButton')" [ngClass]="{'green': user.messages.length > 0}" ><i class="fa fa-envelope"> /</i> {{user.messages.length}}</button>
     <button class="menuButton" id="overviewButton" (click)="changePage('Overview'); changeAppearance('overviewButton')">Overview</button>
     <button class="menuButton" id="buildingsButton" (click)="changePage('Buildings'); changeAppearance('buildingsButton')">Buildings</button>
     <button class="menuButton" id="researchButton" (click)="changePage('Research'); changeAppearance('researchButton')">Research</button>

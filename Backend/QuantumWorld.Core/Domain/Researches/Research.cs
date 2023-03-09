@@ -44,7 +44,7 @@ namespace QuantumWorld.Core.Domain
         }
         public void SetNewTime(int LabolatoryLevel)
         {
-            TimeToBuildInSeconds = (BaseTimeToBuildInSeconds * TimeMultiplier * (Level)) / (LabolatoryLevel + 1);
+            TimeToBuildInSeconds = (BaseTimeToBuildInSeconds * TimeMultiplier * (Level + 1)) / (LabolatoryLevel + 1);
             if (TimeToBuildInSeconds < 1)
             {
                 TimeToBuildInSeconds = 1;
@@ -71,10 +71,10 @@ namespace QuantumWorld.Core.Domain
         {
             TimeToBuildInSeconds = BaseTimeToBuildInSeconds;
         }
-        private void SetNewTime()
-        {
-            TimeToBuildInSeconds = BaseTimeToBuildInSeconds * TimeMultiplier * (Level + 1);
-        }
+        // private void SetNewTime()
+        // {
+        //     TimeToBuildInSeconds = BaseTimeToBuildInSeconds * TimeMultiplier * (Level + 1);
+        // }
         private void SetDescription()
         {
             Description = BaseDescription;
@@ -117,7 +117,7 @@ namespace QuantumWorld.Core.Domain
         }
         public void UpgradeResearch()
         {
-            SetNewTime();
+            // SetNewTime();
             SetNewCost();
             IncreaseLevel();
         }

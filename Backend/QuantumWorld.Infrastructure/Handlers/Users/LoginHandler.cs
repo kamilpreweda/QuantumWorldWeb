@@ -30,6 +30,6 @@ namespace QuantumWorld.Infrastructure.Handlers.Users
             var jwt = _jwtService.CreateToken(request.Username);
             _cache.SetJwt(request.TokenId, jwt);
             return Unit.Value;
-        }
+        }        
     }
 }

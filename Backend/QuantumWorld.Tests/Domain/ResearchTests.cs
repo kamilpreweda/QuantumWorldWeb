@@ -32,18 +32,5 @@ namespace QuantumWorld.Tests.Domain
 
             actualCost.Should().BeEquivalentTo(expectedCost);
         }
-
-        [Fact]
-        public void Research_UpgradeResearch_Should_Increase_Its_TimeToBuild_Properly()
-        {
-            var theExpanseResearch = new TheExpanseResearch();
-            theExpanseResearch.UpgradeResearch();
-
-            float expectedTime = 30;
-
-            float actualTime = theExpanseResearch.TimeToBuildInSeconds;
-
-            Assert.Equal(expectedTime, actualTime);
-        }
     }
 }

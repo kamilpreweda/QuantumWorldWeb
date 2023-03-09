@@ -26,7 +26,7 @@ namespace QuantumWorld.Tests.Domain
         {
             var outsidersEnemy = new OutsidersEnemy();
 
-            var expectedAP = 2000;
+            var expectedAP = 1250;
             var actualAP = outsidersEnemy.GetEnemyTotalAP();
 
             Assert.Equal(expectedAP, actualAP);
@@ -37,7 +37,7 @@ namespace QuantumWorld.Tests.Domain
         {
             var outsidersEnemy = new OutsidersEnemy();
 
-            var expectedHP = 3500;
+            var expectedHP = 2250;
             var actualHP = outsidersEnemy.GetEnemyTotalHP();
 
             Assert.Equal(expectedHP, actualHP);
@@ -67,7 +67,7 @@ namespace QuantumWorld.Tests.Domain
             List<Ship> expectedShips = new List<Ship>()
             {
                 new LightFighterShip(50),
-                new HeavyFighterShip(50),
+                new HeavyFighterShip(25),
             };
 
             List<Ship> actualShips = outsidersEnemy.GetShips();

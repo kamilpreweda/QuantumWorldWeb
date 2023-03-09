@@ -1,3 +1,5 @@
+using System.Security;
+
 namespace QuantumWorld.Infrastructure.Services
 {
     public interface IEncrypter

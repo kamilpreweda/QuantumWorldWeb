@@ -6,7 +6,7 @@ namespace QuantumWorld.Core.Domain
 
         protected override float CostMultiplier => 4;
 
-        protected override float TimeMultiplier => 4;
+        protected override float TimeMultiplier => 1;
 
         protected override float BaseTimeToBuildInSeconds => 20;
 

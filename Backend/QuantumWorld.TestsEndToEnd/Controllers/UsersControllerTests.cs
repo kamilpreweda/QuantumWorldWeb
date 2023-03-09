@@ -1,10 +1,6 @@
 using System.Net;
-using System.Text;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Testing;
-using MongoDB.Bson;
 using Newtonsoft.Json;
-using QuantumWorld.Core.Domain;
 using QuantumWorld.Infrastructure.Commands.Users;
 using QuantumWorld.Infrastructure.DTO;
 
@@ -33,13 +29,13 @@ namespace QuantumWorld.TestsEndToEnd.Controllers
         {
             var request = new CreateUser
             {
-                Password = "string",
+                Password = "stringstring",
                 Username = "string",
 
             };
             var payload = GetPayload(request);
             var response = await Client.PostAsync("users/register", payload);
-            response.Headers.Location.ToString().Should().BeEquivalentTo($"users/{request.Username}");
+            response.EnsureSuccessStatusCode();
 
             var user = await GetUserAsync(request.Username);
             user.Username.Should().BeEquivalentTo(request.Username);

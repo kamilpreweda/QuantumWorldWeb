@@ -22,7 +22,9 @@
                         <span *ngIf= 'cost.name === "HiggsBosonResource"' style="color:#FFD700">{{displayHelper.displayShortName(cost.name)}}</span>
                         {{displayHelper.numberWithDots(cost.value)}}
                     </div>
-                    <div class="timeContainer"><i class="fa-regular fa-clock"></i> Time to Build: <countdown #countdown [config]="configs[ship.type]" (event)="handleCountdown($event, ship.type)"></countdown></div>
+                    <div class="timeContainer"><i class="fa-regular fa-clock"></i> Time to Build: <countdown #countdown [config]="configs[ship.type]" (event)="handleCountdown($event, ship.type)"></countdown>
+                        <span *ngIf="countdown!.config!.leftTime! > 0 && countdown.config.demand === false"> (Building {{ ship.shipsToBuild }} ships)</span>
+                    </div>
                 </div>
                 
             <div class="shipRequirements">Requirements: <span [class]="isSpaceshipFactoryRequirementMet(ship.type)" >Spaceship Factory lvl {{ship.spaceshipFactoryLevelRequirement}}</span></div>   

@@ -4,7 +4,7 @@ namespace QuantumWorld.Core.Domain
     {
         public override string BaseDescription => "The Ancients are the stuff of legends, whispered about in hushed tones by those who have glimpsed the edges of the universe. It is said that they possess unimaginable power, able to manipulate the fabric of space and time itself. But they are also shrouded in mystery, and no one truly knows where they come from or what their intentions are. Some believe they are benevolent beings, watching over the universe from a distance. Others fear they are malevolent and will stop at nothing to exert their will over all creation. Whatever the truth may be, one thing is certain: to face the Ancients in battle would require the most advanced technology and tactics humanity has ever seen.";
 
-        protected override float BaseTimeToAttackInSeconds => 200;
+        protected override float BaseTimeToAttackInSeconds => 10;
 
         protected override float TimeMultiplier => 1;
 

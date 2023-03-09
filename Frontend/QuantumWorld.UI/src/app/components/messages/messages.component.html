@@ -6,8 +6,12 @@
                 <span class="title">{{message.title}}</span>
                 <span class="date">{{message.date}}</span>
                 </div>
-                <div id ="content" class="content">{{(displayHelper.changeDisplayedName(displayHelper.replaceComasWithNewLine((message.content))))}}</div>
+                <div class="messageContent">
+                <div id ="content" class="content" *ngIf='message.title === "Battle Raport"' >{{(displayHelper.changeDisplayedName(displayHelper.replaceComasWithNewLine((message.content))))}}</div>
+                <div id ="content" class="content" *ngIf='message.title !== "Battle Raport"'>{{(message.content)}}</div>
+
                 <button class="messageButton" (click)="delete(message.id)">Delete</button>
+            </div>
             </div>
         </div>
     </div>

@@ -12,7 +12,7 @@ namespace QuantumWorld.Core.Domain
 
         protected override int BaseHealthPoints => 500;
         protected override int BaseAttackPower => 250;
-        protected override int BaseSpaceshipFactoryLevelRequirement => 10;
+        protected override int BaseSpaceshipFactoryLevelRequirement => 5;
         protected override List<Resource> BaseCost => new List<Resource>()
         {
             new CarbonFiberResource(8000),

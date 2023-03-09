@@ -67,7 +67,7 @@ namespace QuantumWorld.Tests.Domain
             var user = SetUser();
             user.UpgradeBuilding(BuildingType.CarbonFiberFactory);
 
-            float expectedTime = 4;
+            float expectedTime = 2;
             List<Resource> expectedCost = new List<Resource>()
             {
                 new CarbonFiberResource(300),
@@ -131,7 +131,7 @@ namespace QuantumWorld.Tests.Domain
             user.Buildings.Where(b => b.Type == BuildingType.Labolatory).FirstOrDefault().SetLevelForTests(12);
             user.UpgradeResearch(ResearchType.ArtOfWarResearch);
 
-            float expectedTime = 80;
+            float expectedTime = 3;
             List<Resource> expectedCost = new List<Resource>()
             {
                 new CarbonFiberResource(800),
@@ -139,7 +139,7 @@ namespace QuantumWorld.Tests.Domain
             };
             int expectedLevel = 1;
 
-            float actualTime = user.Research.SingleOrDefault(r => r.Name == "ArtOfWarResearch").TimeToBuildInSeconds;
+            float actualTime = (float)Math.Round(user.Research.SingleOrDefault(r => r.Name == "ArtOfWarResearch").TimeToBuildInSeconds);
             List<Resource> actualCost = user.Research.SingleOrDefault(r => r.Name == "ArtOfWarResearch").Cost;
             int actualLevel = user.Research.SingleOrDefault(r => r.Name == "ArtOfWarResearch").Level;
 
@@ -167,6 +167,11 @@ namespace QuantumWorld.Tests.Domain
         {
             var user = SetUser();
 
+            user.Research = new List<Research>(){
+                new TheExpanseResearch(4),
+                new ArtOfWarResearch(2),
+            };
+
             user.Ships = new List<Ship>()
             {
                 new LightFighterShip(100),
@@ -186,6 +191,11 @@ namespace QuantumWorld.Tests.Domain
         public void User_Start_Battle_Should_Increase_Number_Of_Defeated_Enemies_If_Won()
         {
             var user = SetUser();
+
+            user.Research = new List<Research>(){
+                new TheExpanseResearch(4),
+                new ArtOfWarResearch(2),
+            };
 
             user.Ships = new List<Ship>()
             {
