@@ -36,9 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\QuantumWorld.Infrastructure\QuantumWorld.Infrastructure.csproj" />
-    <ProjectReference Include="..\QuantumWorld.Core\QuantumWorld.Core.csproj" />
-    <ProjectReference Include="..\QuantumWorld.Api\QuantumWorld.Api.csproj" />
+    <ProjectReference Include="..\..\src\QuantumWorld.Infrastructure\QuantumWorld.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\QuantumWorld.Core\QuantumWorld.Core.csproj" />
+    <ProjectReference Include="..\..\src\QuantumWorld.Api\QuantumWorld.Api.csproj" />
   </ItemGroup>
 
 </Project>

@@ -28,8 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\QuantumWorld.Core\QuantumWorld.Core.csproj" />
-    <ProjectReference Include="..\QuantumWorld.Infrastructure\QuantumWorld.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\QuantumWorld.Core\QuantumWorld.Core.csproj" />
+    <ProjectReference Include="..\..\src\QuantumWorld.Infrastructure\QuantumWorld.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
