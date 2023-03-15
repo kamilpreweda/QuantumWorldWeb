@@ -8,7 +8,7 @@ https://quantumworldclient.azurewebsites.net/
 
 ## Screenshots
 
-![Overview](https://images2.imgbox.com/69/9d/WU0NTnVs_o.png?raw=true)
+![Overview](https://user-images.githubusercontent.com/51667954/225307430-01c3235b-709e-4eb6-906e-f31dec28ce67.png)
 Overview is the first thing that user sees after logging in. It contains information about things currently under construction, used space for buildings, enemies defeated and points.
 ![Buildings](https://images2.imgbox.com/28/19/mmZa5odn_o.png)
 User can build buildings with his resources, which increase every second.
