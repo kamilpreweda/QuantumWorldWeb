@@ -28,11 +28,11 @@ There is possibility to build ships.
 
 The map contains 6 opponents that the user can attack if he meets the requirements.
 
-![WelcomingMessage](https://user-images.githubusercontent.com/51667954/225307467-26e3c1ca-fea5-4f28-95bd-b769669eb96c.png
+![WelcomingMessage](https://user-images.githubusercontent.com/51667954/225307467-26e3c1ca-fea5-4f28-95bd-b769669eb96c.png)
 
 There is message system, user recieves welcoming message, battle raports and warning about used space for buildings.
 
-![TimeToBuild](https://images2.imgbox.com/be/48/N93hpRtG_o.png](https://user-images.githubusercontent.com/51667954/225307464-ec05d374-6944-4d6f-82a4-e29b221c102f.png)
+![TimeToBuild](https://user-images.githubusercontent.com/51667954/225307464-ec05d374-6944-4d6f-82a4-e29b221c102f.png)
 
 A timer has been implemented that measures the time until the construction is completed
 
