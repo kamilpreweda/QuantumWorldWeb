@@ -56,7 +56,12 @@ export class BuildingsComponent {
     if (building?.type === BuildingType.SpaceshipFactory && this.isShipUnderConstruction()) {
       return false;
     }
-    return (this.validation.checkResourceRequirements(building!.cost, this.user!.resources) && (this.validation.checkIfPlayerHasSpaceForBuilding(this.user.usedSpace, this.user.availibleSpace)));
+    return (this.validation.checkIfPlayerHasSpaceForBuilding(this.user.usedSpace, this.user.availibleSpace));
+  }
+
+  hasEnoughResources(type: BuildingType): boolean {
+    var building = this.user.buildings.find(b => (b.type === type));
+    return this.validation.checkResourceRequirements(building!.cost, this.user!.resources);
   }
 
   loggedIn() {

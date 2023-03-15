@@ -42,10 +42,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateAudience = false
     };
 });
-builder.Services.AddCors(options => options.AddPolicy(name: "UserOrigins",
+builder.Services.AddCors(options => options.AddPolicy
+    // (name: "UserOrigins",
+    // policy =>
+    // {
+    //     policy.WithOrigins("http://localhost:4200", "*").AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
+    // }),
+    (name: "AnyOrigins",
     policy =>
     {
-        policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     }));
 // builder.Services.AddScoped<IUserRepository, InMemoryUserRopository>();
 builder.Services.AddScoped<IUserService, UserService>();
@@ -85,7 +91,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.UseCors("UserOrigins");
+app.UseCors("AnyOrigins");
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

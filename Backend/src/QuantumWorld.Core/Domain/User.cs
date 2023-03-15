@@ -331,7 +331,7 @@ namespace QuantumWorld.Core.Domain
         private void CalculateResourcesBasedOnTimeSpan()
         {
             TimeSpan timeSpan = DateTime.Now - LastUpdated;
-            int seconds = timeSpan.Seconds;
+            int seconds = (int)timeSpan.TotalSeconds;
             for (int i = 0; i < seconds; i++)
             {
                 foreach (var resource in Resources)

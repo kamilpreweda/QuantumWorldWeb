@@ -52,7 +52,12 @@ export class ShipyardComponent {
     var spaceshipFactoryLevel = this.user.buildings.find(b => (b.type === BuildingType.SpaceshipFactory))!.level;
     var isSpaceshipFactoryUpgrading = this.user.buildings.find(b => (b.type === BuildingType.SpaceshipFactory))!.isUnderConstruction;
 
-    return (this.validation.checkResourceRequirements(ship!.cost, this.user!.resources) && (this.validation.checkRequiredBuildingLevel(spaceshipFactoryLevel, ship!.spaceshipFactoryLevelRequirement)) && (!isSpaceshipFactoryUpgrading));
+    return (this.validation.checkRequiredBuildingLevel(spaceshipFactoryLevel, ship!.spaceshipFactoryLevelRequirement)) && (!isSpaceshipFactoryUpgrading);
+  }
+
+  hasEnoughResources(type: ShipType): boolean {
+    var ship = this.user.ships.find(s => (s.type === type));
+    return this.validation.checkResourceRequirements(ship!.cost, this.user!.resources);
   }
 
   getInputValue(index: number): number {

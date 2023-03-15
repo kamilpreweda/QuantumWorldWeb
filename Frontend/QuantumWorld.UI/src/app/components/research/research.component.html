@@ -26,7 +26,7 @@
                     {{research.description}}
                     </div>
         </div> 
-        <button class="researchButton" [disabled]="(!canBuild(research.type)||(this.isResearchUpgrading))" (click)="countdown.resume(); onClick(research.type, user.username)">Discover</button>              
+        <button class="researchButton" [disabled]="(!canBuild(research.type)||(this.isResearchUpgrading))||(!this.hasEnoughResources(research.type))" (click)="countdown.resume(); onClick(research.type, user.username)">Discover</button>              
     </div>   
 </div>
     </div>

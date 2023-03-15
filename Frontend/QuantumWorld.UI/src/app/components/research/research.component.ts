@@ -48,8 +48,14 @@ export class ResearchComponent {
     var research = this.user.research.find(r => (r.type === type));
     var labolatoryLevel = this.user.buildings.find(b => (b.type === BuildingType.Labolatory))!.level;
     var isLabolatoryUpgrading = this.user.buildings.find(b => (b.type === BuildingType.Labolatory))!.isUnderConstruction;
-    return (this.validation.checkResourceRequirements(research!.cost, this.user!.resources) && (this.validation.checkRequiredBuildingLevel(labolatoryLevel, research!.labolatoryLevelRequirement)) && (!isLabolatoryUpgrading));
+    return (this.validation.checkRequiredBuildingLevel(labolatoryLevel, research!.labolatoryLevelRequirement)) && (!isLabolatoryUpgrading);
   }
+
+  hasEnoughResources(type: ResearchType): boolean {
+    var research = this.user.research.find(r => (r.type === type));
+    return this.validation.checkResourceRequirements(research!.cost, this.user!.resources);
+  }
+
   loggedIn() {
     return localStorage.getItem("authToken");
   }
