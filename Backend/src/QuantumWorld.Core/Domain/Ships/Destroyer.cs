@@ -17,7 +17,7 @@ namespace QuantumWorld.Core.Domain
         {
             new CarbonFiberResource(5000),
             new QuantumGlassResource(4000),
-            new HiggsBosonResource(1500)
+            new HiggsBosonResource(2000)
         };
 
         public Destroyer() : base()

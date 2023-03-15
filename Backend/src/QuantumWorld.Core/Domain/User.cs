@@ -87,7 +87,7 @@ namespace QuantumWorld.Core.Domain
                 new AncientsEnemy()
             };
             EnemiesDefeated = 0;
-            AvailibleSpace = 15;
+            AvailibleSpace = 30;
             UsedSpace = 0;
             Points = 0;
             Messages = new();
@@ -112,7 +112,7 @@ namespace QuantumWorld.Core.Domain
                 throw new Exception("There is no such building.");
             }
 
-            if (CanAfford(building.Cost) && HasEnoughSpace())
+            if (HasEnoughSpace())
             {
                 CalculateResourcesBasedOnTimeSpan();
                 CalculatePoints(building.Cost);
@@ -136,7 +136,7 @@ namespace QuantumWorld.Core.Domain
                 throw new Exception("There is no such research.");
             }
 
-            if ((CanAfford(research.Cost)) && (CheckLabolatoryLevel(research)))
+            if (CheckLabolatoryLevel(research))
             {
                 CalculateResourcesBasedOnTimeSpan();
                 CalculatePoints(research.Cost);
@@ -154,7 +154,7 @@ namespace QuantumWorld.Core.Domain
             {
                 throw new Exception("There is no such ship.");
             }
-            if ((CanAfford(ship.Cost) && CheckSpaceshipFactoryLevel(ship)))
+            if (CheckSpaceshipFactoryLevel(ship))
             {
                 CalculateResourcesBasedOnTimeSpan();
                 CalculatePoints(ship.Cost);
@@ -180,6 +180,10 @@ namespace QuantumWorld.Core.Domain
             if (enemy.IsDefeated)
             {
                 EnemiesDefeated++;
+            }
+            if (!enemy.IsDefeated)
+            {
+                enemy.SetDefaultTimeToAttackInSeconds();
             }
 
             BattleRaport = _battle.GetRaport();
@@ -317,11 +321,11 @@ namespace QuantumWorld.Core.Domain
             }
             if (type == BuildingType.QuantumGlassFactory)
             {
-                quantumGlass.IncreaseIncome(1.75F);
+                quantumGlass.IncreaseIncome(1.9F);
             }
             if (type == BuildingType.HiggsBosonDetector)
             {
-                higgsBoson.IncreaseIncome(1.5F);
+                higgsBoson.IncreaseIncome(1.8F);
             }
             else
             {

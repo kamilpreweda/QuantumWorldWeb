@@ -10,8 +10,9 @@ namespace QuantumWorld.Core.Domain
 
         public override List<Resource> BaseRewards => new List<Resource>()
         {
-            new CarbonFiberResource(5000),
-            new QuantumGlassResource(5000),
+            new CarbonFiberResource(50000),
+            new QuantumGlassResource(50000),
+            new HiggsBosonResource(10000),
         };
 
         public override List<Ship> BaseShips => new List<Ship>()
@@ -21,8 +22,8 @@ namespace QuantumWorld.Core.Domain
         };
         public override List<Research> BaseRequirements => new List<Research>()
         {
-            new TheExpanseResearch(4),
-            new ArtOfWarResearch(2),
+            new TheExpanseResearch(2),
+            new ArtOfWarResearch(1),
         };
     }
 }

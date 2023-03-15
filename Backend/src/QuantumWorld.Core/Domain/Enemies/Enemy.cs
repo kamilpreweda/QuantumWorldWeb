@@ -86,6 +86,11 @@ namespace QuantumWorld.Core.Domain
             TimeToAttackInSeconds = seconds;
         }
 
+        public void SetDefaultTimeToAttackInSeconds()
+        {
+            TimeToAttackInSeconds = BaseTimeToAttackInSeconds;
+        }
+
         public void ClearAttackStartDate()
         {
             AttackStartDate = null;

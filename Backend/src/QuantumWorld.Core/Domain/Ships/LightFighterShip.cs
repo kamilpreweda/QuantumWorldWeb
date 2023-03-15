@@ -17,8 +17,8 @@ namespace QuantumWorld.Core.Domain
 
         protected override List<Resource> BaseCost => new List<Resource>()
         {
-            new CarbonFiberResource(100),
-            new QuantumGlassResource(50),
+            new CarbonFiberResource(1000),
+            new QuantumGlassResource(500),
         };
 
         public LightFighterShip() : base()

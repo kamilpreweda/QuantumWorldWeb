@@ -29,7 +29,7 @@ namespace QuantumWorld.Infrastructure.Services
                 if (enemy.AttackStartDate != null)
                 {
                     TimeSpan timeSpan = (TimeSpan)(now - enemy.AttackStartDate);
-                    float timeSpanInSeconds = timeSpan.Seconds;
+                    float timeSpanInSeconds = (float)timeSpan.TotalSeconds;
                     if (timeSpanInSeconds >= enemy.TimeToAttackInSeconds)
                     {
                         enemy.ClearAttackStartDate();

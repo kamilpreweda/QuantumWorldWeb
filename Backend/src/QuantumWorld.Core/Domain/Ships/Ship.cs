@@ -83,7 +83,7 @@ namespace QuantumWorld.Core.Domain
             TimeForAllShips = value;
             if (TimeForAllShips < 1)
             {
-                TimeForAllShips = 0;
+                TimeForAllShips = 1;
             }
         }
         public int GetSpaceshipLevelRequirement()

@@ -17,7 +17,7 @@ namespace QuantumWorld.Core.Domain
         {
             new CarbonFiberResource(8000),
             new QuantumGlassResource(5000),
-            new HiggsBosonResource(2000)
+            new HiggsBosonResource(4000)
         };
 
         public Dreadnought() : base()
