@@ -7,12 +7,12 @@ namespace QuantumWorld.Core.Domain
         protected override float BaseTimeToBuildInSeconds => 2;
         protected override float TimeMultiplier => 2;
 
-        protected override float CostMultiplier => 1.2F;
+        protected override float CostMultiplier => 1.6F;
 
         protected override List<Resource> BaseCost => new List<Resource>()
         {
-            new CarbonFiberResource(150),
-            new QuantumGlassResource(100)
+            new CarbonFiberResource(48),
+            new QuantumGlassResource(24)
         };
     }
 }

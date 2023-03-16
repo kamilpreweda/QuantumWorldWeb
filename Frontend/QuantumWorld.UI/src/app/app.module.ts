@@ -18,6 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserInterceptor } from './services/user.interceptor';
 import { CountdownModule } from 'ngx-countdown';
+import { ToastrModule } from 'ngx-toastr';
 
 const appRoute: Routes = [
   { path: '', component: LoginComponent },
@@ -52,6 +53,7 @@ const appRoute: Routes = [
     FormsModule,
     ReactiveFormsModule,
     CountdownModule,
+    ToastrModule.forRoot(),
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

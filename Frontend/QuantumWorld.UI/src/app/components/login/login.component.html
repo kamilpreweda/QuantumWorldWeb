@@ -15,6 +15,6 @@
     </div>
         <div class="loginButtonsContainer">
         <button [disabled]="loginForm.invalid" class="loginButton" (click)="login()">Login</button>
-        <button [disabled]="loginForm.invalid" class="loginButton" (click)="register()">Register</button>
+        <button [disabled]="loginForm.invalid" class="loginButton" (click)="register(); onClick()">Register</button>
     </div>
 </div>

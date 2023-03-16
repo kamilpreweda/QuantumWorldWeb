@@ -15,7 +15,7 @@ namespace QuantumWorld.Core.Domain
         protected override int BaseSpaceshipFactoryLevelRequirement => 3;
         protected override List<Resource> BaseCost => new List<Resource>()
         {
-            new CarbonFiberResource(3000),
+            new CarbonFiberResource(4000),
             new QuantumGlassResource(2000),
             new HiggsBosonResource(1000)
         };

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
   })
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.changePage('Overview');
@@ -29,6 +30,12 @@ export class LoginComponent {
       (error) => {
         alert(error.error);
       });
+  }
+
+  onClick() {
+    this.toastr.info('Please wait, service is starting... Registration will be completed soon.', 'Info', {
+      timeOut: 3000
+    });
   }
 
   async login() {

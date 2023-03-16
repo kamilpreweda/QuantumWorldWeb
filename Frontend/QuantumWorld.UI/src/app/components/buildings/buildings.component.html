@@ -14,6 +14,7 @@
                     <div *ngFor = "let cost of building.cost">
                         <span *ngIf= 'cost.name === "CarbonFiberResource"' style="color:#00E676">{{displayHelper.displayShortName(cost.name)}}</span>
                         <span *ngIf= 'cost.name === "QuantumGlassResource"' style="color:#00B8D4">{{displayHelper.displayShortName(cost.name)}}</span>
+                        <span *ngIf= 'cost.name === "HiggsBosonResource"' style="color:#FFD700">{{displayHelper.displayShortName(cost.name)}}</span>
                         {{displayHelper.numberWithDots(cost.value)}}
                     </div>
                     <div class="timeContainer"><i class="fa-regular fa-clock"></i> 
